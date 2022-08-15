@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UserSecretsId>9b7e5e76-1087-4a1d-ae2b-04674ce07f9f</UserSecretsId>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="fonts\Prototype.ttf" />
+    <None Remove="Imgs\CpuIcon.png" />
+    <None Remove="Imgs\gpuicon.png" />
+    <None Remove="Imgs\motherboardicon.png" />
+    <None Remove="Imgs\Storageicon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="fonts\Prototype.ttf" />
+    <Resource Include="Imgs\CpuIcon.png" />
+    <Resource Include="Imgs\gpuicon.png" />
+    <Resource Include="Imgs\motherboardicon.png" />
+    <Resource Include="Imgs\Storageicon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CUDAfy.NET" Version="1.29.5576.13786" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.1-pre140" />
+    <PackageReference Include="Syncfusion.SfProgressBar.WPF" Version="20.2.0.43" />
+    <PackageReference Include="System.Management" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>

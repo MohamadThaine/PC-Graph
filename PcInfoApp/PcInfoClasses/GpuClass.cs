@@ -44,13 +44,13 @@ namespace PcInfoApp.PcInfoClasses
         private void GetGpuInfo()
         {
             GPGPU Gpu = CudafyHost.GetDevice(CudafyModes.Target, CudafyModes.DeviceId);
-             var GpuInfo = Gpu.GetDeviceProperties(true);
-             var GpuVRamSize = (GpuInfo.TotalMemory / 1024 / 1024 + 1) / 1024;
-             GpuName = GpuInfo.Name;
-             GetGpuChangedData();
-             GpuMaxClock = (GpuInfo.ClockRate / 1000);
-             GpuMemoryMaxSize = GpuVRamSize;
-             VersionDate = GetDriverVersionDate().ToString("dd/MM/yyyy");
+            var GpuInfo = Gpu.GetDeviceProperties(true);
+            var GpuVRamSize = (GpuInfo.TotalMemory / 1024 / 1024 + 1) / 1024;
+            GpuName = GpuInfo.Name;
+            GetGpuChangedData();
+            GpuMaxClock = (GpuInfo.ClockRate / 1000);
+            GpuMemoryMaxSize = GpuVRamSize;
+            VersionDate = GetDriverVersionDate().ToString("dd/MM/yyyy");
         }
         private DateTime GetDriverVersionDate()
         {

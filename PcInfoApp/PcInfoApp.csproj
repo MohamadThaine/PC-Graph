@@ -12,17 +12,23 @@
 
   <ItemGroup>
     <None Remove="fonts\Prototype.ttf" />
+    <None Remove="Imgs\CloseIcon.png" />
     <None Remove="Imgs\CpuIcon.png" />
     <None Remove="Imgs\gpuicon.png" />
+    <None Remove="Imgs\MinimizeIcon.png" />
     <None Remove="Imgs\motherboardicon.png" />
+    <None Remove="Imgs\PcIcon.png" />
     <None Remove="Imgs\Storageicon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="fonts\Prototype.ttf" />
+    <Resource Include="Imgs\CloseIcon.png" />
     <Resource Include="Imgs\CpuIcon.png" />
     <Resource Include="Imgs\gpuicon.png" />
+    <Resource Include="Imgs\MinimizeIcon.png" />
     <Resource Include="Imgs\motherboardicon.png" />
+    <Resource Include="Imgs\PcIcon.png" />
     <Resource Include="Imgs\Storageicon.png" />
   </ItemGroup>
 

@@ -2,8 +2,6 @@
 using LibreHardwareMonitor.Hardware.Storage;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PcInfoApp.PcInfoClasses
 {
@@ -26,20 +24,20 @@ namespace PcInfoApp.PcInfoClasses
             pc.Open();
             foreach (var Storage in pc.Hardware)
             {
-               TotalSize = 0;
-               TotalFreeSize = 0;
-               if(Storage.Identifier.ToString().Contains("nvme"))
+                TotalSize = 0;
+                TotalFreeSize = 0;
+                if (Storage.Identifier.ToString().Contains("nvme"))
                 {
                     NVMeGeneric NVME = (NVMeGeneric)Storage;
                     StorageNames.Add(NVME.Name);
-                    foreach(var Info in NVME.DriveInfos)
+                    foreach (var Info in NVME.DriveInfos)
                     {
                         TotalSize += Convert.ToInt32(Info.TotalSize / 1024 / 1024 / 1024);
                         TotalFreeSize += Convert.ToInt32(Info.TotalFreeSpace / 1024 / 1024 / 1024);
                     }
                     StorageSpace.Add(TotalSize);
                     StorageFreeSpace.Add(TotalFreeSize);
-                }  
+                }
                 else
                 {
                     GenericHardDisk StorageDisk = (GenericHardDisk)Storage;
@@ -51,7 +49,7 @@ namespace PcInfoApp.PcInfoClasses
                     }
                     StorageSpace.Add(TotalSize);
                     StorageFreeSpace.Add(TotalFreeSize);
-                } 
+                }
             }
         }
     }

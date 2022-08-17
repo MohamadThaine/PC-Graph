@@ -52,7 +52,7 @@ namespace PcInfoApp.PcInfoClasses
         public void GetLoadInfo()
         {
             this.RamLoad = (GC.GetGCMemoryInfo().MemoryLoadBytes) / 1024 / 1024 / 1024;
-            if(Convert.ToInt32((this.RamLoad / this.RamSize) * 100) > this.MaxRamLoad)
+            if (Convert.ToInt32((this.RamLoad / this.RamSize) * 100) > this.MaxRamLoad)
                 this.MaxRamLoad = Convert.ToInt32((this.RamLoad / this.RamSize) * 100);
 
         }

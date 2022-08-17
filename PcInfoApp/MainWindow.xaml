@@ -21,12 +21,22 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                <ColumnDefinition Width="AUTO"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Name="Pcspecsbtn" Content="PC specs" Click="Pcspecsbtn_Click"></Button>
-            <Button Name="Minimize"  Grid.Column="1" Content="Minimize" Click="Minimize_Click"></Button>
-            <Button Name="Close" Grid.Column="2"  Content="Close" Click="Close_Click"/>
+            <Button Style="{StaticResource NoGlow}" Name="Pcspecsbtn" Click="Pcspecsbtn_Click" Height="Auto" Width="70" Background="{x:Null}" BorderBrush="{x:Null}">
+                <StackPanel>
+                    <Image Source="/imgs/PcIcon.png" Width="50" ></Image>
+                    <TextBlock Text="Pc monitor" Foreground="WHITE" FontFamily="/fonts/#Prototype"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource NoGlow}" Name="Minimize"  Grid.Column="1" Click="Minimize_Click" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Image Source="/imgs/MinimizeIcon.png" Width="30"></Image>
+            </Button>
+            <Button Style="{StaticResource NoGlow}" Name="Close" Grid.Column="2"  Click="Close_Click" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50">
+                <Image Source="/imgs/CloseIcon.png" Width="30"></Image>
+            </Button>
+            <Grid Height="1" Background="White" Grid.ColumnSpan="3" VerticalAlignment="Bottom"></Grid>
         </Grid>
         <Grid Name="ViewGrid" Grid.Row="1">
         </Grid>

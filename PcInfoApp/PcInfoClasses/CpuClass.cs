@@ -96,7 +96,7 @@ namespace PcInfoApp.PcInfoClasses
             if (CpuLoadS.Length > 2)
                 CpuLoadS = CpuLoadS.Substring(0, 2);
             CpuLoad = Convert.ToDouble(CpuLoadS);
-            if(Convert.ToInt32(this.CpuLoad) > this.MaxCpuLoad)
+            if (Convert.ToInt32(this.CpuLoad) > this.MaxCpuLoad)
                 this.MaxCpuLoad = Convert.ToInt32(this.CpuLoad);
             if (this.CpuCurrentClock.Length > 5)
                 this.CpuCurrentClock = CpuCurrentClock.Substring(0, 5) + "MHZ";

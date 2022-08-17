@@ -4,6 +4,18 @@
              xmlns:local="clr-namespace:PcInfoApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style x:Key="NoGlow" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <ControlTemplate x:Key="CuttingBorder" TargetType="{x:Type ProgressBar}">
             <Grid x:Name="TemplateRoot">
                 <Border x:Name="OuterBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">

@@ -1,9 +1,5 @@
 ﻿using LibreHardwareMonitor.Hardware;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PcInfoApp.PcInfoClasses
 {
@@ -15,7 +11,7 @@ namespace PcInfoApp.PcInfoClasses
         public string[] trying { get; set; }
         public MBClass()
         {
-            trying = new string[4] {"hi" , "bye" , "hello" , "how are you"} ;
+            trying = new string[4] { "hi", "bye", "hello", "how are you" };
             GetMotherBoardInfo();
         }
         private void GetMotherBoardInfo()

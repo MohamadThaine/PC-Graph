@@ -53,7 +53,7 @@
                 </TextBlock>
                 <Border Grid.Column="4" BorderBrush="Black" BorderThickness="1,0,0,0" />
                 <TextBlock Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="/fonts/#Prototype">
-                    <Run Text="Max Ram Load:"></Run>
+                    <Run Text="Ram Max Load:"></Run>
                     <Run Text="{Binding RamInfo.MaxRamLoad}"></Run>
                     <Run Text="%"></Run>
                 </TextBlock>

@@ -542,7 +542,7 @@
                     </VisualBrush>
                 </fw:AcrylicPanel.OpacityMask>
                 <Grid>
-                    <TextBlock FontFamily="Poppins" Text="RAM Max" Foreground="White" FontSize="24" Margin="27,13,121,101" FontWeight="Bold" Height="33"/>
+                    <TextBlock FontFamily="Poppins" Text="RAM Max" Foreground="White" FontSize="24" Margin="27,13,116,101" FontWeight="Bold" Height="33"/>
                     <Grid Width="206" Margin="0,65,0,50" HorizontalAlignment="Center">
                         <ProgressBar Template="{DynamicResource CuttingBorder}" Width="206" Height="7" Value="70" Maximum="100" VerticalAlignment="Top" ></ProgressBar>
                         <TextBlock Text="Temperature" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>

@@ -40,4 +40,4 @@ Things i plan to add for now(may be changed):
 2-Pc Info widnow where you can see every pc info you need to know.
 
 Screenshot:
-![alt text](https://snipboard.io/L1RIDj.jpg)
+![alt text](https://snipboard.io/zBsn7F.jpg)

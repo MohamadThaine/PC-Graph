@@ -7,6 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
              xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
+
              xmlns:Util="clr-namespace:PcInfoApp.Util"
              mc:Ignorable="d" 
              d:DesignHeight="774.86" d:DesignWidth="1100">
@@ -482,7 +483,7 @@
                 </fw:AcrylicPanel.OpacityMask>
                 <Grid>
                     <TextBlock FontFamily="Poppins" Text="GPU Max" Foreground="White" FontSize="24" Margin="27,13,203,101" FontWeight="Bold" Width="108" Height="33"/>
-                    <Grid Width="278" Margin="0,65,0,50" HorizontalAlignment="Center">
+                    <Grid Width="279" Margin="0,65,0,50" HorizontalAlignment="Center">
                         <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding GpuInfo.MaxGpuTemp}" Maximum="100" VerticalAlignment="Top" ></ProgressBar>
                         <TextBlock Text="Temperature" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
                         <TextBlock Foreground="White" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
@@ -490,7 +491,7 @@
                             <Run Text="°C"></Run>
                         </TextBlock>
                     </Grid>
-                    <Grid Width="278" Margin="0,107,0,12" HorizontalAlignment="Center">
+                    <Grid Width="279" Margin="0,107,0,12" HorizontalAlignment="Center">
                         <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding GpuInfo.MaxGpuLoad}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
                         <TextBlock Text="Load" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
                         <TextBlock Foreground="White" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
@@ -512,7 +513,7 @@
                 </fw:AcrylicPanel.OpacityMask>
                 <Grid>
                     <TextBlock FontFamily="Poppins" Text="CPU Max" Foreground="White" FontSize="24" Margin="27,13,198,101" FontWeight="Bold" Height="33"/>
-                    <Grid Width="278" Margin="0,65,0,50" HorizontalAlignment="Center">
+                    <Grid Width="279" Margin="0,65,0,50" HorizontalAlignment="Center">
                         <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding CpuInfo.MaxCpuTemp}" Maximum="100" VerticalAlignment="Top" ></ProgressBar>
                         <TextBlock Text="Temperature" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
                         <TextBlock Foreground="White" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
@@ -520,7 +521,7 @@
                             <Run Text="°C"></Run>
                         </TextBlock>
                     </Grid>
-                    <Grid Width="278" Margin="0,107,0,12" HorizontalAlignment="Center">
+                    <Grid Width="279" Margin="0,107,0,12" HorizontalAlignment="Center">
                         <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding CpuInfo.MaxCpuLoad}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
                         <TextBlock Text="Load" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
                         <TextBlock Foreground="White" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">

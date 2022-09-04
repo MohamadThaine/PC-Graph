@@ -21,18 +21,27 @@ namespace PcInfoApp.PcInfoClasses
         public double GpuFansControl { get; set; }
         public double CurrentClockRate { get; set; }
         public double CurrentVramUsage { get; set; }
+        private BackgroundWorker GetChangingInfo;
+        public event PropertyChangedEventHandler PropertyChanged;
         public GpuClass()
         {
             GetGpuInfo();
+            GetChangingInfo = new BackgroundWorker();
+            GetChangingInfo.DoWork += GetChangingInfo_DoWork; ;
+            GetChangingInfo.RunWorkerAsync();
             DispatcherTimer GpuTempTimer = new DispatcherTimer();
             GpuTempTimer.Interval = TimeSpan.FromSeconds(1);
             GpuTempTimer.Tick += GpuTempTimer_Tick1;
             GpuTempTimer.Start();
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+
+
+
         private void GpuTempTimer_Tick1(object? sender, EventArgs e)
         {
-            GetGpuChangedData();
+            GetChangingInfo = new BackgroundWorker();
+            GetChangingInfo.DoWork += GetChangingInfo_DoWork; ;
+            GetChangingInfo.RunWorkerAsync();
             OnPropertyChanged("GpuTemp");
             OnPropertyChanged("GpuLoad");
             OnPropertyChanged("GpuFansControl");
@@ -47,7 +56,6 @@ namespace PcInfoApp.PcInfoClasses
             var GpuInfo = Gpu.GetDeviceProperties(true);
             var GpuVRamSize = (GpuInfo.TotalMemory / 1024 / 1024 + 1) / 1024;
             GpuName = GpuInfo.Name;
-            GetGpuChangedData();
             GpuMaxClock = (GpuInfo.ClockRate / 1000);
             GpuMemoryMaxSize = GpuVRamSize;
             VersionDate = GetDriverVersionDate().ToString("dd/MM/yyyy");
@@ -67,7 +75,7 @@ namespace PcInfoApp.PcInfoClasses
             return Convert.ToDateTime(DriverVersion);
 
         }
-        public void GetGpuChangedData()
+        private void GetChangingInfo_DoWork(object? sender, DoWorkEventArgs e)
         {
             this.GpuFansControl = 0;
             int FansCounter = 0;

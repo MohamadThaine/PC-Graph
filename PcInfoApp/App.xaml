@@ -4,40 +4,12 @@
              xmlns:local="clr-namespace:PcInfoApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="NoGlow" TargetType="Button">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <ControlTemplate x:Key="CuttingBorder" TargetType="{x:Type ProgressBar}">
-            <Grid x:Name="TemplateRoot">
-                <Border x:Name="OuterBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
-                    <Grid>
-                        <Border x:Name="MaskBorder" Background="{TemplateBinding Background}" CornerRadius="9.5" />
-                        <Grid x:Name="MainGrid">
-                            <Grid.OpacityMask>
-                                <VisualBrush Visual="{Binding ElementName=MaskBorder}" />
-                            </Grid.OpacityMask>
-                            <Rectangle x:Name="PART_Track" Fill="#191C20" />
-                            <Border x:Name="PART_Indicator" HorizontalAlignment="Left">
-                                <Grid x:Name="Foreground">
-                                    <Rectangle x:Name="Indicator" Fill="{TemplateBinding Background}" />
-                                    <Grid x:Name="Animation" ClipToBounds="true">
-                                        <Rectangle x:Name="PART_GlowRect" Fill="#6CA085"/>
-                                    </Grid>
-                                </Grid>
-                            </Border>
-                        </Grid>
-                    </Grid>
-                </Border>
-            </Grid>
-        </ControlTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

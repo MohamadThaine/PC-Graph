@@ -1,7 +1,6 @@
 ﻿using LibreHardwareMonitor.Hardware;
 using System;
 using System.ComponentModel;
-using System.Management;
 using System.Windows.Threading;
 
 namespace PcInfoApp.PcInfoClasses
@@ -11,14 +10,19 @@ namespace PcInfoApp.PcInfoClasses
         public string CpuName { get; set; }
         public double CpuTemp { get; set; }
         public int MaxCpuTemp { get; set; }
-        public string CpuCurrentClock { get; set; }
+        public int CpuCurrentClock { get; set; }
+        public int CpuMaxClock { get; set; }
         public string CpuVolatge { get; set; }
         public double CpuLoad { get; set; }
         public int MaxCpuLoad { get; set; }
         public int CoresCount { get; set; }
+        private BackgroundWorker GetChangingInfo;
         public CpuClass()
         {
             GetCpuInfo();
+            GetChangingInfo = new BackgroundWorker();
+            GetChangingInfo.DoWork += GetChangingInfo_DoWork;
+            GetChangingInfo.RunWorkerAsync();
             DispatcherTimer CpuInfoTimer = new DispatcherTimer();
             CpuInfoTimer.Interval = TimeSpan.FromSeconds(1);
             CpuInfoTimer.Tick += CpuInfoTimer_Tick1;
@@ -30,18 +34,17 @@ namespace PcInfoApp.PcInfoClasses
             {
                 IsCpuEnabled = true,
             };
-            ManagementObjectSearcher CpuInfo = new ManagementObjectSearcher("SELECT * FROM Win32_Processor ");
-            foreach (ManagementObject Cpu in CpuInfo.Get())
-            {
-                CpuName = Cpu["Name"].ToString();
-                CoresCount = Convert.ToInt32(Cpu["NumberOfCores"]);
-            }
-            GetCpuOtherInfo();
+            pc.Open();
+            CpuName = pc.Hardware[0].Name;
+            CoresCount = pc.SMBios.Processors[0].CoreCount;
+            CpuMaxClock = pc.SMBios.Processors[0].MaxSpeed;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         private void CpuInfoTimer_Tick1(object? sender, EventArgs e)
         {
-            GetCpuOtherInfo();
+            GetChangingInfo = new BackgroundWorker();
+            GetChangingInfo.DoWork += GetChangingInfo_DoWork;
+            GetChangingInfo.RunWorkerAsync();
             OnPropertyChanged("CpuTemp");
             OnPropertyChanged("CpuCurrentClock");
             OnPropertyChanged("CpuVolatge");
@@ -49,10 +52,10 @@ namespace PcInfoApp.PcInfoClasses
             OnPropertyChanged("MaxCpuLoad");
             OnPropertyChanged("MaxCpuTemp");
         }
-        public void GetCpuOtherInfo()
+        private void GetChangingInfo_DoWork(object? sender, DoWorkEventArgs e)
         {
             bool VoltageFirstTime = true, ClockFirstTime = true;
-            string CpuTempS, CpuLoadS;
+            string CpuTempS, CpuLoadS, CpuClockS;
             Computer pc = new Computer
             {
                 IsCpuEnabled = true,
@@ -78,7 +81,7 @@ namespace PcInfoApp.PcInfoClasses
                     else if (sensor.SensorType == SensorType.Clock && ClockFirstTime == true)
                     {
                         ClockFirstTime = false;
-                        this.CpuCurrentClock = sensor.Value.ToString();
+                        this.CpuCurrentClock = Convert.ToInt32(sensor.Value);
                     }
                 }
             }
@@ -98,10 +101,6 @@ namespace PcInfoApp.PcInfoClasses
             CpuLoad = Convert.ToDouble(CpuLoadS);
             if (Convert.ToInt32(this.CpuLoad) > this.MaxCpuLoad)
                 this.MaxCpuLoad = Convert.ToInt32(this.CpuLoad);
-            if (this.CpuCurrentClock.Length > 5)
-                this.CpuCurrentClock = CpuCurrentClock.Substring(0, 5) + "MHZ";
-            else
-                this.CpuCurrentClock = "MHZ";
         }
         private void OnPropertyChanged(string propertyName)
         {

@@ -8,10 +8,8 @@ namespace PcInfoApp.PcInfoClasses
         public string MBName { get; set; }
         public string MBBiosVersion { get; set; }
         public string MBBiosDate { get; set; }
-        public string[] trying { get; set; }
         public MBClass()
         {
-            trying = new string[4] { "hi", "bye", "hello", "how are you" };
             GetMotherBoardInfo();
         }
         private void GetMotherBoardInfo()

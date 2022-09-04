@@ -8,5 +8,6 @@ namespace PcInfoApp
         public RamClass RamInfo { get; set; } = new();
         public MBClass MBInfo { get; set; } = new();
         public StorageClass StorageInfo { get; set; } = new();
+        public NetworkClass NetworkInfo { get; set; } = new();
     }
 }

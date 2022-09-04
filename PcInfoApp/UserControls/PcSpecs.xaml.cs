@@ -1,7 +1,8 @@
 ﻿using PcInfoApp.PcInfoClasses;
-using Syncfusion.UI.Xaml.ProgressBar;
+using System;
+using System.ComponentModel;
 using System.Windows.Controls;
-using System.Windows.Media;
+using System.Windows.Threading;
 namespace PcInfoApp.UserControls
 {
     /// <summary>
@@ -9,29 +10,59 @@ namespace PcInfoApp.UserControls
     /// </summary>
     public partial class PcSpecs : UserControl
     {
-        private RamClass Ram;
-        private StorageClass Storage;
+        BackgroundWorker GettingStorageTemp;
+        DispatcherTimer StorageTempTimer;
         public PcSpecs()
         {
-            Ram = new();
-            Storage = new();
             InitializeComponent();
-            PrepareRamBar();
+            GettingStorageTemp = new BackgroundWorker();
+            GettingStorageTemp.WorkerSupportsCancellation = true;
+            GettingStorageTemp.DoWork += GettingStorageTemp_DoWork;
+            GettingStorageTemp.RunWorkerAsync();
+            StorageTempTimer = new DispatcherTimer();
+            StorageTempTimer.Interval = TimeSpan.FromSeconds(1);
+            StorageTempTimer.Tick += StorageTempTimer_Tick;
+            StorageTempTimer.Start();
         }
-        private void PrepareRamBar()
+
+        private void StorageTempTimer_Tick(object? sender, EventArgs e)
         {
-            double thirtyPrecentRam = Ram.RamSize * 0.3, SeventyPrecentRam = Ram.RamSize * 0.7;
-            RangeColorCollection BarRangeColors = new();
-            BarRangeColors.Add(new RangeColor() { Color = Colors.LightGreen, Start = 0, End = thirtyPrecentRam });
-            BarRangeColors.Add(new RangeColor() { Color = Colors.Coral, Start = thirtyPrecentRam, End = SeventyPrecentRam });
-            BarRangeColors.Add(new RangeColor() { Color = Colors.Crimson, Start = SeventyPrecentRam, End = Ram.RamSize });
-            RamLoadBar.RangeColors = BarRangeColors;
+            GettingStorageTemp = new BackgroundWorker();
+            GettingStorageTemp.WorkerSupportsCancellation = true;
+            GettingStorageTemp.DoWork += GettingStorageTemp_DoWork;
+            GettingStorageTemp.RunWorkerAsync();
+        }
+
+        private void GettingStorageTemp_DoWork(object? sender, DoWorkEventArgs e)
+        {
+            string StorageName = "";
+            this.Dispatcher.Invoke(() =>
+            {
+                if (StorageNameComboBox.SelectedItem != null)
+                    StorageName = StorageNameComboBox.SelectedItem.ToString();
+            });
+            if (StorageName == "")
+                return;
+            double TempValue = Convert.ToDouble(StorageClass.GetStorageTemp(StorageName));
+            this.Dispatcher.Invoke(() =>
+            {
+                StorageTemp.Value = TempValue;
+            });
+            GettingStorageTemp.CancelAsync();
         }
 
         private void StorageNameComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TotalSpaceTextBlock.Text = "Total Space is: " + Storage.StorageSpace[StorageNameComboBox.SelectedIndex].ToString() + "GB";
-            TotalFreeSpaceTextBlock.Text = "Total Free Space is: " + Storage.StorageFreeSpace[StorageNameComboBox.SelectedIndex].ToString() + "GB";
+            try
+            {
+                SpaceProggrass.Value = Convert.ToDouble(StorageClass.StorageSpace[StorageNameComboBox.SelectedIndex] - StorageClass.StorageFreeSpace[StorageNameComboBox.SelectedIndex]);
+                SpaceProggrass.Maximum = Convert.ToDouble(StorageClass.StorageSpace[StorageNameComboBox.SelectedIndex]);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+
+            }
+
         }
     }
 }

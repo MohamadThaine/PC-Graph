@@ -3,42 +3,75 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:local="clr-namespace:PcInfoApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000"
+        Title="MainWindow" Height="822.86" Width="1200"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        fw:AcrylicWindow.AcrylicAccentState="AcrylicBlurBehind"
+        >
+    <Window.Background>
+        <ImageBrush ImageSource="/imgs/appbackground.png" Stretch="UniformToFill">
+        </ImageBrush>
+    </Window.Background>
     <Window.DataContext>
         <local:PcInfo/>
     </Window.DataContext>
-
-    <Grid Background="#191C20">
+    <Window.Resources>
+        <Style x:Key="NoGlow" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid fw:PointerTracker.Enabled="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="AUTO"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid>
+        <Grid Grid.ColumnSpan="2" Height="48" Width="100" HorizontalAlignment="Left" Margin="1090,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="AUTO"></ColumnDefinition>
-                <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource NoGlow}" Name="Pcspecsbtn" Click="Pcspecsbtn_Click" Height="Auto" Width="70" Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel>
-                    <Image Source="/imgs/PcIcon.png" Width="50" ></Image>
-                    <TextBlock Text="Pc monitor" Foreground="WHITE" FontFamily="/fonts/#Prototype"></TextBlock>
-                </StackPanel>
+            <Button Style="{StaticResource NoGlow}" Name="Close" Grid.Column="1"  Click="Close_Click" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                <Image Source="/imgs/CloseIcon.png" Width="16"></Image>
             </Button>
-            <Button Style="{StaticResource NoGlow}" Name="Minimize"  Grid.Column="1" Click="Minimize_Click" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <Image Source="/imgs/MinimizeIcon.png" Width="30"></Image>
+            <Button Style="{StaticResource NoGlow}" Name="Minimize"  Click="Minimize_Click" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                <Image Source="/imgs/MinimizeIcon.png" Width="17"></Image>
             </Button>
-            <Button Style="{StaticResource NoGlow}" Name="Close" Grid.Column="2"  Click="Close_Click" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50">
-                <Image Source="/imgs/CloseIcon.png" Width="30"></Image>
-            </Button>
-            <Grid Height="1" Background="White" Grid.ColumnSpan="3" VerticalAlignment="Bottom"></Grid>
         </Grid>
-        <Grid Name="ViewGrid" Grid.Row="1">
+        <Grid Grid.Row="1">
+        </Grid>
+        <ListView VerticalAlignment="Center" Grid.Row="1" Style="{DynamicResource MaterialDesignListView}" SelectedIndex="0" Background="Transparent">
+            <ListViewItem Width="90" Height="74">
+                <Button  FontSize="14" Click="Pcspecsbtn_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="60" >
+                    <Image Source="/imgs/computer.png" />
+                </Button>
+            </ListViewItem>
+            <ListViewItem Width="90" Height="74">
+                <Button FontSize="14" Click="FileSizeBT_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="60">
+                    <Image Source="/imgs/FolderIcon.png" />
+                </Button>
+            </ListViewItem>
+        </ListView>
+        <Grid Grid.Row="1" Background="#7070704A" Width="1" Height="632.6" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Grid Name="ViewGrid" Grid.Row="1" Grid.Column="1">
         </Grid>
     </Grid>
 </Window>

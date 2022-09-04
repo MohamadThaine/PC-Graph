@@ -11,33 +11,47 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="fonts\Poppins-ExtraBold.ttf" />
+    <None Remove="fonts\Poppins-Regular.ttf" />
     <None Remove="fonts\Prototype.ttf" />
+    <None Remove="Imgs\appbackground.png" />
+    <None Remove="Imgs\arrow.png" />
     <None Remove="Imgs\CloseIcon.png" />
-    <None Remove="Imgs\CpuIcon.png" />
-    <None Remove="Imgs\gpuicon.png" />
+    <None Remove="Imgs\computer.png" />
+    <None Remove="Imgs\FolderIcon.png" />
     <None Remove="Imgs\MinimizeIcon.png" />
-    <None Remove="Imgs\motherboardicon.png" />
-    <None Remove="Imgs\PcIcon.png" />
-    <None Remove="Imgs\Storageicon.png" />
+    <None Remove="Imgs\questionmark.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="fonts\Poppins-ExtraBold.ttf" />
+    <Resource Include="fonts\Poppins-Regular.ttf" />
     <Resource Include="fonts\Prototype.ttf" />
+    <Resource Include="Imgs\appbackground.png" />
+    <Resource Include="Imgs\arrow.png" />
     <Resource Include="Imgs\CloseIcon.png" />
-    <Resource Include="Imgs\CpuIcon.png" />
-    <Resource Include="Imgs\gpuicon.png" />
+    <Resource Include="Imgs\computer.png" />
+    <Resource Include="Imgs\FolderIcon.png" />
     <Resource Include="Imgs\MinimizeIcon.png" />
-    <Resource Include="Imgs\motherboardicon.png" />
-    <Resource Include="Imgs\PcIcon.png" />
-    <Resource Include="Imgs\Storageicon.png" />
+    <Resource Include="Imgs\questionmark.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CUDAfy.NET" Version="1.29.5576.13786" />
-    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <PackageReference Include="FluentWPF" Version="0.10.2" />
     <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.1-pre140" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci277" />
+    <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="3.0.4" />
+    <PackageReference Include="Microsoft.WindowsAPICodePack-Shell" Version="1.1.0" />
+    <PackageReference Include="MimeTypeMapOfficial" Version="1.0.17" />
     <PackageReference Include="Syncfusion.SfProgressBar.WPF" Version="20.2.0.43" />
     <PackageReference Include="System.Management" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="FastSearchLibrary">
+      <HintPath>FastSearchLibary\FastSearchLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

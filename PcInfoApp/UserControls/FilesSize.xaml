@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="PcInfoApp.UserControls.FilesSize"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PcInfoApp.UserControls"
+             xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:pcinfoclasses="clr-namespace:PcInfoApp.PcInfoClasses"
+             xmlns:Util="clr-namespace:PcInfoApp.Util"
+             mc:Ignorable="d" 
+             d:DesignHeight="760" d:DesignWidth="1020" Background="Transparent">
+    <UserControl.DataContext>
+        <pcinfoclasses:FilesSizeClass/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Name="ChooseFolderButton" Content="Choose Folder" Background="White" Click="ChooseFolderButton_Click" FontFamily="/fonts/#Poppins-ExtraBold"></Button>
+            <Button Grid.Column="1" Name="DeleteFile" Content="Detele Selected File" Background="White" Click="DeleteFile_Click" FontFamily="/fonts/#Poppins-ExtraBold" IsEnabled="False"></Button>
+            <Button Grid.Column="2" Name="ShowFolder" Content="Open File Location" Background="White" Click="ShowFolder_Click" FontFamily="/fonts/#Poppins-ExtraBold" IsEnabled="False"></Button>
+            <Button Grid.Column="3" Name="SortFolders" Content="Sort Folder By Biggest" Background="White" Click="SortFolders_Click" FontFamily="/fonts/Poppins-ExtraBold" IsEnabled="{Binding EnableSortFolderBT}"></Button>
+        </Grid>
+        <ListView x:Name="FolderListView" Style="{DynamicResource MaterialDesignCardsListBox }" ItemsSource="{Binding Folders}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="30" FontFamily="/fonts/#Poppins-ExtraBold">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Expander>
+                        <Expander.Header>
+                            <TextBlock FontSize="20" FontFamily="/fonts/#Poppins-ExtraBold">
+                                <Run Text="Folder Name:"></Run>  <Run Text="{Binding FolderName}"></Run>
+                                <Run Text="||"></Run>
+                                <Run Text="Folder Size:"></Run> <Run Text="{Binding FolderSize}"></Run>
+                            </TextBlock>
+                        </Expander.Header>
+                        <ListView Name="FilesListView" ItemsSource="{Binding FolderFiles}" SelectionChanged="FilesListView_SelectionChanged" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  MaxHeight="300" FontSize="20" FontFamily="/fonts/#Poppins-ExtraBold" Util:GridViewSort.AutoSort="True">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="File Name" DisplayMemberBinding="{Binding Name}"  Util:GridViewSort.PropertyName="Name">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
+                                                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                <Setter Property="FontSize" Value="20"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="File Size" DisplayMemberBinding="{Binding Size}" Util:GridViewSort.PropertyName="SizeInBytes">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
+                                                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                <Setter Property="FontSize" Value="20"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="File Type" DisplayMemberBinding="{Binding FileType}" Util:GridViewSort.PropertyName="FileType">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
+                                                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                <Setter Property="FontSize" Value="20"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Expander>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Name="ReadingStatus" Foreground="White" FontSize="30" Visibility="Hidden">
+                <Run Text="Number of files"></Run>
+                <Run Text="{Binding NumberOfFiles}"></Run>
+            </TextBlock>
+            <TextBlock Text="Progress:" Foreground="White" FontSize="30" HorizontalAlignment="Left" Margin="383,0,0,0"></TextBlock>
+            <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Grid.Column="1" Name="ReadingStatusProg" Value="{Binding CurrentProggrass}" Maximum="{Binding NumberOfFiles}" Height="35" IsEnabled="False" Margin="0,2,0,2"/>
+        </Grid>
+    </Grid>
+</UserControl>

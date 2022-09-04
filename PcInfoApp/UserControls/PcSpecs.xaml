@@ -4,276 +4,559 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PcInfoApp.UserControls" xmlns:local1="clr-namespace:PcInfoApp"
-              xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+             xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:Util="clr-namespace:PcInfoApp.Util"
              mc:Ignorable="d" 
-             d:DesignHeight="760" d:DesignWidth="1000">
-    <Grid Background="#191C20">
+             d:DesignHeight="774.86" d:DesignWidth="1100">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="CuttingBorder" TargetType="{x:Type ProgressBar}">
+            <Grid x:Name="TemplateRoot" Background="{x:Null}">
+                <Grid>
+                    <Border Height="1" x:Name="MaskBorder" Background="{TemplateBinding Background}" CornerRadius="5" />
+                    <Grid Width="AUTO" x:Name="MainGrid">
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=MaskBorder}" />
+                        </Grid.OpacityMask>
+                        <Rectangle x:Name="PART_Track" Fill="#343434"/>
+                        <Border x:Name="PART_Indicator" HorizontalAlignment="Left">
+                            <Grid x:Name="Foreground" Background="Transparent">
+                                <Border x:Name="PART_GlowRect" Background="#47B5FF" CornerRadius="5"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border
+                  x:Name="Border" 
+                  Grid.ColumnSpan="2"
+                  CornerRadius="0"
+                  Background="Transparent"
+                  BorderBrush="Transparent"
+                  BorderThickness="0" />
+                <Border 
+                  Grid.Column="0"
+                  CornerRadius="0" 
+                  Margin="1" 
+                  Background="Transparent" 
+                  BorderBrush="Transparent"
+                  BorderThickness="0" />
+                <Path 
+                  x:Name="Arrow"
+                  Grid.Column="1"     
+                  Fill="#47B5FF"
+                  Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z" Margin="5,11,5,11" Stretch="Fill"
+                />
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+
+        <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton 
+                            Name="ToggleButton" 
+                            Template="{StaticResource ComboBoxToggleButton}" 
+                            Grid.Column="2" 
+                            Focusable="false"
+                            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press">
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            Margin="3,3,23,3"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}" 
+                            Template="{StaticResource ComboBoxTextBox}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            Margin="3,3,23,3"
+                            Focusable="True" 
+                            Background="#70707049"
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup 
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True" 
+                            Focusable="False"
+                            PopupAnimation="Slide">
+
+                                <Grid Name="DropDown"
+                              SnapsToDevicePixels="True"                
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border 
+                                x:Name="DropDownBorder"
+                                 CornerRadius="0,0,3,3"       
+                                BorderThickness="0"
+                                        >
+                                        <fw:AcrylicPanel TintColor="#3C3D66" NoiseOpacity="0" TintOpacity="1"  Width="{TemplateBinding ActualWidth}">
+                                            <fw:AcrylicPanel.OpacityMask>
+                                                <VisualBrush Stretch="Fill">
+                                                    <VisualBrush.Visual>
+                                                        <Border CornerRadius="0,0,3,3"  Width="{TemplateBinding ActualWidth}" Height="28" Background="White"></Border>
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </fw:AcrylicPanel.OpacityMask>
+                                        </fw:AcrylicPanel>
+                                    </Border>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#70707049"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="8"/>
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable"  Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+
+        <!-- SimpleStyles: ComboBoxItem -->
+        <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Name="Border"
+                              Padding="2"
+                              SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#70707049"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#70707049"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="45"/>
+            <ColumnDefinition Width="AUTO"/>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="AUTO"/>
+            <ColumnDefinition Width="35"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="350"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="350"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="48"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="400"/>
-            <RowDefinition/>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="192.68"></RowDefinition>
         </Grid.RowDefinitions>
-        <Border BorderThickness="1" Background="#C70039" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Top" Height="50" Width="650" Margin="86,10,64,0" BorderBrush="LightBlue">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="/fonts/#Prototype">
-                    <Run Text="Gpu Max Temp:"></Run>
-                    <Run Text="{Binding GpuInfo.MaxGpuTemp}"></Run>
-                    <Run Text="°C"></Run>
-                </TextBlock>
-                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,0" />
-                <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="/fonts/#Prototype">
-                    <Run Text="Gpu Max Load:"></Run>
-                    <Run Text="{Binding GpuInfo.MaxGpuLoad}"></Run>
-                    <Run Text="%"></Run>
-                </TextBlock>
-                <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,0" />
-                <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="/fonts/#Prototype">
-                    <Run Text="Cpu Max Temp:"></Run>
-                    <Run Text="{Binding CpuInfo.MaxCpuTemp}"></Run>
-                    <Run Text="°C"></Run>
-                </TextBlock>
-                <Border Grid.Column="3" BorderBrush="Black" BorderThickness="1,0,0,0" />
-                <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="/fonts/#Prototype">
-                    <Run Text="Cpu Max Load:"></Run>
-                    <Run Text="{Binding CpuInfo.MaxCpuLoad}"></Run>
-                    <Run Text="%"></Run>
-                </TextBlock>
-                <Border Grid.Column="4" BorderBrush="Black" BorderThickness="1,0,0,0" />
-                <TextBlock Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="/fonts/#Prototype">
-                    <Run Text="Ram Max Load:"></Run>
-                    <Run Text="{Binding RamInfo.MaxRamLoad}"></Run>
-                    <Run Text="%"></Run>
-                </TextBlock>
-            </Grid>
+        <Border Name="GPUborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Column="1" Width="338"  Height="237" Margin="0,20,0,0">
+            <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="338" Height="237">
+                <fw:AcrylicPanel.OpacityMask>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Border CornerRadius="24 , 24 , 27 , 24"  Width="338" Height="237" Background="White"></Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </fw:AcrylicPanel.OpacityMask>
+                <Grid>
+                    <TextBlock FontFamily="Poppins" Text="GPU" Foreground="White" FontSize="34" Margin="27,15,240,174" FontWeight="Bold" Width="71" Height="48"/>
+                    <TextBlock FontFamily="Poppins" Text="{Binding GpuInfo.GpuName}"  Foreground="White" FontSize="15" Margin="107,28,18,187">
+                    </TextBlock>
+                    <Grid Width="279" Height="33.56" Margin="0,84.88,0,125.56">
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding GpuInfo.GpuTemp}" Maximum="100" VerticalAlignment="Top" ></ProgressBar>
+                        <TextBlock Text="Temperature" Foreground="White" FontSize="13" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Foreground="White" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding GpuInfo.GpuTemp}"></Run>
+                            <Run Text="°C"></Run>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Width="279" Height="33.56" Margin="0,137.44,0,73.56">
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding GpuInfo.GpuLoad}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
+                        <TextBlock Text="Load" Foreground="White" FontSize="13" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Foreground="White" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding GpuInfo.GpuLoad}"></Run>
+                            <Run Text="%"></Run>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Width="279" Height="33.56" Margin="0,187.22,0,21.42" >
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding GpuInfo.CurrentClockRate}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
+                        <TextBlock Text="Clock" Foreground="White" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"/>
+                        <TextBlock Foreground="White" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding GpuInfo.CurrentClockRate}"></Run>
+                            <Run Text="MHZ"></Run>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </fw:AcrylicPanel>
         </Border>
-        <Border  Background="#36454F" BorderThickness="1" CornerRadius="30" Margin="0,145,0,55" Grid.Column="1" Height="200" Width="280" BorderBrush="LightBlue">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="10"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="2">
-                    <ProgressBar Template="{DynamicResource CuttingBorder}"  Height="12" Width="250" Value="{Binding GpuInfo.GpuTemp}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
-                    <TextBlock Text="Temp" Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" Margin="15,0,-15,1">
+        <Border Grid.Column="3" Name="CpuBorder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Width="338"  Height="237" Margin="0,20,0,0">
+            <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="338" Height="237">
+                <fw:AcrylicPanel.OpacityMask>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Border CornerRadius="24 , 24 , 27 , 24"  Width="338" Height="237" Background="White"></Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </fw:AcrylicPanel.OpacityMask>
+                <Grid>
+                    <TextBlock FontFamily="Poppins" Text="CPU" Foreground="White" FontSize="34" Margin="27,15,240,174" FontWeight="Bold" Width="71" Height="48"/>
+                    <TextBlock FontFamily="Poppins" Text="{Binding CpuInfo.CpuName}"  Foreground="White" FontSize="15" Margin="107.25,28.5,32.75,187.5">
                     </TextBlock>
-                    <TextBlock Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,14,0">
-                        <Run Text="{Binding GpuInfo.GpuTemp}"></Run>
+                    <Grid Width="279" Height="33.56" Margin="0,84.88,0,125.56">
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding GpuInfo.GpuTemp}" Maximum="100" VerticalAlignment="Top" ></ProgressBar>
+                        <TextBlock Text="Temperature" Foreground="White" FontSize="13" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Foreground="White" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding CpuInfo.CpuTemp}"></Run>
                         <Run Text="°C"></Run>
-                    </TextBlock>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Width="279" Height="33.56" Margin="0,137.44,0,73.56">
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding CpuInfo.CpuLoad}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
+                        <TextBlock Text="Load" Foreground="White" FontSize="13" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Foreground="White" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                             <Run Text="{Binding CpuInfo.CpuLoad}"></Run>
+                             <Run Text="%"></Run>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Width="279" Height="33.56" Margin="0,187.22,0,21.42" >
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding CpuInfo.CpuCurrentClock}" Maximum="{Binding CpuInfo.CpuMaxClock}" VerticalAlignment="Top"></ProgressBar>
+                        <TextBlock Text="Clock" Foreground="White" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"/>
+                        <TextBlock Foreground="White" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding CpuInfo.CpuCurrentClock}"></Run>
+                            <Run Text="MHZ"></Run>
+                        </TextBlock>
+                    </Grid>
                 </Grid>
-                <Grid Grid.Row="3">
-                    <ProgressBar Template="{DynamicResource CuttingBorder}"  Height="12" Width="250" Value="{Binding GpuInfo.GpuLoad}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
-                    <TextBlock Text="Load" Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" Margin="15,0,-15,1">
-                    </TextBlock>
-                    <TextBlock Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,14,0">
-                        <Run Text="{Binding GpuInfo.GpuLoad}"></Run>
-                        <Run Text="%"></Run>
-                    </TextBlock>
-                </Grid>
-                <Grid Grid.Row="4">
-                    <ProgressBar Template="{DynamicResource CuttingBorder}"  Height="12" Width="250" Value="{Binding GpuInfo.GpuFansControl}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
-                    <TextBlock Text="Fans" Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" Margin="15,0,-15,1">
-                    </TextBlock>
-                    <TextBlock Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,14,0">
-                        <Run Text="{Binding GpuInfo.GpuFansControl}"></Run>
-                        <Run Text="%"></Run>
-                    </TextBlock>
-                </Grid>
-                <Grid Grid.Row="5">
-                    <ProgressBar Template="{DynamicResource CuttingBorder}"  Height="12" Width="250" Value="{Binding GpuInfo.CurrentClockRate}" Maximum="{Binding GpuInfo.GpuMaxClock}" VerticalAlignment="Top"></ProgressBar>
-                    <TextBlock Text="Clock" Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" Margin="15,0,-15,1">
-                    </TextBlock>
-                    <TextBlock Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,14,0">
-                        <Run Text="{Binding GpuInfo.CurrentClockRate}"></Run>
-                        <Run Text="MHZ"></Run>
-                    </TextBlock>
-                </Grid>
-                <Grid Grid.Row="6">
-                    <ProgressBar Template="{DynamicResource CuttingBorder}"  Height="12" Width="250" Value="{Binding GpuInfo.CurrentVramUsage}" Maximum="{Binding GpuInfo.GpuMemoryMaxSize}" VerticalAlignment="Top"></ProgressBar>
-                    <TextBlock Text="Memory" Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" Margin="15,0,15,3">
-                    </TextBlock>
-                    <TextBlock Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,15,3">
-                        <Run Text="{Binding GpuInfo.CurrentVramUsage}"></Run>
+            </fw:AcrylicPanel>
+        </Border>
+        <Border Grid.Column="5" Name="RamBorder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Width="259"  Height="237" Margin="0,20,0,0">
+            <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="259" Height="237">
+                <fw:AcrylicPanel.OpacityMask>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Border CornerRadius="24 , 24 , 27 , 24"  Width="259" Height="237" Background="White"></Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </fw:AcrylicPanel.OpacityMask>
+                <Grid>
+                    <TextBlock FontFamily="Poppins" Text="RAM" Foreground="White" FontSize="34" Margin="27,18,157,170" FontWeight="Bold" Width="78" Height="48"/>
+                    <TextBlock FontFamily="Poppins"  Foreground="White" FontSize="20" Width="AUTO" Height="28" Margin="123,29,-48,180">
+                        <Run Text="{Binding RamInfo.RamLoad}"></Run>
+                        <Run Text="/"></Run>
+                        <Run Text="{Binding RamInfo.RamSize}"></Run>
                         <Run Text="GB"></Run>
                     </TextBlock>
-                </Grid>
-            </Grid>
-        </Border>
-        <Border Grid.Column="1"  Background="#C70039" BorderThickness="1" CornerRadius="8" Width="350" Height="100" Margin="0,71,0,229" HorizontalAlignment="Center" BorderBrush="#191970">
-            <Border.Effect>
-                <DropShadowEffect Color="#191970" ShadowDepth="1" />
-            </Border.Effect>
-            <Grid  Name="GpuSpecsGrid">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="AUTO"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Image Grid.RowSpan="3" Source="/Imgs/gpuicon.png" Width="100" Height="100" Margin="-3,2,3,-4"></Image>
-                <TextBlock Grid.Column="1" Text="{Binding GpuInfo.GpuName  , StringFormat=GPU: {0}}" Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="1" Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Center">
-                    <Run Text="VRAM:"></Run>
-                    <Run Text="{Binding GpuInfo.GpuMemoryMaxSize}"></Run>
-                    <Run Text="GB"></Run>
-                </TextBlock>
-                <TextBlock Grid.Column="1"  Grid.Row="3" Text="{Binding GpuInfo.VersionDate , StringFormat=Driver version date: {0}}" Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Center"></TextBlock>
-            </Grid>
-        </Border>
-        <Border Background="#36454F" BorderThickness="1" CornerRadius="30" Margin="0,145,0,55" Grid.Column="3" Height="200" Width="280" BorderBrush="LightBlue">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="10"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="2">
-                    <ProgressBar Template="{DynamicResource CuttingBorder}"  Height="12" Width="250" Value="{Binding GpuInfo.GpuTemp}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
-                    <TextBlock Text="Temp" Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" Margin="15,0,-15,36">
-                    </TextBlock>
-                    <TextBlock Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,14,36">
-                        <Run Text="{Binding CpuInfo.CpuTemp}"></Run>
-                        <Run Text="°C"></Run>
-                    </TextBlock>
-                </Grid>
-                <Grid Grid.Row="3">
-                    <ProgressBar Template="{DynamicResource CuttingBorder}"  Height="12" Width="250" Value="{Binding CpuInfo.CpuLoad}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
-                    <TextBlock Text="Load" Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" Margin="16,0,-16,36">
-                    </TextBlock>
-                    <TextBlock Foreground="Black" FontFamily="/fonts/#Prototype" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,15,36">
-                        <Run Text="{Binding CpuInfo.CpuLoad}"></Run>
-                        <Run Text="%"></Run>
-                    </TextBlock>
-                </Grid>
-            </Grid>
-
-        </Border>
-        <Border Grid.Column="3" Background="#C70039" BorderThickness="1" CornerRadius="8" Width="350" Height="100" Margin="0,70,0,230" BorderBrush="#191970">
-            <Border.Effect>
-                <DropShadowEffect Color="#191970" ShadowDepth="1" />
-            </Border.Effect>
-            <Grid  Name="CpuSpecsGrid">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="AUTO"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Image Grid.RowSpan="5" Source="/Imgs/CpuIcon.png" Width="100" Height="90" Margin="-4,6,4,2"></Image>
-                <TextBlock Grid.Column="1" Text="{Binding CpuInfo.CpuName  , StringFormat=CPU: {0}}" Foreground="Black" FontFamily="/fonts/#Prototype"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding CpuInfo.CoresCount , StringFormat=CPU Cores: {0}}" Foreground="Black" FontFamily="/fonts/#Prototype"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding CpuInfo.CpuCurrentClock , StringFormat=CPU Speed: {0}}" Foreground="Black" FontFamily="/fonts/#Prototype"></TextBlock>
-                <TextBlock Grid.Column="1"  Grid.Row="3" Text="{Binding CpuInfo.CpuVolatge , StringFormat=Cpu Voltage: {0}}" Foreground="Black" FontFamily="/fonts/#Prototype"></TextBlock>
-            </Grid>
-        </Border>
-        <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" CornerRadius="8" Background="#C70039" Width="420" Height="300" VerticalAlignment="Top" Margin="0,22,0,0" BorderBrush="#191970">
-            <Border.Effect>
-                <DropShadowEffect Color="#191970" ShadowDepth="1" />
-            </Border.Effect>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-
-                </Grid.RowDefinitions>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="AUTO"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Syncfusion:SfCircularProgressBar Name="RamLoadBar"  Grid.RowSpan="2" Progress="{Binding RamInfo.RamLoad}" Maximum="{Binding RamInfo.RamSize}" Width="100" TrackOuterRadius="0.7" TrackInnerRadius="0" IndicatorInnerRadius="0.6" HorizontalAlignment="Left"  >
+                    <Syncfusion:SfCircularProgressBar x:Name="RamBar" Progress="{Binding RamInfo.RamLoad}" Maximum="{Binding RamInfo.RamSize}" ProgressColor="#47B5FF" HorizontalAlignment="Center"
+                                TrackColor="#343434" Margin="0,64,0,13" IndicatorCornerRadius="3" ShowProgressValue="False"
+                                IndicatorOuterRadius="0.7" IndicatorInnerRadius="0.8" TrackOuterRadius="0.8" TrackInnerRadius="0.7" Width="168">
                         <Syncfusion:SfCircularProgressBar.ProgressContent>
                             <StackPanel>
-                                <TextBlock TextAlignment="Center" FontFamily="/fonts/#Prototype">
-                            <Run Text="{Binding RamInfo.RamLoad}"></Run>
-                            <Run Text="GB/"></Run>
-                            <Run Text="{Binding RamInfo.RamSize}"></Run>
-                            <Run Text="GB"></Run>
-                                </TextBlock>
-                                <TextBlock Text="USED" TextAlignment="Center" FontFamily="/fonts/#Prototype"></TextBlock>
+                                <TextBlock Text="{Binding RamInfo.RamUsage , StringFormat={}{0}%}" FontSize="27" Foreground="white"  FontFamily="Poppins" FontWeight="Bold" />
                             </StackPanel>
                         </Syncfusion:SfCircularProgressBar.ProgressContent>
                     </Syncfusion:SfCircularProgressBar>
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" FontFamily="/fonts/#Prototype" FontSize="18">
-                    <Run Text="{Binding RamInfo.RamStickCounter}"/>
-                    <Run Text=" Ram Sticks"/>
-                    </TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" FontFamily="/fonts/#Prototype" FontSize="18">
-                    <Run Text=" Ram Frequency: "/>
-                    <Run Text="{Binding RamInfo.RamSpeed}"/>
-                    <Run Text="MHZ"/>
-                    </TextBlock>
                 </Grid>
-                <Grid Background="White" Grid.Row="0" Height="1" VerticalAlignment="Bottom"></Grid>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="AUTO"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.RowSpan="3" Source="/Imgs/motherboardicon.png" Width="90"></Image>
-                    <TextBlock Grid.Column="1" Text="{Binding MBInfo.MBName , StringFormat=Motherboard Name: {0}}" VerticalAlignment="Center" FontFamily="/fonts/#Prototype"/>
-                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding MBInfo.MBBiosVersion , StringFormat= Motherboard Bios Version: {0}}" VerticalAlignment="Center" FontFamily="/fonts/#Prototype"/>
-                    <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding MBInfo.MBBiosDate , StringFormat= Motherboard Bios Date: {0}}" VerticalAlignment="Center" FontFamily="/fonts/#Prototype"/>
+            </fw:AcrylicPanel>
+        </Border>
+        <Border Name="StorageBorder" Grid.Row="1" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Column="1" Width="338"  Height="237" Margin="0,20,0,0">
+            <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="338" Height="237">
+                <fw:AcrylicPanel.OpacityMask>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Border CornerRadius="24 , 24 , 27 , 24"  Width="338" Height="237" Background="White"></Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </fw:AcrylicPanel.OpacityMask>
+                <Grid>
+                    <TextBlock FontFamily="Poppins" Text="Storage" Foreground="White" FontSize="34" Margin="27,15,170,174" FontWeight="Bold" Height="48"/>
+                    <fw:AcrylicPanel Width="250" Height="33.56" Margin="0,84.88,29,120" TintColor="#2E2E58" NoiseOpacity="0" TintOpacity="1" >
+                        <fw:AcrylicPanel.OpacityMask>
+                            <VisualBrush Stretch="Fill">
+                                <VisualBrush.Visual>
+                                    <Border CornerRadius="8"  Width="250" Height="33.56" Background="White"></Border>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </fw:AcrylicPanel.OpacityMask>
+                        <ComboBox Name="StorageNameComboBox" Width="240" Height="28" Foreground="White"  BorderBrush="#47B5FF" BorderThickness="0" 
+                                  FontSize="15" 
+                                  FontFamily="Poppins" 
+                                  ItemsSource="{Binding StorageInfo.StorageNames}"
+                                  SelectedItem="{Binding StorageInfo.StorageNames[0]}"
+                                  SelectionChanged="StorageNameComboBox_SelectionChanged">
+                        </ComboBox>
+                    </fw:AcrylicPanel>
+                    <Grid Width="279" Height="33.56" Margin="0,137.44,0,73.56">
+                        <ProgressBar Name="SpaceProggrass" Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="65" Maximum="100" VerticalAlignment="Top"></ProgressBar>
+                        <TextBlock Text="Space" Foreground="White" FontSize="13" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Foreground="White" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding Value , ElementName=SpaceProggrass}"></Run>
+                            <Run Text="/"></Run>
+                            <Run Text="{Binding Maximum , ElementName=SpaceProggrass}"></Run>
+                            <Run Text="GB"></Run>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Width="279" Height="33.56" Margin="0,187.22,0,21.42" >
+                        <ProgressBar Name="StorageTemp" Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="0" Maximum="100" VerticalAlignment="Top"></ProgressBar>
+                        <TextBlock Text="Temperature" Foreground="White" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"/>
+                        <TextBlock Name="StorageTempText" Foreground="White" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding Value , ElementName=StorageTemp}"></Run>
+                            <Run Text="°C"></Run>
+                        </TextBlock>
+                    </Grid>
                 </Grid>
-                <Grid Background="White" Grid.Row="1" Height="1" VerticalAlignment="Bottom"></Grid>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="AUTO"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.RowSpan="3" Source="/Imgs/Storageicon.png" HorizontalAlignment="Left" Margin="-11,0,0,0"/>
-                    <ComboBox Name="StorageNameComboBox" Grid.Column="1" Width="200" Height="20" 
-                              HorizontalAlignment="Left"
-                              ItemsSource="{Binding StorageInfo.StorageNames}"
-                              SelectedItem="{Binding StorageInfo.StorageNames[0]}"
-                              SelectionChanged="StorageNameComboBox_SelectionChanged"/>
-                    <TextBlock Grid.Column="1" Grid.Row="1"
-                        Name="TotalSpaceTextBlock"  FontFamily="/fonts/#Prototype" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"></TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="2"
-                        Name="TotalFreeSpaceTextBlock" FontFamily="/fonts/#Prototype" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18"></TextBlock>
+            </fw:AcrylicPanel>
+        </Border>
+        <Border Name="RamBorder2" Grid.Row="1" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Column="3" Width="338"  Height="237" Margin="0,20,0,0">
+            <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="338" Height="237">
+                <fw:AcrylicPanel.OpacityMask>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Border CornerRadius="24 , 24 , 27 , 24"  Width="338" Height="237" Background="White"></Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </fw:AcrylicPanel.OpacityMask>
+                <Grid>
+                    <TextBlock FontFamily="Poppins" Text="RAM" Foreground="White" FontSize="34" Margin="27,15,170,174" FontWeight="Bold" Height="48"/>
+                    <fw:AcrylicPanel Width="250" Height="33.56" Margin="0,84.88,29,120" TintColor="#2E2E58" NoiseOpacity="0" TintOpacity="1" >
+                        <fw:AcrylicPanel.OpacityMask>
+                            <VisualBrush Stretch="Fill">
+                                <VisualBrush.Visual>
+                                    <Border CornerRadius="8"  Width="250" Height="33.56" Background="White"></Border>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </fw:AcrylicPanel.OpacityMask>
+                        <ComboBox Width="240" Height="28" Foreground="White"  BorderBrush="#47B5FF" BorderThickness="0" FontSize="15" FontFamily="Poppins" >
+                            <ComboBoxItem Content="G.SKILL 8GB RAM" IsSelected="True"></ComboBoxItem>
+                        </ComboBox>
+                    </fw:AcrylicPanel>
+                    <Grid Width="279" Height="33.56" Margin="0,137.44,0,73.56">
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="60" Maximum="100" VerticalAlignment="Top"></ProgressBar>
+                        <TextBlock Text="Temperature" Foreground="White" FontSize="13" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Text="60°C" Foreground="White" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins"></TextBlock>
+                    </Grid>
+                    <Border Width="177" Height="22" Margin="26,180,135,31" CornerRadius="4">
+                        <fw:AcrylicPanel Width="177" Height="22" NoiseOpacity="0" TintColor="#70707049" TintOpacity="0.2">
+                            <fw:AcrylicPanel.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border CornerRadius="4"  Width="177" Height="22" Background="White"></Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </fw:AcrylicPanel.OpacityMask>
+                            <Grid>
+                                <Rectangle Fill="#47B5FF" Width="8" Height="8" RadiusX="2" RadiusY="2" Margin="7,7,162,7"></Rectangle>
+                                <TextBlock Text="{Binding RamInfo.HighestAppUsing}" FontSize="13" FontFamily="Poppins" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"></TextBlock>
+                                <TextBlock Text="{Binding RamInfo.RamUsageFromTheApp}" FontSize="13" FontFamily="Poppins" Foreground="White" VerticalAlignment="Center" Margin="120,0,10.36,0"></TextBlock>
+                            </Grid>
+                        </fw:AcrylicPanel>
+                    </Border>
+
                 </Grid>
-            </Grid>
+            </fw:AcrylicPanel>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="5" Name="NetworkBorder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Width="259"  Height="237" Margin="0,20,0,0">
+            <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="259" Height="237">
+                <fw:AcrylicPanel.OpacityMask>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Border CornerRadius="24 , 24 , 27 , 24"  Width="259" Height="237" Background="White"></Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </fw:AcrylicPanel.OpacityMask>
+                <Grid>
+                    <fw:AcrylicPanel Width="18" Height="18" TintColor="#373A71" TintOpacity="1" Margin="214,18,27,201">
+                        <fw:AcrylicPanel.OpacityMask>
+                            <VisualBrush Stretch="Fill">
+                                <VisualBrush.Visual>
+                                    <Border x:Name="circularBorder" Width="20" Height="20" CornerRadius="20" Background="White"></Border>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </fw:AcrylicPanel.OpacityMask>
+                        <fw:AcrylicPanel.ToolTip>
+                            <TextBlock>
+                                <Run Text="Total Usage and Download"></Run><LineBreak/>
+                                <Run Text="is based on how much you"></Run><LineBreak/>
+                                <Run Text="used while app in runnig"></Run>
+                            </TextBlock>
+                        </fw:AcrylicPanel.ToolTip>
+                        <TextBlock Text="?" FontFamily="Arial" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    </fw:AcrylicPanel>
+                    
+                    <TextBlock FontFamily="Poppins" Text="Network" Foreground="White" FontSize="34" Margin="27,18,82,170" FontWeight="Bold"/>
+                    <TextBlock Text="Upload" FontSize="18" Foreground="White"  Margin="28.87,81.84,165.13,126.16" FontFamily="Poppins"></TextBlock>
+                    <TextBlock Text="Download" FontSize="18" Foreground="White"  Margin="28.87,119.69,138.8,88.31" FontFamily="Poppins"></TextBlock>
+                    <TextBlock Text="{Binding NetworkInfo.CurrentUploadUsage}" FontSize="16" Foreground="White"  Margin="136,82,54,126" FontFamily="Poppins"></TextBlock>
+                    <Image Source="/imgs/arrow.png" Margin="208,84,37,131"/>
+                    <TextBlock Text="{Binding NetworkInfo.CurrentDownloadUsage}" FontSize="16" Foreground="White"  Margin="136,120,54,88" FontFamily="Poppins"></TextBlock>
+                    <Image Source="/imgs/arrow.png" Margin="208,122,37,93" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-180"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Border Width="168" Height="46" CornerRadius="4" Margin="30,163,61,24">
+                        <fw:AcrylicPanel Width="168" Height="46" NoiseOpacity="0" TintColor="#70707049" TintOpacity="0.2">
+                            <fw:AcrylicPanel.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border CornerRadius="4"  Width="168" Height="46" Background="White"></Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </fw:AcrylicPanel.OpacityMask>
+                            <Grid>
+                                <Rectangle Fill="#47B5FF" Width="8" Height="8" RadiusX="2" RadiusY="2" Margin="10,10,150,28"></Rectangle>
+                                <Rectangle Fill="#47B5FF" Width="8" Height="8" RadiusX="2" RadiusY="2" Margin="10,29,150,9"></Rectangle>
+                                <TextBlock Text="Total Upload" FontSize="12" Foreground="White" FontFamily="Poppins" Margin="22,6,70,22"></TextBlock>
+                                <TextBlock Text="Total Download" FontSize="12" Foreground="White" FontFamily="Poppins" Margin="22,26,50,4"></TextBlock>
+                                <TextBlock Text="{Binding NetworkInfo.UploadUsageWhileAppRunning}" FontSize="12" Foreground="White" FontFamily="Poppins" Margin="119,7,4,6"></TextBlock>
+                                <TextBlock Text="{Binding NetworkInfo.DownloadUsageWhileAppRunning}"  FontSize="12" Foreground="White" FontFamily="Poppins" Margin="119,26,4,6" RenderTransformOrigin="0.53,0.492"></TextBlock>
+                            </Grid>
+                        </fw:AcrylicPanel>
+                    </Border>
+                </Grid>
+            </fw:AcrylicPanel>
+        </Border>
+        <Border Name="GPUMaxborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Row="2" Grid.Column="1" Width="338"  Height="147" Margin="0,-30,0,0">
+            <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="338" Height="147">
+                <fw:AcrylicPanel.OpacityMask>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Border CornerRadius="24 , 24 , 27 , 24"  Width="338" Height="147" Background="White"></Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </fw:AcrylicPanel.OpacityMask>
+                <Grid>
+                    <TextBlock FontFamily="Poppins" Text="GPU Max" Foreground="White" FontSize="24" Margin="27,13,203,101" FontWeight="Bold" Width="108" Height="33"/>
+                    <Grid Width="278" Margin="0,65,0,50" HorizontalAlignment="Center">
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding GpuInfo.MaxGpuTemp}" Maximum="100" VerticalAlignment="Top" ></ProgressBar>
+                        <TextBlock Text="Temperature" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Foreground="White" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding GpuInfo.MaxGpuTemp}"></Run>
+                            <Run Text="°C"></Run>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Width="278" Margin="0,107,0,12" HorizontalAlignment="Center">
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding GpuInfo.MaxGpuLoad}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
+                        <TextBlock Text="Load" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Foreground="White" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding GpuInfo.MaxGpuLoad}"></Run>
+                            <Run Text="%"></Run>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </fw:AcrylicPanel>
+        </Border>
+        <Border Name="CPUMaxborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Row="2" Grid.Column="3" Width="338"  Height="147" Margin="0,-30,0,0">
+            <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="338" Height="147">
+                <fw:AcrylicPanel.OpacityMask>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Border CornerRadius="24 , 24 , 27 , 24"  Width="338" Height="147" Background="White"></Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </fw:AcrylicPanel.OpacityMask>
+                <Grid>
+                    <TextBlock FontFamily="Poppins" Text="CPU Max" Foreground="White" FontSize="24" Margin="27,13,198,101" FontWeight="Bold" Height="33"/>
+                    <Grid Width="278" Margin="0,65,0,50" HorizontalAlignment="Center">
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding CpuInfo.MaxCpuTemp}" Maximum="100" VerticalAlignment="Top" ></ProgressBar>
+                        <TextBlock Text="Temperature" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Foreground="White" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding CpuInfo.MaxCpuTemp}"></Run>
+                            <Run Text="°C"></Run>
+                        </TextBlock>
+                    </Grid>
+                    <Grid Width="278" Margin="0,107,0,12" HorizontalAlignment="Center">
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding CpuInfo.MaxCpuLoad}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
+                        <TextBlock Text="Load" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Foreground="White" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding CpuInfo.MaxCpuLoad}"></Run>
+                            <Run Text="%"></Run>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </fw:AcrylicPanel>
+        </Border>
+        <Border Name="RamMaxborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Row="2" Grid.Column="5" Width="259"  Height="147" Margin="0,-30,0,0">
+            <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="259" Height="147">
+                <fw:AcrylicPanel.OpacityMask>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Border CornerRadius="24 , 24 , 27 , 24"  Width="259" Height="147" Background="White"></Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </fw:AcrylicPanel.OpacityMask>
+                <Grid>
+                    <TextBlock FontFamily="Poppins" Text="RAM Max" Foreground="White" FontSize="24" Margin="27,13,121,101" FontWeight="Bold" Height="33"/>
+                    <Grid Width="206" Margin="0,65,0,50" HorizontalAlignment="Center">
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="206" Height="7" Value="70" Maximum="100" VerticalAlignment="Top" ></ProgressBar>
+                        <TextBlock Text="Temperature" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Text="70°C" Foreground="White" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins"></TextBlock>
+                    </Grid>
+                    <Grid Width="206" Margin="0,107,0,12" HorizontalAlignment="Center">
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="206" Height="7" Value="{Binding RamInfo.MaxRamLoad}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
+                        <TextBlock Text="Load" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Foreground="White" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
+                            <Run Text="{Binding RamInfo.MaxRamLoad}"></Run>
+                            <Run Text="%"></Run>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </fw:AcrylicPanel>
         </Border>
     </Grid>
 </UserControl>

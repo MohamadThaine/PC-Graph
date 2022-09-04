@@ -8,15 +8,36 @@ namespace PcInfoApp.PcInfoClasses
     public class StorageClass
     {
         public List<String> StorageNames { get; set; } = new List<String>();
-        public List<int> StorageSpace { get; set; } = new List<int>();
-        public List<int> StorageFreeSpace { get; set; } = new List<int>();
+        public static List<int> StorageSpace { get; set; } = new List<int>();
+        public static List<int> StorageFreeSpace { get; set; } = new List<int>();
         public StorageClass()
         {
             GetStorageInfo();
         }
         private void GetStorageInfo()
         {
-            int TotalSize = 0, TotalFreeSize = 0;
+            Computer pc = new Computer()
+            {
+                IsStorageEnabled = true
+            };
+            pc.Open();
+            foreach (AbstractStorage Storage in pc.Hardware)
+            {
+                int TotalSize = 0;
+                int TotalFreeSize = 0;
+                StorageNames.Add(Storage.Name);
+                foreach (var Info in Storage.DriveInfos)
+                {
+                    TotalSize += Convert.ToInt32(Info.TotalSize / 1024 / 1024 / 1024);
+                    TotalFreeSize += Convert.ToInt32(Info.TotalFreeSpace / 1024 / 1024 / 1024);
+                }
+                StorageSpace.Add(TotalSize);
+                StorageFreeSpace.Add(TotalFreeSize);
+            }
+        }
+        public static double GetStorageTemp(string name)
+        {
+            double Temp = 0;
             Computer pc = new Computer()
             {
                 IsStorageEnabled = true
@@ -24,33 +45,20 @@ namespace PcInfoApp.PcInfoClasses
             pc.Open();
             foreach (var Storage in pc.Hardware)
             {
-                TotalSize = 0;
-                TotalFreeSize = 0;
-                if (Storage.Identifier.ToString().Contains("nvme"))
+                if (Storage.Name != name)
+                    continue;
+                Storage.Update();
+                foreach (var sensor in Storage.Sensors)
                 {
-                    NVMeGeneric NVME = (NVMeGeneric)Storage;
-                    StorageNames.Add(NVME.Name);
-                    foreach (var Info in NVME.DriveInfos)
+                    if (sensor.Name == "Temperature")
                     {
-                        TotalSize += Convert.ToInt32(Info.TotalSize / 1024 / 1024 / 1024);
-                        TotalFreeSize += Convert.ToInt32(Info.TotalFreeSpace / 1024 / 1024 / 1024);
+                        Temp = Convert.ToDouble(sensor.Value);
+                        break;
                     }
-                    StorageSpace.Add(TotalSize);
-                    StorageFreeSpace.Add(TotalFreeSize);
                 }
-                else
-                {
-                    GenericHardDisk StorageDisk = (GenericHardDisk)Storage;
-                    StorageNames.Add(StorageDisk.Name);
-                    foreach (var Info in StorageDisk.DriveInfos)
-                    {
-                        TotalSize += Convert.ToInt32(Info.TotalSize / 1024 / 1024 / 1024);
-                        TotalFreeSize += Convert.ToInt32(Info.TotalFreeSpace / 1024 / 1024 / 1024);
-                    }
-                    StorageSpace.Add(TotalSize);
-                    StorageFreeSpace.Add(TotalFreeSize);
-                }
+                break;
             }
+            return Temp;
         }
     }
 }

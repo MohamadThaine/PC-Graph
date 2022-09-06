@@ -41,10 +41,15 @@ namespace PcInfoApp.UserControls
         }
         private void NetworkUsageListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var t = NetworkUsageListView.SelectedItem.GetType();
-            System.Reflection.PropertyInfo[] props = t.GetProperties();
-            string AppName = props[0].GetValue(NetworkUsageListView.SelectedItem, null).ToString();
-            SelectedProcess = Process.GetProcessesByName(AppName);
+            EndProcessBT.IsEnabled = true;
+            if(NetworkUsageListView.SelectedItem != null)
+            {
+                var t = NetworkUsageListView.SelectedItem.GetType();
+                System.Reflection.PropertyInfo[] props = t.GetProperties();
+                string AppName = props[0].GetValue(NetworkUsageListView.SelectedItem, null).ToString();
+                SelectedProcess = Process.GetProcessesByName(AppName);
+            }
+
         }
     }
 }

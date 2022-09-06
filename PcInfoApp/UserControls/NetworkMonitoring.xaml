@@ -64,6 +64,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="EndProcessBT" Content="End Process" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="White" FontFamily="Poppins" Margin="0,0,6,9" Click="EndProcessBT_Click"></Button>
+        <Button Name="EndProcessBT" Content="End Process" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="White" FontFamily="Poppins" Margin="0,0,6,9" Click="EndProcessBT_Click" IsEnabled="False"></Button>
     </Grid>
 </UserControl>

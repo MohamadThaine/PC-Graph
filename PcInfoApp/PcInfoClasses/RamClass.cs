@@ -19,7 +19,8 @@ namespace PcInfoApp.PcInfoClasses
         {
             GetRamInfo();
             GetChangingInfo = new BackgroundWorker();
-            GetChangingInfo.DoWork += GetChangingInfo_DoWork; ; ;
+            GetChangingInfo.WorkerSupportsCancellation = true;
+            GetChangingInfo.DoWork += GetChangingInfo_DoWork;
             GetChangingInfo.RunWorkerAsync();
             DispatcherTimer RamInfoTimers = new DispatcherTimer();
             RamInfoTimers.Interval = TimeSpan.FromSeconds(1);
@@ -30,7 +31,8 @@ namespace PcInfoApp.PcInfoClasses
         private void RamInfoTimer_Tick1(object? sender, EventArgs e)
         {
             GetChangingInfo = new BackgroundWorker();
-            GetChangingInfo.DoWork += GetChangingInfo_DoWork; ; ;
+            GetChangingInfo.WorkerSupportsCancellation = true;
+            GetChangingInfo.DoWork += GetChangingInfo_DoWork;
             GetChangingInfo.RunWorkerAsync();
             OnPropertyChanged("RamLoad");
             OnPropertyChanged("MaxRamLoad");
@@ -93,6 +95,7 @@ namespace PcInfoApp.PcInfoClasses
                 MemoryUsed = Convert.ToDecimal(MemoryUsed.ToString().Substring(0, 4));
             }
             this.RamUsageFromTheApp = MemoryUsed + memorytype;
+            GetChangingInfo.CancelAsync();
 
         }
         private void OnPropertyChanged(string propertyName)

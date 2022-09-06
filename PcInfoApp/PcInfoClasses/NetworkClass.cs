@@ -157,7 +157,7 @@ namespace PcInfoApp.PcInfoClasses
                     m_EtwSession.Source.Process();
                 }
             }
-            catch (System.Runtime.InteropServices.COMException ex)
+            catch (Exception ex)
             {
                 return;
             }
@@ -231,9 +231,10 @@ namespace PcInfoApp.PcInfoClasses
             }
             else if (this.UploadWhileRunnigType == "TB")
                 this.UploadWhileRunnig += (UploadWhileRunnigDecimal / 1024 / 1024 / 1024);
-            if (this.UploadWhileRunnig.ToString().Length > 4 && this.UploadWhileRunnigType != "TB")
-                this.UploadWhileRunnig = decimal.Parse(this.UploadWhileRunnig.ToString().Substring(0, 4));
-            this.UploadUsageWhileAppRunning = this.UploadWhileRunnig + this.UploadWhileRunnigType;
+            if(this.UploadWhileRunnig.ToString().Length > 4)
+                this.UploadUsageWhileAppRunning = this.UploadWhileRunnig.ToString().Substring(0, 4) + this.UploadWhileRunnigType;
+            else
+                this.UploadUsageWhileAppRunning = this.UploadWhileRunnig + this.UploadWhileRunnigType;
             OnPropertyChanged("UploadUsageWhileAppRunning");
             if (this.DownloadWhileRunnigType == "KB")
             {
@@ -266,9 +267,10 @@ namespace PcInfoApp.PcInfoClasses
             }
             else if (this.DownloadWhileRunnigType == "TB")
                 this.DownloadWhileRunnig += (DownloadWhileRunnigDecimal / 1024 / 1024 / 1024);
-            if (this.DownloadWhileRunnig.ToString().Length > 4 && this.DownloadWhileRunnigType != "TB")
-                this.DownloadWhileRunnig = decimal.Parse(this.DownloadWhileRunnig.ToString().Substring(0, 4));
-            this.DownloadUsageWhileAppRunning = this.DownloadWhileRunnig + this.DownloadWhileRunnigType;
+            if(DownloadWhileRunnig.ToString().Length > 4)
+                this.DownloadUsageWhileAppRunning = this.DownloadWhileRunnig.ToString().Substring(0,4) + this.DownloadWhileRunnigType;
+            else
+                this.DownloadUsageWhileAppRunning = this.DownloadWhileRunnig + this.DownloadWhileRunnigType;
             OnPropertyChanged("DownloadUsageWhileAppRunning");
             if (AppsUsage.Count != 0)
             {

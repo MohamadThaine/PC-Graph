@@ -27,7 +27,8 @@ namespace PcInfoApp.PcInfoClasses
         {
             GetGpuInfo();
             GetChangingInfo = new BackgroundWorker();
-            GetChangingInfo.DoWork += GetChangingInfo_DoWork; ;
+            GetChangingInfo.WorkerSupportsCancellation = true;
+            GetChangingInfo.DoWork += GetChangingInfo_DoWork;
             GetChangingInfo.RunWorkerAsync();
             DispatcherTimer GpuTempTimer = new DispatcherTimer();
             GpuTempTimer.Interval = TimeSpan.FromSeconds(1);
@@ -40,7 +41,8 @@ namespace PcInfoApp.PcInfoClasses
         private void GpuTempTimer_Tick1(object? sender, EventArgs e)
         {
             GetChangingInfo = new BackgroundWorker();
-            GetChangingInfo.DoWork += GetChangingInfo_DoWork; ;
+            GetChangingInfo.WorkerSupportsCancellation = true;
+            GetChangingInfo.DoWork += GetChangingInfo_DoWork;
             GetChangingInfo.RunWorkerAsync();
             OnPropertyChanged("GpuTemp");
             OnPropertyChanged("GpuLoad");
@@ -126,6 +128,7 @@ namespace PcInfoApp.PcInfoClasses
             this.GpuFansControl /= FansCounter;
             this.CurrentVramUsage = Convert.ToDouble(GpuMemoryS) / 1024;
             this.CurrentVramUsage = Math.Round(this.CurrentVramUsage, 2);
+            GetChangingInfo.CancelAsync();
         }
         private void OnPropertyChanged(string propertyName)
         {

@@ -437,9 +437,9 @@
                     <TextBlock FontFamily="Poppins" Text="Network" Foreground="White" FontSize="34" Margin="27,18,82,170" FontWeight="Bold"/>
                     <TextBlock Text="Upload" FontSize="18" Foreground="White"  Margin="28.87,81.84,165.13,126.16" FontFamily="Poppins"></TextBlock>
                     <TextBlock Text="Download" FontSize="18" Foreground="White"  Margin="28.87,119.69,138.8,88.31" FontFamily="Poppins"></TextBlock>
-                    <TextBlock Text="{Binding NetworkInfo.CurrentUploadUsage}" FontSize="16" Foreground="White"  Margin="136,82,54,126" FontFamily="Poppins"></TextBlock>
+                    <TextBlock Text="{Binding NetworkInfo.CurrentUploadUsage}" FontSize="16" Foreground="White"  Margin="128,82,54,126" FontFamily="Poppins"></TextBlock>
                     <Image Source="/imgs/arrow.png" Margin="208,84,37,131"/>
-                    <TextBlock Text="{Binding NetworkInfo.CurrentDownloadUsage}" FontSize="16" Foreground="White"  Margin="136,120,54,88" FontFamily="Poppins"></TextBlock>
+                    <TextBlock Text="{Binding NetworkInfo.CurrentDownloadUsage}" FontSize="16" Foreground="White"  Margin="128,120,54,88" FontFamily="Poppins"></TextBlock>
                     <Image Source="/imgs/arrow.png" Margin="208,122,37,93" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <TransformGroup>

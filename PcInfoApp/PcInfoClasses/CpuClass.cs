@@ -21,6 +21,7 @@ namespace PcInfoApp.PcInfoClasses
         {
             GetCpuInfo();
             GetChangingInfo = new BackgroundWorker();
+            GetChangingInfo.WorkerSupportsCancellation = true;
             GetChangingInfo.DoWork += GetChangingInfo_DoWork;
             GetChangingInfo.RunWorkerAsync();
             DispatcherTimer CpuInfoTimer = new DispatcherTimer();
@@ -43,6 +44,7 @@ namespace PcInfoApp.PcInfoClasses
         private void CpuInfoTimer_Tick1(object? sender, EventArgs e)
         {
             GetChangingInfo = new BackgroundWorker();
+            GetChangingInfo.WorkerSupportsCancellation = true;
             GetChangingInfo.DoWork += GetChangingInfo_DoWork;
             GetChangingInfo.RunWorkerAsync();
             OnPropertyChanged("CpuTemp");
@@ -101,6 +103,7 @@ namespace PcInfoApp.PcInfoClasses
             CpuLoad = Convert.ToDouble(CpuLoadS);
             if (Convert.ToInt32(this.CpuLoad) > this.MaxCpuLoad)
                 this.MaxCpuLoad = Convert.ToInt32(this.CpuLoad);
+            GetChangingInfo.CancelAsync();
         }
         private void OnPropertyChanged(string propertyName)
         {

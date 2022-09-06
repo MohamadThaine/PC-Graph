@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="774.86" d:DesignWidth="1100">
     <Grid>
-        <ListView Width="1100" Height="774.86" ItemsSource="{Binding NetworkInfo.AppsUsage}" Util:GridViewSort.AutoSort="True">
+        <ListView Name="NetworkUsageListView" Width="1100" Height="730" ItemsSource="{Binding NetworkInfo.AppsUsage}" Util:GridViewSort.AutoSort="True" FontFamily="Poppins" VerticalAlignment="Top" SelectionChanged="NetworkUsageListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="App Name" Width="180" DisplayMemberBinding="{Binding Value.AppName}" Util:GridViewSort.PropertyName="Value.AppName">
@@ -64,5 +64,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Name="EndProcessBT" Content="End Process" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="White" FontFamily="Poppins" Margin="0,0,6,9" Click="EndProcessBT_Click"></Button>
     </Grid>
 </UserControl>

@@ -26,7 +26,6 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-using PcInfoApp.PcInfoClasses;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -231,7 +230,7 @@ namespace PcInfoApp.Util
                     CollectionChanged(this, args);
                 });
             }
-                
+
         }
 
         protected virtual void OnPropertyChanged(string name)

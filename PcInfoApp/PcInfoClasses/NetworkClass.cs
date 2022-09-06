@@ -1,12 +1,10 @@
 ﻿using Microsoft.Diagnostics.Tracing.Parsers;
 using Microsoft.Diagnostics.Tracing.Session;
+using PcInfoApp.Util;
 using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Threading;
-using PcInfoApp.Util;
 
 namespace PcInfoApp.PcInfoClasses
 {
@@ -303,7 +301,7 @@ namespace PcInfoApp.PcInfoClasses
                         app.TotalUpload = (app.TotalUploadInBytes / 1024 / 1024).ToString().Substring(0, 6) + "MB";
                     }
                     else
-                    app.TotalUpload = (app.TotalUploadInBytes / 1024 / 1024) + "MB";
+                        app.TotalUpload = (app.TotalUploadInBytes / 1024 / 1024) + "MB";
                     app.OnPropertyChanged("CurrentUpload");
                     app.OnPropertyChanged("CurrentDownload");
                     app.OnPropertyChanged("TotalDownload");
@@ -317,7 +315,7 @@ namespace PcInfoApp.PcInfoClasses
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-    public class AppUsage: INotifyPropertyChanged
+    public class AppUsage : INotifyPropertyChanged
     {
         public string AppName { get; set; }
         public string CurrentUpload { get; set; }

@@ -231,7 +231,7 @@
                         </TextBlock>
                     </Grid>
                     <Grid Width="279" Height="33.56" Margin="0,187.22,0,21.42" >
-                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding GpuInfo.CurrentClockRate}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
+                        <ProgressBar Template="{DynamicResource CuttingBorder}" Width="279" Height="7" Value="{Binding GpuInfo.CurrentClockRate}" Maximum="{Binding GpuInfo.GpuMaxClock}" VerticalAlignment="Top"></ProgressBar>
                         <TextBlock Text="Clock" Foreground="White" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"/>
                         <TextBlock Foreground="White" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
                             <Run Text="{Binding GpuInfo.CurrentClockRate}"></Run>
@@ -397,7 +397,7 @@
                             </fw:AcrylicPanel.OpacityMask>
                             <Grid>
                                 <Rectangle Fill="#47B5FF" Width="8" Height="8" RadiusX="2" RadiusY="2" Margin="7,7,162,7"></Rectangle>
-                                <TextBlock Text="{Binding RamInfo.HighestAppUsing}" FontSize="13" FontFamily="Poppins" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"></TextBlock>
+                                <TextBlock Text="{Binding RamInfo.HighestAppUsing}" FontSize="13" FontFamily="Poppins" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" MaxWidth="100"></TextBlock>
                                 <TextBlock Text="{Binding RamInfo.RamUsageFromTheApp}" FontSize="13" FontFamily="Poppins" Foreground="White" VerticalAlignment="Center" Margin="120,0,10.36,0"></TextBlock>
                             </Grid>
                         </fw:AcrylicPanel>

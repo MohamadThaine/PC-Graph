@@ -8,7 +8,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:pcinfoclasses="clr-namespace:PcInfoApp.PcInfoClasses"
              xmlns:Util="clr-namespace:PcInfoApp.Util"
              mc:Ignorable="d" 
-             d:DesignHeight="760" d:DesignWidth="1020" Background="Transparent">
+             d:DesignHeight="774.86" d:DesignWidth="1100" Background="Transparent">
     <UserControl.DataContext>
         <pcinfoclasses:FilesSizeClass/>
     </UserControl.DataContext>

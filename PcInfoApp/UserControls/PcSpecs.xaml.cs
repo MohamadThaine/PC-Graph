@@ -35,13 +35,13 @@ namespace PcInfoApp.UserControls
 
         private void GettingStorageTemp_DoWork(object? sender, DoWorkEventArgs e)
         {
-            string StorageName = "";
+            int StorageName = -1;
             this.Dispatcher.Invoke(() =>
             {
                 if (StorageNameComboBox.SelectedItem != null)
-                    StorageName = StorageNameComboBox.SelectedItem.ToString();
+                    StorageName = StorageNameComboBox.SelectedIndex;
             });
-            if (StorageName == "")
+            if (StorageName == -1)
                 return;
             double TempValue = Convert.ToDouble(StorageClass.GetStorageTemp(StorageName));
             this.Dispatcher.Invoke(() =>

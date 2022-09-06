@@ -35,7 +35,7 @@ namespace PcInfoApp.PcInfoClasses
                 StorageFreeSpace.Add(TotalFreeSize);
             }
         }
-        public static double GetStorageTemp(string name)
+        public static double GetStorageTemp(int index)
         {
             double Temp = 0;
             Computer pc = new Computer()
@@ -43,20 +43,14 @@ namespace PcInfoApp.PcInfoClasses
                 IsStorageEnabled = true
             };
             pc.Open();
-            foreach (var Storage in pc.Hardware)
+            pc.Hardware[index].Update();
+            foreach (var sensor in pc.Hardware[index].Sensors)
             {
-                if (Storage.Name != name)
-                    continue;
-                Storage.Update();
-                foreach (var sensor in Storage.Sensors)
+                if (sensor.Name == "Temperature")
                 {
-                    if (sensor.Name == "Temperature")
-                    {
-                        Temp = Convert.ToDouble(sensor.Value);
-                        break;
-                    }
+                    Temp = Convert.ToDouble(sensor.Value);
+                    break;
                 }
-                break;
             }
             return Temp;
         }

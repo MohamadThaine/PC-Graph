@@ -15,7 +15,6 @@ namespace PcInfoApp
             PcSpecs pcSpecs = new PcSpecs();
             UserControlEnabled = 1;
             ViewGrid.Children.Add(pcSpecs);
-
         }
         private void Pcspecsbtn_Click(object sender, RoutedEventArgs e)
         {
@@ -26,7 +25,6 @@ namespace PcInfoApp
                 PcSpecs pcSpecs = new PcSpecs();
                 ViewGrid.Children.Add(pcSpecs);
             }
-
         }
         private void FileSizeBT_Click(object sender, RoutedEventArgs e)
         {
@@ -46,11 +44,16 @@ namespace PcInfoApp
         {
             this.WindowState = System.Windows.WindowState.Minimized;
         }
-        private string DoubleToString(double value)
+
+        private void NetworkBt_Click(object sender, RoutedEventArgs e)
         {
-            return value.ToString();
+            if (UserControlEnabled != 3)
+            {
+                ViewGrid.Children.Clear();
+                UserControlEnabled = 3;
+                NetworkMonitoring networkMonitoring = new NetworkMonitoring();
+                ViewGrid.Children.Add(networkMonitoring);
+            }
         }
-
-
     }
 }

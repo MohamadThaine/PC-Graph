@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-
 namespace PcInfoApp.PcInfoClasses
 {
     public class FilesSizeClass
@@ -277,7 +276,6 @@ namespace PcInfoApp.PcInfoClasses
                     SizeInBytes = SizeInBytes * 1024 * 1024 * 1024;
             }
             return SizeInBytes;
-
         }
     }
 }

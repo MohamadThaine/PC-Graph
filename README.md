@@ -30,15 +30,15 @@ Things i added:
 
 1-Monitor your pc componts temp , loads , clocks , space , size , most app using the ram etc..
 
-2-Monitor your network usage , current upload , download , total upload and download.
+2-Monitor your network usage , current upload , download , total upload and download(for system as whole).
 
 3-See how much you each file and folder using inside a dirctory.
 
+4-Network monitoring window page you can see how much each program use right now and their total(for each app).
+
 Things i plan to add for now(may be changed):
 
-1-Bigger Network monitoring where you can see how much each program use right now and their total.
-
-2-Pc Info widnow where you can see every pc info you need to know.
+1-Pc Info widnow where you can see every pc info you need to know.
 
 Screenshot:
 ![alt text](https://snipboard.io/VcJ7wA.jpg)

@@ -10,7 +10,7 @@
         Title="MainWindow" Height="822.86" Width="1200"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResize"
+        ResizeMode="NoResize"
         AllowsTransparency="True"
         fw:AcrylicWindow.AcrylicAccentState="AcrylicBlurBehind"
         MouseDown="Window_MouseDown"

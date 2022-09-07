@@ -59,18 +59,20 @@
         <Grid Grid.Row="1">
         </Grid>
         <ListView VerticalAlignment="Center" Grid.Row="1" Style="{DynamicResource MaterialDesignListView}" SelectedIndex="0" Background="Transparent">
-            <ListViewItem Width="90" Height="74">
-                <Button  FontSize="14" Click="Pcspecsbtn_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="60" >
-                    <Image Source="/imgs/computer.png" />
+            <ListViewItem Width="100" Height="90">
+                <Button  FontSize="14" Click="Pcspecsbtn_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="PC Monitoring" >
+                    <Image Source="/imgs/computerIcon.png" />
                 </Button>
             </ListViewItem>
-            <ListViewItem Width="90" Height="74">
-                <Button FontSize="14" Click="FileSizeBT_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="60">
+            <ListViewItem Width="100" Height="90">
+                <Button FontSize="14" Click="FileSizeBT_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="60" ToolTip="Space Analyzer">
                     <Image Source="/imgs/FolderIcon.png" />
                 </Button>
             </ListViewItem>
-            <ListViewItem>
-                <Button Name="NetworkBt" Content="Network" FontSize="13" Click="NetworkBt_Click"></Button>
+            <ListViewItem Width="100" Height="90">
+                <Button Name="NetworkBt" HorizontalAlignment="Center" FontSize="13" Click="NetworkBt_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="Network Monitoring">
+                    <Image Source="/Imgs/NetworkIcon.png"></Image>
+                </Button>
             </ListViewItem>
         </ListView>
         <Grid Grid.Row="1" Background="#7070704A" Width="1" Height="632.6" HorizontalAlignment="Right" VerticalAlignment="Center"/>

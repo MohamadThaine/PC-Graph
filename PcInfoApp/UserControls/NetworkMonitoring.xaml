@@ -5,10 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PcInfoApp.UserControls"
              xmlns:Util="clr-namespace:PcInfoApp.Util"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="774.86" d:DesignWidth="1100">
     <Grid>
-        <ListView Name="NetworkUsageListView" Width="1100" Height="730" ItemsSource="{Binding NetworkInfo.AppsUsage}" Util:GridViewSort.AutoSort="True" FontFamily="Poppins" VerticalAlignment="Top" SelectionChanged="NetworkUsageListView_SelectionChanged">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListView Name="NetworkUsageListView" Grid.Column="1" Width="1100" Height="730" ItemsSource="{Binding NetworkInfo.AppsUsage}" Util:GridViewSort.AutoSort="True" FontFamily="Poppins" VerticalAlignment="Top" SelectionChanged="NetworkUsageListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="App Name" Width="180" DisplayMemberBinding="{Binding Value.AppName}" Util:GridViewSort.PropertyName="Value.AppName">
@@ -64,6 +68,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="EndProcessBT" Content="End Process" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="White" FontFamily="Poppins" Margin="0,0,6,9" Click="EndProcessBT_Click" IsEnabled="False"></Button>
+        <Button Name="EndProcessBT" Grid.Column="1" Content="End Process" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderBrush="White" FontFamily="Poppins" Margin="0,0,6,9" Click="EndProcessBT_Click" IsEnabled="False"></Button>
     </Grid>
 </UserControl>

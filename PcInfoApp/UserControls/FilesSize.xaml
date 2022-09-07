@@ -31,15 +31,16 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <MenuItem Name="ChooseFolder" Height="100" BorderThickness="1" Margin="13,3,90,-3" Style="{StaticResource AcrylicMenuItemStyle}" Click="ChooseFolder_Click">
+            <Grid Background="White" Height="1" VerticalAlignment="Bottom" Grid.ColumnSpan="4"></Grid>
+            <MenuItem Name="ChooseFolder" Height="90" BorderThickness="1" Margin="13,3,90,-3" Style="{StaticResource AcrylicMenuItemStyle}" Click="ChooseFolder_Click">
                 <MenuItem.Header>
-                    <StackPanel Width="100" HorizontalAlignment="Center">
+                    <StackPanel Width="90" HorizontalAlignment="Center">
                         <Image Source="/Imgs/folder-management.png" Width="90" Height="70"></Image>
-                        <TextBlock Text="Select Folder" Foreground="White" HorizontalAlignment="Center" FontFamily="Poppins"></TextBlock>
+                        <TextBlock Text="Select Folder" Foreground="White" HorizontalAlignment="Center" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <Button Grid.Column="1" Height="100" Name="DeleteFile" Background="Transparent" BorderBrush="Transparent" Click="DeleteFile_Click" IsEnabled="False" VerticalAlignment="Top">
+            <Button Grid.Column="1" Height="100" Name="DeleteFile" Background="Transparent" BorderBrush="Transparent" Click="DeleteFile_Click" IsEnabled="False" Margin="13,3,90,-3">
                 <StackPanel HorizontalAlignment="Center">
                     <Image Source="/Imgs/deletefile.png" Width="90" Height="70"></Image>
                     <TextBlock Text="Delete Selected File" Foreground="White" HorizontalAlignment="Center" FontFamily="Poppins" FontSize="12"></TextBlock>
@@ -115,12 +116,13 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Grid.Column="1" Name="ReadingStatusProg" Value="{Binding CurrentProggrass}" Maximum="{Binding NumberOfFiles}" Height="35" IsEnabled="False" Margin="0,2,0,2"/>
-            <TextBlock Name="ReadingStatus" Foreground="black" FontSize="25" Visibility="Hidden" Grid.Column="1" Margin="146,0,-146,0" FontFamily="Poppins" VerticalAlignment="Center">
-                <Run Text="Number of files"></Run>
+            <Grid Background="White" Height="1" VerticalAlignment="Top" Grid.ColumnSpan="2"></Grid>
+            <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Name="ReadingStatusProg" Value="{Binding CurrentProggrass}" Maximum="{Binding NumberOfFiles}" Height="30" IsEnabled="False" Margin="542,2,5,2" Grid.ColumnSpan="2"/>
+            <TextBlock Name="ReadingStatus" Foreground="black" FontSize="22" Visibility="Hidden" Grid.Column="1" Margin="146,0,-146,0" FontFamily="Poppins" VerticalAlignment="Center">
+                <Run Text="Number of files:"></Run>
                 <Run Text="{Binding NumberOfFiles}"></Run>
             </TextBlock>
-            <TextBlock x:Name="FreeSpaceTextBlock" Text="Free Space:  158GB(OF 500GB)" FontSize="25" Foreground="White" FontFamily="Poppins" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="34,0,513,0"></TextBlock>
+            <TextBlock x:Name="FreeSpaceTextBlock" FontSize="25" Foreground="White" FontFamily="Poppins" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="34,0,513,0"></TextBlock>
         </Grid>
     </Grid>
 </UserControl>

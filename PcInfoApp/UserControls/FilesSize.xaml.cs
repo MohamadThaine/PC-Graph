@@ -17,14 +17,12 @@ namespace PcInfoApp.UserControls
     {
         File SelectedFile;
         bool isButtonsEnabled = false;
-        MenuItem[] menuItems;
-        DriveInfo[] drives;
         public FilesSize()
         {
             InitializeComponent();
-            drives = DriveInfo.GetDrives();
+            DriveInfo[] drives = DriveInfo.GetDrives();
             ContextMenu contextMenuForFolders = new ContextMenu();
-            menuItems = new MenuItem[drives.Length + 1];
+            MenuItem[] menuItems = new MenuItem[drives.Length + 1];
             for(int i = 0; i < drives.Length; i++)
             {
                 if (drives[i].IsReady)
@@ -60,7 +58,7 @@ namespace PcInfoApp.UserControls
             else
                 ChoosenPath = menuItem.Header as string;
             GetFolderFiles(ChoosenPath);
-            GetFreeSpace(ChoosenPath);
+            GetFreeSpace(ChoosenPath[0]);
         }
         private void GetFolderFiles(string FolderPath)
         {
@@ -88,15 +86,10 @@ namespace PcInfoApp.UserControls
                     FilesSizeClass.GetNumberOfFilesBackGroundWorker.RunWorkerAsync();
                 }
         }
-        private void GetFreeSpace(string Drive)
+        private void GetFreeSpace(char Drive)
         {
-            foreach(DriveInfo drive in drives)
-            {
-                if (drive.Name[0] == Drive[0])
-                {
-                    FreeSpaceTextBlock.Text = "Free Space: " + (drive.AvailableFreeSpace / 1024 / 1024 / 1024) + "GB (OF " + ((drive.TotalSize / 1024 / 1024 / 1024)) + "GB)";
-                }
-            }
+            DriveInfo drive = new DriveInfo(Drive.ToString());
+            FreeSpaceTextBlock.Text = "Free Space: " + (drive.AvailableFreeSpace / 1024 / 1024 / 1024) + "GB (OF " + ((drive.TotalSize / 1024 / 1024 / 1024)) + "GB)";
         }
         private void DeleteFile_Click(object sender, RoutedEventArgs e)
         {

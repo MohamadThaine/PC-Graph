@@ -18,10 +18,12 @@
     <None Remove="Imgs\arrow.png" />
     <None Remove="Imgs\CloseIcon.png" />
     <None Remove="Imgs\computer.png" />
+    <None Remove="Imgs\computerIcon.png" />
     <None Remove="Imgs\deletefile.png" />
     <None Remove="Imgs\folder-management.png" />
     <None Remove="Imgs\FolderIcon.png" />
     <None Remove="Imgs\MinimizeIcon.png" />
+    <None Remove="Imgs\NetworkIcon.png" />
     <None Remove="Imgs\OpenFileLocationIcon.png" />
     <None Remove="Imgs\sortfoldersicon.png" />
   </ItemGroup>
@@ -34,10 +36,12 @@
     <Resource Include="Imgs\arrow.png" />
     <Resource Include="Imgs\CloseIcon.png" />
     <Resource Include="Imgs\computer.png" />
+    <Resource Include="Imgs\computerIcon.png" />
     <Resource Include="Imgs\deletefile.png" />
     <Resource Include="Imgs\folder-management.png" />
     <Resource Include="Imgs\FolderIcon.png" />
     <Resource Include="Imgs\MinimizeIcon.png" />
+    <Resource Include="Imgs\NetworkIcon.png" />
     <Resource Include="Imgs\OpenFileLocationIcon.png" />
     <Resource Include="Imgs\sortfoldersicon.png" />
   </ItemGroup>

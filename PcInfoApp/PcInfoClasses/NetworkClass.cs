@@ -86,7 +86,7 @@ namespace PcInfoApp.PcInfoClasses
                             }
                             else
                                 AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, data.size, 0));
-                            if (stopwatch.ElapsedMilliseconds > 2000)
+                            if (stopwatch.ElapsedMilliseconds > 1000)
                             {
                                 time = (int)stopwatch.ElapsedMilliseconds;
                                 stopwatch.Stop();
@@ -106,7 +106,7 @@ namespace PcInfoApp.PcInfoClasses
                             }
                             else
                                 AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, data.size, 0));
-                            if (stopwatch.ElapsedMilliseconds > 2000)
+                            if (stopwatch.ElapsedMilliseconds > 1000)
                             {
                                 time = (int)stopwatch.ElapsedMilliseconds;
                                 stopwatch.Stop();
@@ -126,7 +126,7 @@ namespace PcInfoApp.PcInfoClasses
                             }
                             else
                                 AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, 0, data.size));
-                            if (stopwatch.ElapsedMilliseconds > 2000)
+                            if (stopwatch.ElapsedMilliseconds > 1000)
                             {
                                 time = (int)stopwatch.ElapsedMilliseconds;
                                 stopwatch.Stop();
@@ -146,7 +146,7 @@ namespace PcInfoApp.PcInfoClasses
                             }
                             else
                                 AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, 0, data.size));
-                            if (stopwatch.ElapsedMilliseconds > 2000)
+                            if (stopwatch.ElapsedMilliseconds > 1000)
                             {
                                 time = (int)stopwatch.ElapsedMilliseconds;
                                 stopwatch.Stop();
@@ -161,9 +161,6 @@ namespace PcInfoApp.PcInfoClasses
             {
                 return;
             }
-            time /= 1000;
-            if (time != 0)
-                UploadUsage /= time;
             UploadUsage /= 1024;
             UploadWhileRunnigDecimal = UploadUsage;
             UploadUsageType = "KB/s";
@@ -181,8 +178,6 @@ namespace PcInfoApp.PcInfoClasses
                 UploadUsage = decimal.Parse(UploadUsage.ToString().Substring(0, 4));
             this.CurrentUploadUsage = UploadUsage + UploadUsageType;
             OnPropertyChanged("CurrentUploadUsage");
-            if (time != 0)
-                DownloadUsage /= time;
             DownloadUsage /= 1024;
             DownloadWhileRunnigDecimal = DownloadUsage;
             DownloadUsageType = "KB/s";
@@ -231,7 +226,7 @@ namespace PcInfoApp.PcInfoClasses
             }
             else if (this.UploadWhileRunnigType == "TB")
                 this.UploadWhileRunnig += (UploadWhileRunnigDecimal / 1024 / 1024 / 1024);
-            if(this.UploadWhileRunnig.ToString().Length > 4)
+            if (this.UploadWhileRunnig.ToString().Length > 4)
                 this.UploadUsageWhileAppRunning = this.UploadWhileRunnig.ToString().Substring(0, 4) + this.UploadWhileRunnigType;
             else
                 this.UploadUsageWhileAppRunning = this.UploadWhileRunnig + this.UploadWhileRunnigType;
@@ -267,8 +262,8 @@ namespace PcInfoApp.PcInfoClasses
             }
             else if (this.DownloadWhileRunnigType == "TB")
                 this.DownloadWhileRunnig += (DownloadWhileRunnigDecimal / 1024 / 1024 / 1024);
-            if(DownloadWhileRunnig.ToString().Length > 4)
-                this.DownloadUsageWhileAppRunning = this.DownloadWhileRunnig.ToString().Substring(0,4) + this.DownloadWhileRunnigType;
+            if (DownloadWhileRunnig.ToString().Length > 4)
+                this.DownloadUsageWhileAppRunning = this.DownloadWhileRunnig.ToString().Substring(0, 4) + this.DownloadWhileRunnigType;
             else
                 this.DownloadUsageWhileAppRunning = this.DownloadWhileRunnig + this.DownloadWhileRunnigType;
             OnPropertyChanged("DownloadUsageWhileAppRunning");

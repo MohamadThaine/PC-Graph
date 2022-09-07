@@ -36,15 +36,6 @@ namespace PcInfoApp
                 ViewGrid.Children.Add(filesSize);
             }
         }
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-        private void Minimize_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = System.Windows.WindowState.Minimized;
-        }
-
         private void NetworkBt_Click(object sender, RoutedEventArgs e)
         {
             if (UserControlEnabled != 3)
@@ -54,6 +45,14 @@ namespace PcInfoApp
                 NetworkMonitoring networkMonitoring = new NetworkMonitoring();
                 ViewGrid.Children.Add(networkMonitoring);
             }
+        }
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Minimized;
         }
     }
 }

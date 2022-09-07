@@ -1,9 +1,12 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using PcInfoApp.PcInfoClasses;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using File = PcInfoApp.PcInfoClasses.File;
 
 namespace PcInfoApp.UserControls
 {
@@ -14,17 +17,53 @@ namespace PcInfoApp.UserControls
     {
         File SelectedFile;
         bool isButtonsEnabled = false;
+        MenuItem[] menuItems;
+        DriveInfo[] drives;
         public FilesSize()
         {
             InitializeComponent();
+            drives = DriveInfo.GetDrives();
+            ContextMenu contextMenuForFolders = new ContextMenu();
+            menuItems = new MenuItem[drives.Length + 1];
+            for(int i = 0; i < drives.Length; i++)
+            {
+                if (drives[i].IsReady)
+                {
+                    menuItems[i] = new MenuItem();
+                    menuItems[i].Header = drives[i].Name;
+                    menuItems[i].Click += FolderClick;
+                    contextMenuForFolders.Items.Add(menuItems[i]);
+                }
+            }
+            menuItems[menuItems.Length - 1] = new MenuItem();
+            menuItems[menuItems.Length - 1].Header = "Choose Another Folder";
+            menuItems[menuItems.Length - 1].Click += FolderClick;
+            contextMenuForFolders.Items.Add(menuItems[menuItems.Length - 1]);
+            ChooseFolder.ContextMenu = contextMenuForFolders;
         }
 
-        private void ChooseFolderButton_Click(object sender, RoutedEventArgs e)
+        private void FolderClick(object sender, RoutedEventArgs e)
         {
-            CommonOpenFileDialog OpenFolder = new CommonOpenFileDialog();
-            OpenFolder.IsFolderPicker = true;
-            if (OpenFolder.ShowDialog() == CommonFileDialogResult.Ok)
+            MenuItem menuItem = sender as MenuItem;
+            string ChoosenPath = "";
+            if(menuItem.Header == "Choose Another Folder")
             {
+                CommonOpenFileDialog OpenFolder = new CommonOpenFileDialog();
+                OpenFolder.IsFolderPicker = true;
+                if (OpenFolder.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    ChoosenPath = OpenFolder.FileName;
+                }
+                else
+                    return;
+            }
+            else
+                ChoosenPath = menuItem.Header as string;
+            GetFolderFiles(ChoosenPath);
+            GetFreeSpace(ChoosenPath);
+        }
+        private void GetFolderFiles(string FolderPath)
+        {
                 FilesSizeClass.CurrentProggrass = 0;
                 EnableButtons(false);
                 isButtonsEnabled = false;
@@ -39,14 +78,23 @@ namespace PcInfoApp.UserControls
                 }
                 FilesSizeClass.GetFilesBackGroundWorker = new BackgroundWorker();
                 FilesSizeClass.GetNumberOfFilesBackGroundWorker = new BackgroundWorker();
-                if (!string.IsNullOrWhiteSpace(OpenFolder.FileName))
+                if (!string.IsNullOrWhiteSpace(FolderPath))
                 {
-                    FilesSizeClass.FolderPath = OpenFolder.FileName;
+                    FilesSizeClass.FolderPath = FolderPath;
                     FilesSizeClass.StopThread = false;
                     FilesSizeClass.GetFilesBackGroundWorker.DoWork += FilesSizeClass.GetFilesSizeByDir;
                     FilesSizeClass.GetNumberOfFilesBackGroundWorker.DoWork += FilesSizeClass.GetNumberOfFiles;
                     FilesSizeClass.GetFilesBackGroundWorker.RunWorkerAsync();
                     FilesSizeClass.GetNumberOfFilesBackGroundWorker.RunWorkerAsync();
+                }
+        }
+        private void GetFreeSpace(string Drive)
+        {
+            foreach(DriveInfo drive in drives)
+            {
+                if (drive.Name[0] == Drive[0])
+                {
+                    FreeSpaceTextBlock.Text = "Free Space: " + (drive.AvailableFreeSpace / 1024 / 1024 / 1024) + "GB (OF " + ((drive.TotalSize / 1024 / 1024 / 1024)) + "GB)";
                 }
             }
         }
@@ -91,6 +139,12 @@ namespace PcInfoApp.UserControls
         private void SortFolders_Click(object sender, RoutedEventArgs e)
         {
             FilesSizeClass.SortFolders();
+        }
+        private void ChooseFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var addButton = sender as FrameworkElement;
+            if (addButton != null)
+                addButton.ContextMenu.IsOpen = true;
         }
     }
 }

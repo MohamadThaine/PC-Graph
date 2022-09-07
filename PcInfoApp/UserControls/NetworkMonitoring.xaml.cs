@@ -1,8 +1,5 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Diagnostics.Tracing.AutomatedAnalysis;
-using PcInfoApp.PcInfoClasses;
 using Process = System.Diagnostics.Process;
 
 namespace PcInfoApp.UserControls
@@ -30,7 +27,7 @@ namespace PcInfoApp.UserControls
                         }
                         SelectedProcess = null;
                     }
-                    catch(System.ComponentModel.Win32Exception ex)
+                    catch (System.ComponentModel.Win32Exception ex)
                     {
                         MessageBox.Show("you cant end this process!", ex.Message);
                     }
@@ -42,7 +39,7 @@ namespace PcInfoApp.UserControls
         private void NetworkUsageListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EndProcessBT.IsEnabled = true;
-            if(NetworkUsageListView.SelectedItem != null)
+            if (NetworkUsageListView.SelectedItem != null)
             {
                 var t = NetworkUsageListView.SelectedItem.GetType();
                 System.Reflection.PropertyInfo[] props = t.GetProperties();

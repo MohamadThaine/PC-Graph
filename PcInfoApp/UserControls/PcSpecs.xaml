@@ -529,7 +529,7 @@
                 </fw:AcrylicPanel.OpacityMask>
                 <Grid>
                     <TextBlock FontFamily="Poppins" Text="RAM Max" Foreground="White" FontSize="24" Margin="27,13,116,101" FontWeight="Bold" Height="33"/> 
-                    <Grid Width="206" Margin="0,65,0,50" HorizontalAlignment="Center">
+                    <Grid Width="206" Margin="0,84,0,26" HorizontalAlignment="Center">
                         <ProgressBar Template="{DynamicResource CuttingBorder}" Width="206" Height="7" Value="{Binding RamInfo.MaxRamLoad}" Maximum="100" VerticalAlignment="Top"></ProgressBar>
                         <TextBlock Text="Load" Foreground="White" FontSize="11" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
                         <TextBlock Foreground="White" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">

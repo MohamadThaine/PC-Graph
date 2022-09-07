@@ -10,9 +10,10 @@
         Title="MainWindow" Height="822.86" Width="1200"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         AllowsTransparency="True"
         fw:AcrylicWindow.AcrylicAccentState="AcrylicBlurBehind"
+        MouseDown="Window_MouseDown"
         >
     <Window.Background>
         <ImageBrush ImageSource="/imgs/appbackground.png" Stretch="UniformToFill">

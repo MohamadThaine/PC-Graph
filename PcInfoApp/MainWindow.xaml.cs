@@ -1,5 +1,6 @@
 ﻿using PcInfoApp.UserControls;
 using System.Windows;
+using System.Windows.Input;
 
 namespace PcInfoApp
 {
@@ -53,6 +54,12 @@ namespace PcInfoApp
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = System.Windows.WindowState.Minimized;
+        }
+
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+                this.DragMove();
         }
     }
 }

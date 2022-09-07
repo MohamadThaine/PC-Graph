@@ -26,6 +26,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+using Mono.CSharp;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -131,14 +132,20 @@ namespace PcInfoApp.Util
         {
             get
             {
-                if (_dictionaryCacheVersion != _version)
+                try
                 {
-                    _dictionaryCache.Clear();
-                    foreach (DictionaryEntry entry in _keyedEntryCollection)
-                        _dictionaryCache.Add((TKey)entry.Key, (TValue)entry.Value);
-                    _dictionaryCacheVersion = _version;
-                }
-                return _dictionaryCache;
+                    if (_dictionaryCacheVersion != _version)
+                    {
+                        _dictionaryCache.Clear();
+                        foreach (DictionaryEntry entry in _keyedEntryCollection)
+                            _dictionaryCache.Add((TKey)entry.Key, (TValue)entry.Value);
+                        _dictionaryCacheVersion = _version;
+                    }
+                }catch(System.ArgumentException ex)
+                  {
+                    return null;
+                  }
+                return _dictionaryCache;   
             }
         }
 

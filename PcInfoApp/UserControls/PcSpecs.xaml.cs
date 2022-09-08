@@ -1,6 +1,8 @@
 ﻿using PcInfoApp.PcInfoClasses;
 using System;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 namespace PcInfoApp.UserControls
@@ -12,6 +14,7 @@ namespace PcInfoApp.UserControls
     {
         BackgroundWorker GettingStorageTemp;
         DispatcherTimer StorageTempTimer;
+        bool IsFirstTimeReadingStorageTemp = true;
         public PcSpecs()
         {
             InitializeComponent();
@@ -20,7 +23,7 @@ namespace PcInfoApp.UserControls
             GettingStorageTemp.DoWork += GettingStorageTemp_DoWork;
             GettingStorageTemp.RunWorkerAsync();
             StorageTempTimer = new DispatcherTimer();
-            StorageTempTimer.Interval = TimeSpan.FromSeconds(1);
+            StorageTempTimer.Interval = TimeSpan.FromSeconds(120);
             StorageTempTimer.Tick += StorageTempTimer_Tick;
             StorageTempTimer.Start();
         }
@@ -35,19 +38,28 @@ namespace PcInfoApp.UserControls
 
         private void GettingStorageTemp_DoWork(object? sender, DoWorkEventArgs e)
         {
-            int StorageName = -1;
+            bool IsTheAppInFocus = false;
             this.Dispatcher.Invoke(() =>
             {
-                if (StorageNameComboBox.SelectedItem != null)
-                    StorageName = StorageNameComboBox.SelectedIndex;
+                IsTheAppInFocus = Application.Current.Windows[0].IsActive;
             });
-            if (StorageName == -1)
-                return;
-            double TempValue = Convert.ToDouble(StorageClass.GetStorageTemp(StorageName));
-            this.Dispatcher.Invoke(() =>
+            if(IsTheAppInFocus || IsFirstTimeReadingStorageTemp)
             {
-                StorageTemp.Value = TempValue;
-            });
+                int StorageIndex = -1;
+                this.Dispatcher.Invoke(() =>
+                {
+                    if (StorageNameComboBox.SelectedItem != null)
+                        StorageIndex = StorageNameComboBox.SelectedIndex;
+                });
+                if (StorageIndex == -1)
+                    StorageIndex = 0;
+                double TempValue = Convert.ToDouble(StorageClass.GetStorageTemp(StorageIndex));
+                this.Dispatcher.Invoke(() =>
+                {
+                    StorageTemp.Value = TempValue;
+                });
+                IsFirstTimeReadingStorageTemp = false;
+            }
             GettingStorageTemp.CancelAsync();
         }
 
@@ -62,7 +74,8 @@ namespace PcInfoApp.UserControls
             {
 
             }
-
+            if (!GettingStorageTemp.IsBusy)
+                GettingStorageTemp.RunWorkerAsync();
         }
     }
 }

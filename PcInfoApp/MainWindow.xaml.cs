@@ -1,4 +1,5 @@
-﻿using PcInfoApp.UserControls;
+﻿using Mono.CSharp;
+using PcInfoApp.UserControls;
 using System.Windows;
 using System.Windows.Input;
 

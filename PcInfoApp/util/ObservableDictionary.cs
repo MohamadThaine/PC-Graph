@@ -121,7 +121,7 @@ namespace PcInfoApp.Util
 
         public Dictionary<TKey, TValue>.ValueCollection Values
         {
-            get { return TrueDictionary.Values; }
+                get { return TrueDictionary.Values; }      
         }
 
         #endregion public
@@ -141,7 +141,7 @@ namespace PcInfoApp.Util
                             _dictionaryCache.Add((TKey)entry.Key, (TValue)entry.Value);
                         _dictionaryCacheVersion = _version;
                     }
-                }catch(System.ArgumentException ex)
+                }catch(Exception ex)
                   {
                     return null;
                   }

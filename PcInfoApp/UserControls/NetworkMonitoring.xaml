@@ -5,31 +5,49 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PcInfoApp.UserControls"
              xmlns:Util="clr-namespace:PcInfoApp.Util"
+             xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
              mc:Ignorable="d"
              d:DesignHeight="774.86" d:DesignWidth="1100">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15"></ColumnDefinition>
+            <ColumnDefinition Width="40"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="40"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListView Name="NetworkUsageListView" Grid.Column="1" Width="1100" Height="730" ItemsSource="{Binding NetworkInfo.AppsUsage}" Util:GridViewSort.AutoSort="True" FontFamily="Poppins" VerticalAlignment="Top" SelectionChanged="NetworkUsageListView_SelectionChanged">
+        <Border Width="1040" Height="35" CornerRadius="8" Grid.Column="1" Grid.ColumnSpan="2" Margin="-50,0,0,700">
+            <fw:AcrylicPanel Width="1040" Height="35" NoiseOpacity="0" TintColor="#70707049" TintOpacity="0.3">
+                <fw:AcrylicPanel.OpacityMask>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Border CornerRadius="8"  Width="1040" Height="35" Background="White"></Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </fw:AcrylicPanel.OpacityMask>
+            </fw:AcrylicPanel>
+        </Border>
+        <ListView Name="NetworkUsageListView" Grid.Column="1" Width="1020" Height="700" FontSize="14" ItemsSource="{Binding NetworkInfo.AppsUsage}" Util:GridViewSort.AutoSort="True" FontFamily="Poppins" VerticalAlignment="Top" SelectionChanged="NetworkUsageListView_SelectionChanged" Margin="0,23,0,0">
+            <ListView.Resources>
+                <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}">
+                    <Setter Property="Height" Value="930"/>
+                </Style>
+            </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="App Name" Width="180" DisplayMemberBinding="{Binding Value.AppName}" Util:GridViewSort.PropertyName="Value.AppName">
+                    <GridViewColumn Header="App Name" Width="160" DisplayMemberBinding="{Binding Value.AppName}" Util:GridViewSort.PropertyName="Value.AppName">
                         <GridViewColumn.HeaderContainerStyle>
                             <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}">
                                 <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="FontSize" Value="16"/>
                                 <Setter Property="Foreground" Value="White"/>
                                 <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
                             </Style>
                         </GridViewColumn.HeaderContainerStyle>
                     </GridViewColumn>
-                    <GridViewColumn Header="Current Uplaod usage" Width="220" DisplayMemberBinding="{Binding Value.CurrentUpload}" Util:GridViewSort.PropertyName="Value.CurrentUploadInBytes">
+                    <GridViewColumn Header="Current Uplaod usage" Width="200" DisplayMemberBinding="{Binding Value.CurrentUpload}" Util:GridViewSort.PropertyName="Value.CurrentUploadInBytes">
                         <GridViewColumn.HeaderContainerStyle>
                             <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}">
                                 <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="FontSize" Value="16"/>
                                 <Setter Property="Foreground" Value="White"/>
                                 <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
                             </Style>
@@ -39,27 +57,27 @@
                         <GridViewColumn.HeaderContainerStyle>
                             <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}">
                                 <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="FontSize" Value="16"/>
                                 <Setter Property="Foreground" Value="White"/>
                                 <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
                             </Style>
                         </GridViewColumn.HeaderContainerStyle>
                     </GridViewColumn>
-                    <GridViewColumn Header="Total Uplaod usage" Width="220" DisplayMemberBinding="{Binding Value.TotalUpload}" Util:GridViewSort.PropertyName="Value.TotalUploadInBytes">
+                    <GridViewColumn Header="Total Uplaod usage" Width="200" DisplayMemberBinding="{Binding Value.TotalUpload}" Util:GridViewSort.PropertyName="Value.TotalUploadInBytes">
                         <GridViewColumn.HeaderContainerStyle>
                             <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}">
                                 <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="FontSize" Value="17"/>
                                 <Setter Property="Foreground" Value="White"/>
                                 <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
                             </Style>
                         </GridViewColumn.HeaderContainerStyle>
                     </GridViewColumn>
-                    <GridViewColumn Header="Total Download usage" Width="220" DisplayMemberBinding="{Binding Value.TotalDownload}" Util:GridViewSort.PropertyName="Value.TotalDownloadInBytes">
+                    <GridViewColumn Header="Total Download usage" Width="205" DisplayMemberBinding="{Binding Value.TotalDownload}" Util:GridViewSort.PropertyName="Value.TotalDownloadInBytes">
                         <GridViewColumn.HeaderContainerStyle>
                             <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}">
                                 <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="FontSize" Value="17"/>
                                 <Setter Property="Foreground" Value="White"/>
                                 <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
                             </Style>

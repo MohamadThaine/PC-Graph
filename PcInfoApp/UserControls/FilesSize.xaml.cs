@@ -89,7 +89,8 @@ namespace PcInfoApp.UserControls
         private void GetFreeSpace(char Drive)
         {
             DriveInfo drive = new DriveInfo(Drive.ToString());
-            FreeSpaceTextBlock.Text = "Free Space: " + (drive.AvailableFreeSpace / 1024 / 1024 / 1024) + "GB (OF " + ((drive.TotalSize / 1024 / 1024 / 1024)) + "GB)";
+            FilesSizeClass.FreeSpace = "Free Space: " + (drive.AvailableFreeSpace / 1024 / 1024 / 1024) + "GB (OF " + ((drive.TotalSize / 1024 / 1024 / 1024)) + "GB)";
+            FilesSizeClass.OnPropertyChanged("FreeSpace");
         }
         private void DeleteFile_Click(object sender, RoutedEventArgs e)
         {

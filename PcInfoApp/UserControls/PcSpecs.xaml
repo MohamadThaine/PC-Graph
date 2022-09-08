@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:PcInfoApp.UserControls" xmlns:local1="clr-namespace:PcInfoApp"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-             xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
 
              xmlns:Util="clr-namespace:PcInfoApp.Util"
              mc:Ignorable="d" 
@@ -308,22 +307,6 @@
                     <TextBlock Text="{Binding RamInfo.RamSpeed}" Foreground="White" FontSize="14" Margin="126,70,130,150" FontWeight="SemiBold">
                     </TextBlock>
                     <Grid Width="279" Height="33.56" Margin="0,137.44,0,73.56"/>
-                    <Border Width="177" Height="22" Margin="26,183,135,27" CornerRadius="4">
-                        <fw:AcrylicPanel Width="177" Height="22" NoiseOpacity="0" TintColor="#70707049" TintOpacity="0.2">
-                            <fw:AcrylicPanel.OpacityMask>
-                                <VisualBrush Stretch="Fill">
-                                    <VisualBrush.Visual>
-                                        <Border CornerRadius="4"  Width="177" Height="22" Background="White"></Border>
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </fw:AcrylicPanel.OpacityMask>
-                            <Grid>
-                                <Rectangle Fill="#47B5FF" Width="8" Height="8" RadiusX="2" RadiusY="2" Margin="7,7,162,7"></Rectangle>
-                                <TextBlock Text="{Binding RamInfo.HighestAppUsing[1]}" FontSize="13" FontFamily="Poppins" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" MaxWidth="80"></TextBlock>
-                                <TextBlock Text="{Binding RamInfo.RamUsageFromTheApp[1]}" FontSize="13" FontFamily="Poppins" Foreground="White" VerticalAlignment="Center" Margin="120,0,10.36,0"></TextBlock>
-                            </Grid>
-                        </fw:AcrylicPanel>
-                    </Border>
                     <Border Width="177" Height="22" Margin="26,153,135,57" CornerRadius="4">
                         <fw:AcrylicPanel Width="177" Height="22" NoiseOpacity="0" TintColor="#70707049" TintOpacity="0.2">
                             <fw:AcrylicPanel.OpacityMask>
@@ -337,6 +320,22 @@
                                 <Rectangle Fill="#47B5FF" Width="8" Height="8" RadiusX="2" RadiusY="2" Margin="7,7,162,7"></Rectangle>
                                 <TextBlock Text="{Binding RamInfo.HighestAppUsing[0]}" FontSize="13" FontFamily="Poppins" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" MaxWidth="80"></TextBlock>
                                 <TextBlock Text="{Binding RamInfo.RamUsageFromTheApp[0]}" FontSize="13" FontFamily="Poppins" Foreground="White" VerticalAlignment="Center" Margin="120,0,10.36,0"></TextBlock>
+                            </Grid>
+                        </fw:AcrylicPanel>
+                    </Border>
+                    <Border Width="177" Height="22" Margin="26,183,135,27" CornerRadius="4">
+                        <fw:AcrylicPanel Width="177" Height="22" NoiseOpacity="0" TintColor="#70707049" TintOpacity="0.2">
+                            <fw:AcrylicPanel.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border CornerRadius="4"  Width="177" Height="22" Background="White"></Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </fw:AcrylicPanel.OpacityMask>
+                            <Grid>
+                                <Rectangle Fill="#47B5FF" Width="8" Height="8" RadiusX="2" RadiusY="2" Margin="7,7,162,7"></Rectangle>
+                                <TextBlock Text="{Binding RamInfo.HighestAppUsing[1]}" FontSize="13" FontFamily="Poppins" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" MaxWidth="80"></TextBlock>
+                                <TextBlock Text="{Binding RamInfo.RamUsageFromTheApp[1]}" FontSize="13" FontFamily="Poppins" Foreground="White" VerticalAlignment="Center" Margin="120,0,10.36,0"></TextBlock>
                             </Grid>
                         </fw:AcrylicPanel>
                     </Border>

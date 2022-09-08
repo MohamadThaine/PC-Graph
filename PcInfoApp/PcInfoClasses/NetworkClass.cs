@@ -226,8 +226,8 @@ namespace PcInfoApp.PcInfoClasses
             }
             else if (this.UploadWhileRunnigType == "TB")
                 this.UploadWhileRunnig += (UploadWhileRunnigDecimal / 1024 / 1024 / 1024);
-            if (this.UploadWhileRunnig.ToString().Length > 4)
-                this.UploadUsageWhileAppRunning = this.UploadWhileRunnig.ToString().Substring(0, 4) + this.UploadWhileRunnigType;
+            if (this.UploadWhileRunnig.ToString().Contains("."))
+                this.UploadUsageWhileAppRunning = this.UploadWhileRunnig.ToString().Substring(0, UploadWhileRunnig.ToString().IndexOf(".") + 2) + this.UploadWhileRunnigType;
             else
                 this.UploadUsageWhileAppRunning = this.UploadWhileRunnig + this.UploadWhileRunnigType;
             OnPropertyChanged("UploadUsageWhileAppRunning");
@@ -262,8 +262,8 @@ namespace PcInfoApp.PcInfoClasses
             }
             else if (this.DownloadWhileRunnigType == "TB")
                 this.DownloadWhileRunnig += (DownloadWhileRunnigDecimal / 1024 / 1024 / 1024);
-            if (DownloadWhileRunnig.ToString().Length > 4)
-                this.DownloadUsageWhileAppRunning = this.DownloadWhileRunnig.ToString().Substring(0, 4) + this.DownloadWhileRunnigType;
+            if (DownloadWhileRunnig.ToString().Contains("."))
+                this.DownloadUsageWhileAppRunning = this.DownloadWhileRunnig.ToString().Substring(0, DownloadWhileRunnig.ToString().IndexOf(".") + 2) + this.DownloadWhileRunnigType;
             else
                 this.DownloadUsageWhileAppRunning = this.DownloadWhileRunnig + this.DownloadWhileRunnigType;
             OnPropertyChanged("DownloadUsageWhileAppRunning");
@@ -273,17 +273,17 @@ namespace PcInfoApp.PcInfoClasses
                 {
                     if (app.CurrentUploadInBytes == 0)
                         app.CurrentUpload = "0KB";
-                    else if ((app.CurrentUploadInBytes / 1024).ToString().Length > 4)
+                    else if ((app.CurrentUploadInBytes / 1024).ToString().Contains("."))
                     {
-                        app.CurrentUpload = (app.CurrentUploadInBytes / 1024).ToString().Substring(0, 4) + "KB";
+                        app.CurrentUpload = (app.CurrentUploadInBytes / 1024).ToString().Substring(0, (app.CurrentUploadInBytes / 1024).ToString().IndexOf(".") + 2) + "KB";
                     }
                     else
                         app.CurrentUpload = (app.CurrentUploadInBytes / 1024) + "KB";
                     if (app.CurrentDownloadInBytes == 0)
                         app.CurrentDownload = "0KB";
-                    else if ((app.CurrentDownloadInBytes / 1024).ToString().Length > 4)
+                    else if ((app.CurrentDownloadInBytes / 1024).ToString().Contains("."))
                     {
-                        app.CurrentDownload = (app.CurrentDownloadInBytes / 1024).ToString().Substring(0, 4) + "KB";
+                        app.CurrentDownload = (app.CurrentDownloadInBytes / 1024).ToString().Substring(0, (app.CurrentDownloadInBytes / 1024).ToString().IndexOf(".") + 2) + "KB";
                     }
                     else
                         app.CurrentDownload = (app.CurrentDownloadInBytes / 1024) + "KB";

@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Windows;
+
 namespace PcInfoApp.PcInfoClasses
 {
     public class FilesSizeClass
@@ -17,9 +19,17 @@ namespace PcInfoApp.PcInfoClasses
         static public int NumberOfFiles { get; set; } = 1;
         static public int CurrentProggrass { get; set; }
         static public bool EnableSortFolderBT { get; set; }
+        static public Visibility ReadingStatusVisibility { get; set; }
+        static public string FreeSpace { get; set; }
+        static bool WorkOnce = false;
         static public event PropertyChangedEventHandler StaticPropertyChanged;
         public FilesSizeClass()
         {
+            if (WorkOnce != true)
+            {
+                FilesSizeClass.ReadingStatusVisibility = Visibility.Hidden;
+                WorkOnce = true;
+            }
         }
         static public void GetFilesSizeByDir(object? sender, DoWorkEventArgs e)
         {
@@ -208,12 +218,13 @@ namespace PcInfoApp.PcInfoClasses
             Folders = new ObservableCollection<Folder>(Ordered);
             OnPropertyChanged("Folders");
         }
-        static private void OnPropertyChanged(string propertyName)
+        static public void OnPropertyChanged(string propertyName)
         {
             StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(propertyName));
         }
         static public void GetNumberOfFiles(object? sender, DoWorkEventArgs e)
         {
+            ReadingStatusVisibility = Visibility.Visible;
             GetNumberOfFilesBackGroundWorker.WorkerSupportsCancellation = true;
             NumberOfFiles = 0;
             OnPropertyChanged("NumberOfFiles");

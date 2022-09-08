@@ -117,12 +117,12 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Background="White" Height="1" VerticalAlignment="Top" Grid.ColumnSpan="2"></Grid>
-            <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Name="ReadingStatusProg" Value="{Binding CurrentProggrass}" Maximum="{Binding NumberOfFiles}" Height="30" IsEnabled="False" Margin="542,2,5,2" Grid.ColumnSpan="2"/>
-            <TextBlock Name="ReadingStatus" Foreground="black" FontSize="22" Visibility="Hidden" Grid.Column="1" Margin="146,0,-146,0" FontFamily="Poppins" VerticalAlignment="Center">
+            <ProgressBar Name="ReadingStatusProg" Value="{Binding CurrentProggrass}" Maximum="{Binding NumberOfFiles}" Height="30" IsEnabled="False" Margin="542,2,5,2" Grid.ColumnSpan="2"/>
+            <TextBlock Name="ReadingStatus" Foreground="black" FontSize="22" Visibility="{Binding ReadingStatusVisibility}" Grid.Column="1" Margin="146,0,-146,0" FontFamily="Poppins" VerticalAlignment="Center">
                 <Run Text="Number of files:"></Run>
                 <Run Text="{Binding NumberOfFiles}"></Run>
             </TextBlock>
-            <TextBlock x:Name="FreeSpaceTextBlock" FontSize="25" Foreground="White" FontFamily="Poppins" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="34,0,513,0"></TextBlock>
+            <TextBlock x:Name="FreeSpaceTextBlock" Text="{Binding FreeSpace}" FontSize="25" Foreground="White" FontFamily="Poppins" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="34,0,513,0"></TextBlock>
         </Grid>
     </Grid>
 </UserControl>

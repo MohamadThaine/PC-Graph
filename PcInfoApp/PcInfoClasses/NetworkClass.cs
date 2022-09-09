@@ -35,19 +35,6 @@ namespace PcInfoApp.PcInfoClasses
             GetCurrentDownloadAndUploadUsage.WorkerSupportsCancellation = true;
             GetCurrentDownloadAndUploadUsage.DoWork += GetCurrentDownloadAndUploadUsage_DoWork;
             GetCurrentDownloadAndUploadUsage.RunWorkerAsync();
-            /*DispatcherTimer UsageTimer = new DispatcherTimer();
-            UsageTimer.Interval = TimeSpan.FromMilliseconds(1000);
-            UsageTimer.Tick += UsageTimer_Tick;
-            UsageTimer.Start();*/
-        }
-
-        private void UsageTimer_Tick(object? sender, EventArgs e)
-        {
-            /*GetCurrentDownloadAndUploadUsage.CancelAsync();
-            GetCurrentDownloadAndUploadUsage = new BackgroundWorker();
-            GetCurrentDownloadAndUploadUsage.WorkerSupportsCancellation = true;
-            GetCurrentDownloadAndUploadUsage.DoWork += GetCurrentDownloadAndUploadUsage_DoWork;
-            GetCurrentDownloadAndUploadUsage.RunWorkerAsync();*/
         }
         private void PrepareData(decimal UploadUsage , decimal DownloadUsage)
         {

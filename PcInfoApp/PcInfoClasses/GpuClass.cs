@@ -1,6 +1,4 @@
-﻿using Cudafy;
-using Cudafy.Host;
-using LibreHardwareMonitor.Hardware;
+﻿using LibreHardwareMonitor.Hardware;
 using System;
 using System.ComponentModel;
 using System.Management;
@@ -54,12 +52,15 @@ namespace PcInfoApp.PcInfoClasses
         }
         private void GetGpuInfo()
         {
-            GPGPU Gpu = CudafyHost.GetDevice(CudafyModes.Target, CudafyModes.DeviceId);
-            var GpuInfo = Gpu.GetDeviceProperties(true);
-            var GpuVRamSize = (GpuInfo.TotalMemory / 1024 / 1024 + 1) / 1024;
-            GpuName = GpuInfo.Name;
-            GpuMaxClock = (GpuInfo.ClockRate / 1000);
-            GpuMemoryMaxSize = GpuVRamSize;
+            Computer pc = new Computer
+            {
+                IsGpuEnabled = true,
+            };
+            pc.Open();
+            pc.Hardware[0].Update();
+            this.GpuName = pc.Hardware[0].Name;
+            this.GpuMemoryMaxSize = Convert.ToDouble(pc.Hardware[0].Sensors[26].Value / 1024);
+            this.GpuMaxClock = Convert.ToDouble(pc.Hardware[0].Sensors[1].Max);
             VersionDate = GetDriverVersionDate().ToString("dd/MM/yyyy");
         }
         private DateTime GetDriverVersionDate()

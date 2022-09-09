@@ -36,7 +36,7 @@ namespace PcInfoApp.PcInfoClasses
             GetCurrentDownloadAndUploadUsage.DoWork += GetCurrentDownloadAndUploadUsage_DoWork;
             GetCurrentDownloadAndUploadUsage.RunWorkerAsync();
             DispatcherTimer UsageTimer = new DispatcherTimer();
-            UsageTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            UsageTimer.Interval = TimeSpan.FromMilliseconds(2000);
             UsageTimer.Tick += UsageTimer_Tick;
             UsageTimer.Start();
         }

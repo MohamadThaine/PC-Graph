@@ -25,6 +25,7 @@
     <None Remove="Imgs\MinimizeIcon.png" />
     <None Remove="Imgs\NetworkIcon.png" />
     <None Remove="Imgs\OpenFileLocationIcon.png" />
+    <None Remove="Imgs\OverlayIcon.png" />
     <None Remove="Imgs\sortfoldersicon.png" />
   </ItemGroup>
 
@@ -43,11 +44,11 @@
     <Resource Include="Imgs\MinimizeIcon.png" />
     <Resource Include="Imgs\NetworkIcon.png" />
     <Resource Include="Imgs\OpenFileLocationIcon.png" />
+    <Resource Include="Imgs\OverlayIcon.png" />
     <Resource Include="Imgs\sortfoldersicon.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CUDAfy.NET" Version="1.29.5576.13786" />
     <PackageReference Include="FluentWPF" Version="0.10.2" />
     <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.1-pre140" />
     <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci277" />

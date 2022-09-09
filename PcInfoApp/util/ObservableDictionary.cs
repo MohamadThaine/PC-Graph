@@ -25,8 +25,6 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-using Mono.CSharp;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -121,7 +119,7 @@ namespace PcInfoApp.Util
 
         public Dictionary<TKey, TValue>.ValueCollection Values
         {
-                get { return TrueDictionary.Values; }      
+            get { return TrueDictionary.Values; }
         }
 
         #endregion public
@@ -141,11 +139,12 @@ namespace PcInfoApp.Util
                             _dictionaryCache.Add((TKey)entry.Key, (TValue)entry.Value);
                         _dictionaryCacheVersion = _version;
                     }
-                }catch(Exception ex)
-                  {
+                }
+                catch (Exception ex)
+                {
                     return null;
-                  }
-                return _dictionaryCache;   
+                }
+                return _dictionaryCache;
             }
         }
 

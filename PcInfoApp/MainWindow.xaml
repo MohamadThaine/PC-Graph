@@ -75,6 +75,11 @@
                     <Image Source="/Imgs/NetworkIcon.png"></Image>
                 </Button>
             </ListViewItem>
+            <ListViewItem Width="100" Height="90">
+                <Button Name="OverLayBT" Click="OverLayBT_Click" HorizontalAlignment="Center" FontSize="13" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="Overlay for stats">
+                    <Image Source="/Imgs/OverlayIcon.png"></Image>
+                </Button>
+            </ListViewItem>
         </ListView>
         <Grid Grid.Row="1" Background="#7070704A" Width="1" Height="632.6" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <Grid Name="ViewGrid" Grid.Row="1" Grid.Column="1">

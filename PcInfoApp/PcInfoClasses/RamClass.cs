@@ -19,6 +19,7 @@ namespace PcInfoApp.PcInfoClasses
         public ObservableCollection<string> HighestAppUsing { get; set; }
         public ObservableCollection<string> RamUsageFromTheApp { get; set; }
         private BackgroundWorker GetChangingInfo;
+        public event PropertyChangedEventHandler PropertyChanged;
         public RamClass()
         {
             GetRamInfo();
@@ -33,7 +34,7 @@ namespace PcInfoApp.PcInfoClasses
             RamInfoTimers.Tick += RamInfoTimer_Tick1;
             RamInfoTimers.Start();
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        
         private void RamInfoTimer_Tick1(object? sender, EventArgs e)
         {
             GetChangingInfo = new BackgroundWorker();
@@ -75,22 +76,22 @@ namespace PcInfoApp.PcInfoClasses
             if (Convert.ToInt32((this.RamLoad / RamSize) * 100) > this.MaxRamLoad)
                 this.MaxRamLoad = Convert.ToInt32((this.RamLoad / RamSize) * 100);
             this.RamUsage = Convert.ToInt32((this.RamLoad / RamSize) * 100);
-            Process[] process = Process.GetProcesses();
+            Process[] procesess = Process.GetProcesses();
             Dictionary<string, long> ProcMap = new Dictionary<string, long>();
-            foreach(Process process1 in process)
+            foreach (Process process in procesess)
             {
-                if (ProcMap.ContainsKey(process1.ProcessName))
+                if (ProcMap.ContainsKey(process.ProcessName))
                 {
-                    ProcMap[process1.ProcessName] += process1.WorkingSet64;
+                    ProcMap[process.ProcessName] += process.WorkingSet64;
                 }
                 else
-                    ProcMap.Add(process1.ProcessName, process1.WorkingSet64);
+                    ProcMap.Add(process.ProcessName, process.WorkingSet64);
             }
             ProcMap = ProcMap.OrderByDescending(proc => proc.Value).ToDictionary(x => x.Key, x => x.Value);
             string memorytype = "KB";
             decimal MemoryUsed = 0;
             int index = 0;
-            foreach(KeyValuePair<string, long> kvp in ProcMap)
+            foreach (KeyValuePair<string, long> kvp in ProcMap)
             {
                 if (index >= 2)
                     break;

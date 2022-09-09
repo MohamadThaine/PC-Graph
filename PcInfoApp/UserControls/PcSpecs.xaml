@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:PcInfoApp.UserControls" xmlns:local1="clr-namespace:PcInfoApp"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-
              xmlns:Util="clr-namespace:PcInfoApp.Util"
              mc:Ignorable="d" 
              d:DesignHeight="774.86" d:DesignWidth="1100">

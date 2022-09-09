@@ -1,7 +1,6 @@
 ﻿using PcInfoApp.PcInfoClasses;
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -43,7 +42,7 @@ namespace PcInfoApp.UserControls
             {
                 IsTheAppInFocus = Application.Current.Windows[0].IsActive;
             });
-            if(IsTheAppInFocus || IsFirstTimeReadingStorageTemp)
+            if (IsTheAppInFocus || IsFirstTimeReadingStorageTemp)
             {
                 int StorageIndex = -1;
                 this.Dispatcher.Invoke(() =>

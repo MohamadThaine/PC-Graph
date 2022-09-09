@@ -1,5 +1,4 @@
-﻿using Mono.CSharp;
-using PcInfoApp.UserControls;
+﻿using PcInfoApp.UserControls;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,6 +10,8 @@ namespace PcInfoApp
     public partial class MainWindow : Window
     {
         int UserControlEnabled = 0; // to know which user control is used now , 1 = PcSpecs UserControl
+        Overlay.OverlayWindow overlayWindow;
+        bool IsoverlayEnabled = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -48,6 +49,20 @@ namespace PcInfoApp
                 ViewGrid.Children.Add(networkMonitoring);
             }
         }
+        private void OverLayBT_Click(object sender, RoutedEventArgs e)
+        {
+            if(IsoverlayEnabled)
+            {
+                overlayWindow.Close();
+                IsoverlayEnabled = false;
+            }
+            else
+            {
+                overlayWindow = new Overlay.OverlayWindow();
+                overlayWindow.Show();
+                IsoverlayEnabled = true;
+            }
+        }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -62,5 +77,7 @@ namespace PcInfoApp
             if (Mouse.LeftButton == MouseButtonState.Pressed)
                 this.DragMove();
         }
+
+       
     }
 }

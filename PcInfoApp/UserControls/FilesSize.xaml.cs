@@ -1,6 +1,5 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using PcInfoApp.PcInfoClasses;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -23,7 +22,7 @@ namespace PcInfoApp.UserControls
             DriveInfo[] drives = DriveInfo.GetDrives();
             ContextMenu contextMenuForFolders = new ContextMenu();
             MenuItem[] menuItems = new MenuItem[drives.Length + 1];
-            for(int i = 0; i < drives.Length; i++)
+            for (int i = 0; i < drives.Length; i++)
             {
                 if (drives[i].IsReady)
                 {
@@ -44,7 +43,7 @@ namespace PcInfoApp.UserControls
         {
             MenuItem menuItem = sender as MenuItem;
             string ChoosenPath = "";
-            if(menuItem.Header == "Choose Another Folder")
+            if (menuItem.Header == "Choose Another Folder")
             {
                 CommonOpenFileDialog OpenFolder = new CommonOpenFileDialog();
                 OpenFolder.IsFolderPicker = true;
@@ -62,29 +61,29 @@ namespace PcInfoApp.UserControls
         }
         private void GetFolderFiles(string FolderPath)
         {
-                FilesSizeClass.CurrentProggrass = 0;
-                EnableButtons(false);
-                isButtonsEnabled = false;
-                FilesSizeClass.CurrentProggrass = 0;
-                FilesSizeClass.NumberOfFiles = 0;
-                ReadingStatus.Visibility = Visibility.Visible;
-                if (FilesSizeClass.GetFilesBackGroundWorker.IsBusy || FilesSizeClass.StopThread == true && FilesSizeClass.GetNumberOfFilesBackGroundWorker.IsBusy)
-                {
-                    FilesSizeClass.GetFilesBackGroundWorker.CancelAsync();
-                    FilesSizeClass.GetNumberOfFilesBackGroundWorker.CancelAsync();
-                    FilesSizeClass.StopThread = true;
-                }
-                FilesSizeClass.GetFilesBackGroundWorker = new BackgroundWorker();
-                FilesSizeClass.GetNumberOfFilesBackGroundWorker = new BackgroundWorker();
-                if (!string.IsNullOrWhiteSpace(FolderPath))
-                {
-                    FilesSizeClass.FolderPath = FolderPath;
-                    FilesSizeClass.StopThread = false;
-                    FilesSizeClass.GetFilesBackGroundWorker.DoWork += FilesSizeClass.GetFilesSizeByDir;
-                    FilesSizeClass.GetNumberOfFilesBackGroundWorker.DoWork += FilesSizeClass.GetNumberOfFiles;
-                    FilesSizeClass.GetFilesBackGroundWorker.RunWorkerAsync();
-                    FilesSizeClass.GetNumberOfFilesBackGroundWorker.RunWorkerAsync();
-                }
+            FilesSizeClass.CurrentProggrass = 0;
+            EnableButtons(false);
+            isButtonsEnabled = false;
+            FilesSizeClass.CurrentProggrass = 0;
+            FilesSizeClass.NumberOfFiles = 0;
+            ReadingStatus.Visibility = Visibility.Visible;
+            if (FilesSizeClass.GetFilesBackGroundWorker.IsBusy || FilesSizeClass.StopThread == true && FilesSizeClass.GetNumberOfFilesBackGroundWorker.IsBusy)
+            {
+                FilesSizeClass.GetFilesBackGroundWorker.CancelAsync();
+                FilesSizeClass.GetNumberOfFilesBackGroundWorker.CancelAsync();
+                FilesSizeClass.StopThread = true;
+            }
+            FilesSizeClass.GetFilesBackGroundWorker = new BackgroundWorker();
+            FilesSizeClass.GetNumberOfFilesBackGroundWorker = new BackgroundWorker();
+            if (!string.IsNullOrWhiteSpace(FolderPath))
+            {
+                FilesSizeClass.FolderPath = FolderPath;
+                FilesSizeClass.StopThread = false;
+                FilesSizeClass.GetFilesBackGroundWorker.DoWork += FilesSizeClass.GetFilesSizeByDir;
+                FilesSizeClass.GetNumberOfFilesBackGroundWorker.DoWork += FilesSizeClass.GetNumberOfFiles;
+                FilesSizeClass.GetFilesBackGroundWorker.RunWorkerAsync();
+                FilesSizeClass.GetNumberOfFilesBackGroundWorker.RunWorkerAsync();
+            }
         }
         private void GetFreeSpace(char Drive)
         {

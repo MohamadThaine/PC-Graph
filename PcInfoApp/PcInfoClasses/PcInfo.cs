@@ -3,11 +3,11 @@ namespace PcInfoApp
 {
     public class PcInfo
     {
-        public GpuClass GpuInfo { get; set; } = new();
-        public CpuClass CpuInfo { get; set; } = new();
-        public RamClass RamInfo { get; set; } = new();
-        public MBClass MBInfo { get; set; } = new();
-        public StorageClass StorageInfo { get; set; } = new();
-        public NetworkClass NetworkInfo { get; set; } = new();
+        static public GpuClass GpuInfo { get; set; } = new();
+        static public CpuClass CpuInfo { get; set; } = new();
+        static public RamClass RamInfo { get; set; } = new();
+        static public MBClass MBInfo { get; set; } = new();
+        static public StorageClass StorageInfo { get; set; } = new();
+        static public NetworkClass NetworkInfo { get; set; } = new();
     }
 }

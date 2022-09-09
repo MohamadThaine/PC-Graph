@@ -35,132 +35,25 @@ namespace PcInfoApp.PcInfoClasses
             GetCurrentDownloadAndUploadUsage.WorkerSupportsCancellation = true;
             GetCurrentDownloadAndUploadUsage.DoWork += GetCurrentDownloadAndUploadUsage_DoWork;
             GetCurrentDownloadAndUploadUsage.RunWorkerAsync();
-            DispatcherTimer UsageTimer = new DispatcherTimer();
-            UsageTimer.Interval = TimeSpan.FromMilliseconds(2000);
+            /*DispatcherTimer UsageTimer = new DispatcherTimer();
+            UsageTimer.Interval = TimeSpan.FromMilliseconds(1000);
             UsageTimer.Tick += UsageTimer_Tick;
-            UsageTimer.Start();
+            UsageTimer.Start();*/
         }
 
         private void UsageTimer_Tick(object? sender, EventArgs e)
         {
-            GetCurrentDownloadAndUploadUsage.CancelAsync();
+            /*GetCurrentDownloadAndUploadUsage.CancelAsync();
             GetCurrentDownloadAndUploadUsage = new BackgroundWorker();
             GetCurrentDownloadAndUploadUsage.WorkerSupportsCancellation = true;
             GetCurrentDownloadAndUploadUsage.DoWork += GetCurrentDownloadAndUploadUsage_DoWork;
-            GetCurrentDownloadAndUploadUsage.RunWorkerAsync();
+            GetCurrentDownloadAndUploadUsage.RunWorkerAsync();*/
         }
-        private void GetCurrentDownloadAndUploadUsage_DoWork(object? sender, DoWorkEventArgs e)
+        private void PrepareData(decimal UploadUsage , decimal DownloadUsage)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            TraceEventSession m_EtwSession;
-            decimal UploadUsage = 0;
-            decimal DownloadUsage = 0;
             decimal UploadWhileRunnigDecimal = 0;
             decimal DownloadWhileRunnigDecimal = 0;
-            int time = 0;
             string UploadUsageType, DownloadUsageType;
-            if (AppsUsage.Count != 0)
-            {
-                foreach (AppUsage app in AppsUsage.Values)
-                {
-                    app.CurrentUploadInBytes = 0;
-                    app.CurrentDownloadInBytes = 0;
-                }
-            }
-            System.Net.IPAddress PcIp = System.Net.IPAddress.Parse("127.0.0.1");
-            try
-            {
-                using (m_EtwSession = new TraceEventSession("MyKernelAndClrEventsSession"))
-                {
-                    m_EtwSession.EnableKernelProvider(KernelTraceEventParser.Keywords.NetworkTCPIP);
-                    m_EtwSession.Source.Kernel.TcpIpRecv += data =>
-                    {
-                        if (data.daddr.Address != PcIp.Address)
-                        {
-                            DownloadUsage += data.size;
-                            if (AppsUsage.ContainsKey(data.ProcessName))
-                            {
-                                AppsUsage[data.ProcessName].CurrentDownloadInBytes += data.size;
-                                AppsUsage[data.ProcessName].TotalDownloadInBytes += data.size;
-                            }
-                            else
-                                AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, data.size, 0));
-                            if (stopwatch.ElapsedMilliseconds > 1000)
-                            {
-                                time = (int)stopwatch.ElapsedMilliseconds;
-                                stopwatch.Stop();
-                                m_EtwSession.Stop();
-                            }
-                        }
-                    };
-                    m_EtwSession.Source.Kernel.UdpIpRecv += data =>
-                    {
-                        if (data.daddr.Address != PcIp.Address)
-                        {
-                            DownloadUsage += data.size;
-                            if (AppsUsage.ContainsKey(data.ProcessName))
-                            {
-                                AppsUsage[data.ProcessName].CurrentDownloadInBytes += data.size;
-                                AppsUsage[data.ProcessName].TotalDownloadInBytes += data.size;
-                            }
-                            else
-                                AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, data.size, 0));
-                            if (stopwatch.ElapsedMilliseconds > 1000)
-                            {
-                                time = (int)stopwatch.ElapsedMilliseconds;
-                                stopwatch.Stop();
-                                m_EtwSession.Stop();
-                            }
-                        }
-                    };
-                    m_EtwSession.Source.Kernel.UdpIpSend += data =>
-                    {
-                        if (data.daddr.Address != PcIp.Address)
-                        {
-                            UploadUsage += data.size;
-                            if (AppsUsage.ContainsKey(data.ProcessName))
-                            {
-                                AppsUsage[data.ProcessName].CurrentUploadInBytes += data.size;
-                                AppsUsage[data.ProcessName].TotalUploadInBytes += data.size;
-                            }
-                            else
-                                AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, 0, data.size));
-                            if (stopwatch.ElapsedMilliseconds > 1000)
-                            {
-                                time = (int)stopwatch.ElapsedMilliseconds;
-                                stopwatch.Stop();
-                                m_EtwSession.Stop();
-                            }
-                        }
-                    };
-                    m_EtwSession.Source.Kernel.TcpIpSend += data =>
-                    {
-                        if (data.daddr.Address != PcIp.Address)
-                        {
-                            UploadUsage += data.size;
-                            if (AppsUsage.ContainsKey(data.ProcessName))
-                            {
-                                AppsUsage[data.ProcessName].CurrentUploadInBytes += data.size;
-                                AppsUsage[data.ProcessName].TotalUploadInBytes += data.size;
-                            }
-                            else
-                                AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, 0, data.size));
-                            if (stopwatch.ElapsedMilliseconds > 1000)
-                            {
-                                time = (int)stopwatch.ElapsedMilliseconds;
-                                stopwatch.Stop();
-                                m_EtwSession.Stop();
-                            }
-                        }
-                    };
-                    m_EtwSession.Source.Process();
-                }
-            }
-            catch (Exception ex)
-            {
-                return;
-            }
             UploadUsage /= 1024;
             UploadWhileRunnigDecimal = UploadUsage;
             UploadUsageType = "KB/s";
@@ -304,9 +197,122 @@ namespace PcInfoApp.PcInfoClasses
                     app.OnPropertyChanged("TotalDownload");
                     app.OnPropertyChanged("TotalUpload");
                 }
+                if (AppsUsage.Count != 0)
+                {
+                    foreach (AppUsage app in AppsUsage.Values)
+                    {
+                        app.CurrentUploadInBytes = 0;
+                        app.CurrentDownloadInBytes = 0;
+                    }
+                }
             }
-            GetCurrentDownloadAndUploadUsage.CancelAsync();
         }
+        private void GetCurrentDownloadAndUploadUsage_DoWork(object? sender, DoWorkEventArgs e)
+         {
+             Stopwatch stopwatch = new Stopwatch();
+             stopwatch.Start();
+             TraceEventSession m_EtwSession;
+             decimal UploadUsage = 0;
+             decimal DownloadUsage = 0;
+
+             System.Net.IPAddress PcIp = System.Net.IPAddress.Parse("127.0.0.1");
+             try
+             {
+                 using (m_EtwSession = new TraceEventSession("MyKernelAndClrEventsSession"))
+                 {
+                     m_EtwSession.EnableKernelProvider(KernelTraceEventParser.Keywords.NetworkTCPIP);
+                     m_EtwSession.Source.Kernel.TcpIpRecv += data =>
+                     {
+                         if (data.daddr.Address != PcIp.Address)
+                         {
+                             DownloadUsage += data.size;
+                             if (AppsUsage.ContainsKey(data.ProcessName))
+                             {
+                                 AppsUsage[data.ProcessName].CurrentDownloadInBytes += data.size;
+                                 AppsUsage[data.ProcessName].TotalDownloadInBytes += data.size;
+                             }
+                             else
+                                 AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, data.size, 0));
+                             if (stopwatch.ElapsedMilliseconds > 1000)
+                             {
+                                 PrepareData(UploadUsage, DownloadUsage);
+                                 DownloadUsage = 0;
+                                 UploadUsage = 0;
+                                 stopwatch.Restart();
+                             }
+                         }
+                     };
+                     m_EtwSession.Source.Kernel.UdpIpRecv += data =>
+                     {
+                         if (data.daddr.Address != PcIp.Address)
+                         {
+                             DownloadUsage += data.size;
+                             if (AppsUsage.ContainsKey(data.ProcessName))
+                             {
+                                 AppsUsage[data.ProcessName].CurrentDownloadInBytes += data.size;
+                                 AppsUsage[data.ProcessName].TotalDownloadInBytes += data.size;
+                             }
+                             else
+                                 AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, data.size, 0));
+                             if (stopwatch.ElapsedMilliseconds > 1000)
+                             {
+                                 PrepareData(UploadUsage, DownloadUsage);
+                                 DownloadUsage = 0;
+                                 UploadUsage = 0;
+                                 stopwatch.Restart();
+                             }
+                         }
+                     };
+                     m_EtwSession.Source.Kernel.UdpIpSend += data =>
+                     {
+                         if (data.daddr.Address != PcIp.Address)
+                         {
+                             UploadUsage += data.size;
+                             if (AppsUsage.ContainsKey(data.ProcessName))
+                             {
+                                 AppsUsage[data.ProcessName].CurrentUploadInBytes += data.size;
+                                 AppsUsage[data.ProcessName].TotalUploadInBytes += data.size;
+                             }
+                             else
+                                 AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, 0, data.size));
+                             if (stopwatch.ElapsedMilliseconds > 1000)
+                             {
+                                 PrepareData(UploadUsage, DownloadUsage);
+                                 DownloadUsage = 0;
+                                 UploadUsage = 0;
+                                 stopwatch.Restart();
+                             }
+                         }
+                     };
+                     m_EtwSession.Source.Kernel.TcpIpSend += data =>
+                     {
+                         if (data.daddr.Address != PcIp.Address)
+                         {
+                             UploadUsage += data.size;
+                             if (AppsUsage.ContainsKey(data.ProcessName))
+                             {
+                                 AppsUsage[data.ProcessName].CurrentUploadInBytes += data.size;
+                                 AppsUsage[data.ProcessName].TotalUploadInBytes += data.size;
+                             }
+                             else
+                                 AppsUsage.Add(data.ProcessName, new AppUsage(data.ProcessName, 0, data.size));
+                             if (stopwatch.ElapsedMilliseconds > 1000)
+                             {
+                                 PrepareData(UploadUsage, DownloadUsage);
+                                 DownloadUsage = 0;
+                                 UploadUsage = 0;
+                                 stopwatch.Restart();
+                             }
+                         }
+                     };
+                     m_EtwSession.Source.Process();
+                 }
+             }
+             catch (Exception ex)
+             {
+                 return;
+             }
+         }
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

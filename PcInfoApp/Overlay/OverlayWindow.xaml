@@ -54,7 +54,7 @@
                 <Grid Width="1" Grid.Column="3" Background="White" HorizontalAlignment="Right"></Grid>
                 <TextBlock Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12.5" FontFamily="Poppins" FontWeight="SemiBold" Foreground="White">
                     <Run Text="Ram Load:"></Run>
-                    <Run Text="{Binding RamInfo.RamLoad}"></Run>
+                    <Run Text="{Binding RamInfo.RamUsage}"></Run>
                     <Run Text="%"></Run>
                 </TextBlock>
             </Grid>

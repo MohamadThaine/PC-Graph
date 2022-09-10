@@ -17,7 +17,6 @@
     <None Remove="Imgs\appbackground.png" />
     <None Remove="Imgs\arrow.png" />
     <None Remove="Imgs\CloseIcon.png" />
-    <None Remove="Imgs\computer.png" />
     <None Remove="Imgs\computerIcon.png" />
     <None Remove="Imgs\deletefile.png" />
     <None Remove="Imgs\folder-management.png" />
@@ -27,6 +26,7 @@
     <None Remove="Imgs\OpenFileLocationIcon.png" />
     <None Remove="Imgs\OverlayIcon.png" />
     <None Remove="Imgs\sortfoldersicon.png" />
+    <None Remove="Imgs\systemtray.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,7 +36,6 @@
     <Resource Include="Imgs\appbackground.png" />
     <Resource Include="Imgs\arrow.png" />
     <Resource Include="Imgs\CloseIcon.png" />
-    <Resource Include="Imgs\computer.png" />
     <Resource Include="Imgs\computerIcon.png" />
     <Resource Include="Imgs\deletefile.png" />
     <Resource Include="Imgs\folder-management.png" />
@@ -46,6 +45,9 @@
     <Resource Include="Imgs\OpenFileLocationIcon.png" />
     <Resource Include="Imgs\OverlayIcon.png" />
     <Resource Include="Imgs\sortfoldersicon.png" />
+    <Content Include="Imgs\systemtray.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -56,7 +58,6 @@
     <PackageReference Include="Microsoft.WindowsAPICodePack-Shell" Version="1.1.0" />
     <PackageReference Include="MimeTypeMapOfficial" Version="1.0.17" />
     <PackageReference Include="Syncfusion.SfProgressBar.WPF" Version="20.2.0.43" />
-    <PackageReference Include="System.Management" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

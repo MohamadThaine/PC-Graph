@@ -4,6 +4,9 @@ using PcInfoApp.Util;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Net.NetworkInformation;
+
 namespace PcInfoApp.PcInfoClasses
 {
     public class NetworkClass : INotifyPropertyChanged
@@ -199,7 +202,35 @@ namespace PcInfoApp.PcInfoClasses
             TraceEventSession m_EtwSession;
             decimal UploadUsage = 0;
             decimal DownloadUsage = 0;
-
+            System.Net.IPAddress NetworkIp = null;
+            bool IsConnectionToInternet = false;
+            NetworkInterface[] networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
+            foreach(NetworkInterface networkInterface in networkInterfaces)
+            {
+                try
+                {
+                    if (networkInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || networkInterface.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                        IsConnectionToInternet = System.Net.IPAddress.TryParse(networkInterface.GetIPProperties().GatewayAddresses[0].Address.ToString() ,out NetworkIp);
+                    else
+                        continue;
+                    if(IsConnectionToInternet)
+                    {
+                        foreach (UnicastIPAddressInformation ip in networkInterface.GetIPProperties().UnicastAddresses)
+                        {
+                            if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                            {
+                                NetworkIp = ip.Address;
+                            }
+                        }
+                    }
+                }
+                catch(System.ArgumentOutOfRangeException ex)
+                {
+                    continue;
+                }
+            }
+            if (NetworkIp == null)
+                return;
             System.Net.IPAddress PcIp = System.Net.IPAddress.Parse("127.0.0.1");
             try
             {
@@ -208,11 +239,11 @@ namespace PcInfoApp.PcInfoClasses
                     m_EtwSession.EnableKernelProvider(KernelTraceEventParser.Keywords.NetworkTCPIP);
                     m_EtwSession.Source.Kernel.TcpIpRecv += data =>
                     {
-                        if (data.daddr.Address != PcIp.Address)
+                        if (data.saddr.Equals(NetworkIp))
                         {
                             DownloadUsage += data.size;
                             if (AppsUsage.ContainsKey(data.ProcessName))
-                            {
+                            {    
                                 AppsUsage[data.ProcessName].CurrentDownloadInBytes += data.size;
                                 AppsUsage[data.ProcessName].TotalDownloadInBytes += data.size;
                             }
@@ -229,7 +260,7 @@ namespace PcInfoApp.PcInfoClasses
                     };
                     m_EtwSession.Source.Kernel.UdpIpRecv += data =>
                     {
-                        if (data.daddr.Address != PcIp.Address)
+                        if (data.saddr.Equals(NetworkIp))
                         {
                             DownloadUsage += data.size;
                             if (AppsUsage.ContainsKey(data.ProcessName))
@@ -250,7 +281,7 @@ namespace PcInfoApp.PcInfoClasses
                     };
                     m_EtwSession.Source.Kernel.UdpIpSend += data =>
                     {
-                        if (data.daddr.Address != PcIp.Address)
+                        if (data.saddr.Equals(NetworkIp))
                         {
                             UploadUsage += data.size;
                             if (AppsUsage.ContainsKey(data.ProcessName))
@@ -267,11 +298,11 @@ namespace PcInfoApp.PcInfoClasses
                                 UploadUsage = 0;
                                 stopwatch.Restart();
                             }
-                        }
+                        }  
                     };
                     m_EtwSession.Source.Kernel.TcpIpSend += data =>
                     {
-                        if (data.daddr.Address != PcIp.Address)
+                        if (data.saddr.Equals(NetworkIp))
                         {
                             UploadUsage += data.size;
                             if (AppsUsage.ContainsKey(data.ProcessName))

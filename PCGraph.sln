@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PcInfoApp", "PcInfoApp\PcInfoApp.csproj", "{E11992C9-D611-4BFB-81F8-03A254C84475}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCGraph", "PcInfoApp\PCGraph.csproj", "{E11992C9-D611-4BFB-81F8-03A254C84475}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

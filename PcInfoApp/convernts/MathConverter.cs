@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 
-namespace PcInfoApp.convernts
+namespace PCGraph.convernts
 {
     public class MathConverter : IValueConverter
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace PcInfoApp.util
+namespace PCGraph.util
 {
     public class Win32
     {

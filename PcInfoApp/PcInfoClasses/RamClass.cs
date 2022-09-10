@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Threading;
 
-namespace PcInfoApp.PcInfoClasses
+namespace PCGraph.PcInfoClasses
 {
     public class RamClass : INotifyPropertyChanged
     {

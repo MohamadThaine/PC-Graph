@@ -34,7 +34,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
-namespace PcInfoApp.Util
+namespace PCGraph.Util
 {
     [Serializable]
     public class ObservableDictionary<TKey, TValue> :

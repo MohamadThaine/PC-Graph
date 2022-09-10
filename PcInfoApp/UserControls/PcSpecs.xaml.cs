@@ -1,10 +1,10 @@
-﻿using PcInfoApp.PcInfoClasses;
+﻿using PCGraph.PcInfoClasses;
 using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-namespace PcInfoApp.UserControls
+namespace PCGraph.UserControls
 {
     /// <summary>
     /// Interaction logic for PcSpecs.xaml

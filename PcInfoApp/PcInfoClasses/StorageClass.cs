@@ -3,7 +3,7 @@ using LibreHardwareMonitor.Hardware.Storage;
 using System;
 using System.Collections.Generic;
 
-namespace PcInfoApp.PcInfoClasses
+namespace PCGraph.PcInfoClasses
 {
     public class StorageClass
     {

@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Threading;
 
-namespace PcInfoApp.PcInfoClasses
+namespace PCGraph.PcInfoClasses
 {
     public class CpuClass : INotifyPropertyChanged
     {

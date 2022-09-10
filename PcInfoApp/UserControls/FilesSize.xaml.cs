@@ -1,13 +1,13 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using PcInfoApp.PcInfoClasses;
+using PCGraph.PcInfoClasses;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using File = PcInfoApp.PcInfoClasses.File;
+using File = PCGraph.PcInfoClasses.File;
 
-namespace PcInfoApp.UserControls
+namespace PCGraph.UserControls
 {
     /// <summary>
     /// Interaction logic for FilesSize.xaml

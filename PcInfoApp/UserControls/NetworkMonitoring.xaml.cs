@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using Process = System.Diagnostics.Process;
 
-namespace PcInfoApp.UserControls
+namespace PCGraph.UserControls
 {
     /// <summary>
     /// Interaction logic for NetworkMonitoring.xaml
@@ -16,7 +16,7 @@ namespace PcInfoApp.UserControls
         }
         private void EndProcessBT_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (SelectedProcess != null && SelectedProcess.Length > 0)
+            if (SelectedProcess != null && SelectedProcess.Length > 0 && SelectedProcess[0].ProcessName != "svchost")
             {
                 {
                     try

@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace PcInfoApp.Util
+namespace PCGraph.Util
 {
     public class GridViewSort // Thanks to Thomas Levesque for this class to sort listview
     {

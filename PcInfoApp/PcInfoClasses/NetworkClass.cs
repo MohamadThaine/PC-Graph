@@ -1,12 +1,12 @@
 ﻿using Microsoft.Diagnostics.Tracing.Parsers;
 using Microsoft.Diagnostics.Tracing.Session;
-using PcInfoApp.Util;
+using PCGraph.Util;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 
-namespace PcInfoApp.PcInfoClasses
+namespace PCGraph.PcInfoClasses
 {
     public class NetworkClass : INotifyPropertyChanged
     {

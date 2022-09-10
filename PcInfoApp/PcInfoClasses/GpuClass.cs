@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Management;
 using System.Windows.Threading;
 
-namespace PcInfoApp.PcInfoClasses
+namespace PCGraph.PcInfoClasses
 {
     public class GpuClass : INotifyPropertyChanged
     {

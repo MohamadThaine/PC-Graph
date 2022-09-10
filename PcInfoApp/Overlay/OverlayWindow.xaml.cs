@@ -1,10 +1,10 @@
-﻿using PcInfoApp.util;
+﻿using PCGraph.util;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 
-namespace PcInfoApp.Overlay
+namespace PCGraph.Overlay
 {
     public partial class OverlayWindow : Window
     {

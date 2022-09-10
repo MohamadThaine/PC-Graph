@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="PcInfoApp.UserControls.FilesSize"
+﻿<UserControl x:Class="PCGraph.UserControls.FilesSize"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PcInfoApp.UserControls"
+             xmlns:local="clr-namespace:PCGraph.UserControls"
              xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:pcinfoclasses="clr-namespace:PcInfoApp.PcInfoClasses"
-             xmlns:Util="clr-namespace:PcInfoApp.Util"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:pcinfoclasses="clr-namespace:PCGraph.PcInfoClasses"
+             xmlns:Util="clr-namespace:PCGraph.Util"
              mc:Ignorable="d" 
              d:DesignHeight="774.86" d:DesignWidth="1100" Background="Transparent">
     <UserControl.DataContext>

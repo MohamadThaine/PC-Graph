@@ -1,11 +1,11 @@
-﻿using PcInfoApp.UserControls;
+﻿using PCGraph.UserControls;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using Forms = System.Windows.Forms;
-namespace PcInfoApp
+namespace PCGraph
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -80,9 +80,9 @@ namespace PcInfoApp
             notifyIcon.Icon = new System.Drawing.Icon("imgs/systemtray.ico");
             notifyIcon.Visible = false;
             notifyIcon.ContextMenuStrip = new Forms.ContextMenuStrip();
-            notifyIcon.ContextMenuStrip.Items.Add("Open App", null, NotifyIcon_Click);
-            notifyIcon.ContextMenuStrip.Items.Add("Close App", null, ShutdownApp);
+            notifyIcon.ContextMenuStrip.Items.Add("Open PC Graph", null, NotifyIcon_Click);
             notifyIcon.ContextMenuStrip.Items.Add("Show/Hide Overlay", null, ShowOverlay);
+            notifyIcon.ContextMenuStrip.Items.Add("Close PC Graph", null, ShutdownApp);
             notifyIcon.DoubleClick += NotifyIcon_Click;
         }
 

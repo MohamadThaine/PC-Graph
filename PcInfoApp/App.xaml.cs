@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace PcInfoApp
+namespace PCGraph
 {
     /// <summary>
     /// Interaction logic for App.xaml

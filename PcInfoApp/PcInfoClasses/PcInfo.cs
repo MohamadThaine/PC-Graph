@@ -1,5 +1,5 @@
-﻿using PcInfoApp.PcInfoClasses;
-namespace PcInfoApp
+﻿using PCGraph.PcInfoClasses;
+namespace PCGraph
 {
     public class PcInfo
     {

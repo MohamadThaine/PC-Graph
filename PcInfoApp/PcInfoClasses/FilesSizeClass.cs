@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 
-namespace PcInfoApp.PcInfoClasses
+namespace PCGraph.PcInfoClasses
 {
     public class FilesSizeClass
     {

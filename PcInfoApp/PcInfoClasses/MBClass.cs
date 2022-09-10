@@ -1,7 +1,7 @@
 ﻿using LibreHardwareMonitor.Hardware;
 using System;
 
-namespace PcInfoApp.PcInfoClasses
+namespace PCGraph.PcInfoClasses
 {
     public class MBClass
     {

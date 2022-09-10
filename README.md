@@ -6,25 +6,19 @@ PC monitor app is all in one app program to monitor everything you want in your 
 
 Packages used:
 
-1-CUDAfy.NET
+1-FluentWPF
 
-2-FluentWPF
+2-LibreHardwareMonitorLib
 
-3-LibreHardwareMonitorLib
+3-MaterialDesignThemes
 
-4-MaterialDesignThemes
+4-Microsoft.Diagnostics.Tracing.TraceEvent
 
-5-Microsoft.Diagnostics.Tracing.TraceEvent
+5-Microsoft.WindowsAPICodePack-Shell
 
-6-Microsoft.WindowsAPICodePack-Shell
+6-MimeTypeMapOfficial
 
-7-MimeTypeMapOfficial
-
-8-Syncfusion.SfProgressBar.WPF
-
-9-System.Management
-
-10-FastSearchLibary
+7-FastSearchLibary
 
 Things i added:
 
@@ -35,6 +29,8 @@ Things i added:
 3-See how much you each file and folder using inside a dirctory.
 
 4-Network monitoring window page you can see how much each program use right now and their total(for each app).
+
+5-Overlay where you can see cpu , gpu and ram stats while playing etc..
 
 Things i plan to add for now(may be changed):
 

@@ -34,7 +34,7 @@ namespace PcInfoApp.PcInfoClasses
             RamInfoTimers.Tick += RamInfoTimer_Tick1;
             RamInfoTimers.Start();
         }
-        
+
         private void RamInfoTimer_Tick1(object? sender, EventArgs e)
         {
             GetChangingInfo = new BackgroundWorker();

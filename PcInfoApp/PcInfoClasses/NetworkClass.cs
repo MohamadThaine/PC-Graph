@@ -4,7 +4,6 @@ using PcInfoApp.Util;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.NetworkInformation;
 
 namespace PcInfoApp.PcInfoClasses
@@ -205,15 +204,15 @@ namespace PcInfoApp.PcInfoClasses
             System.Net.IPAddress NetworkIp = null;
             bool IsConnectionToInternet = false;
             NetworkInterface[] networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
-            foreach(NetworkInterface networkInterface in networkInterfaces)
+            foreach (NetworkInterface networkInterface in networkInterfaces)
             {
                 try
                 {
                     if (networkInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || networkInterface.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
-                        IsConnectionToInternet = System.Net.IPAddress.TryParse(networkInterface.GetIPProperties().GatewayAddresses[0].Address.ToString() ,out NetworkIp);
+                        IsConnectionToInternet = System.Net.IPAddress.TryParse(networkInterface.GetIPProperties().GatewayAddresses[0].Address.ToString(), out NetworkIp);
                     else
                         continue;
-                    if(IsConnectionToInternet)
+                    if (IsConnectionToInternet)
                     {
                         foreach (UnicastIPAddressInformation ip in networkInterface.GetIPProperties().UnicastAddresses)
                         {
@@ -224,7 +223,7 @@ namespace PcInfoApp.PcInfoClasses
                         }
                     }
                 }
-                catch(System.ArgumentOutOfRangeException ex)
+                catch (System.ArgumentOutOfRangeException ex)
                 {
                     continue;
                 }
@@ -243,7 +242,7 @@ namespace PcInfoApp.PcInfoClasses
                         {
                             DownloadUsage += data.size;
                             if (AppsUsage.ContainsKey(data.ProcessName))
-                            {    
+                            {
                                 AppsUsage[data.ProcessName].CurrentDownloadInBytes += data.size;
                                 AppsUsage[data.ProcessName].TotalDownloadInBytes += data.size;
                             }
@@ -298,7 +297,7 @@ namespace PcInfoApp.PcInfoClasses
                                 UploadUsage = 0;
                                 stopwatch.Restart();
                             }
-                        }  
+                        }
                     };
                     m_EtwSession.Source.Kernel.TcpIpSend += data =>
                     {

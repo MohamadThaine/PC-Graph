@@ -57,7 +57,6 @@
     <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="3.0.4" />
     <PackageReference Include="Microsoft.WindowsAPICodePack-Shell" Version="1.1.0" />
     <PackageReference Include="MimeTypeMapOfficial" Version="1.0.17" />
-    <PackageReference Include="Syncfusion.SfProgressBar.WPF" Version="20.2.0.43" />
   </ItemGroup>
 
   <ItemGroup>

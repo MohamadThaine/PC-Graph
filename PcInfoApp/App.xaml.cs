@@ -9,7 +9,7 @@ namespace PcInfoApp
     {
         public App()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Njk1ODQ1QDMyMzAyZTMyMmUzMEpiclZxTFRydzVOUkQybUl2WVdoMUV5V3JwbUIyS2VJeGZrMll6YjNRaUU9");
+            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Njk1ODQ1QDMyMzAyZTMyMmUzMEpiclZxTFRydzVOUkQybUl2WVdoMUV5V3JwbUIyS2VJeGZrMll6YjNRaUU9");
         }
     }
 }

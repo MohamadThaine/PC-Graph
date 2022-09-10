@@ -9,13 +9,15 @@
         WindowStartupLocation="Manual"
         Top="-1"
         Left="-1"
+        ShowInTaskbar="False"
         Topmost="True"
         WindowStyle="None"
         AllowsTransparency="True"
+        IsHitTestVisible="False"
         ResizeMode="NoResize"
         Background="Transparent"
-        fw:AcrylicWindow.NoiseOpacity="0"
-        BorderBrush="Transparent"
+        IsEnabled="False"
+        Loaded="Window_Loaded"
         Title="OverlayWindow" Height="30" Width="550">
     <Window.DataContext>
         <local:PcInfo/>

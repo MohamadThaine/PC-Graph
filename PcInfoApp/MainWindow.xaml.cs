@@ -1,9 +1,9 @@
 ﻿using PcInfoApp.UserControls;
 using System;
-using System.Drawing;
-using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 using Forms = System.Windows.Forms;
 namespace PcInfoApp
 {
@@ -12,6 +12,12 @@ namespace PcInfoApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")]
+        static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+        private const int GWL_EX_STYLE = -20;
+        private const int WS_EX_APPWINDOW = 0x00040000, WS_EX_TOOLWINDOW = 0x00000080;
         int UserControlEnabled = 0; // to know which user control is used now , 1 = PcSpecs UserControl
         Overlay.OverlayWindow overlayWindow;
         bool IsoverlayEnabled = false;
@@ -56,7 +62,7 @@ namespace PcInfoApp
         }
         private void OverLayBT_Click(object sender, RoutedEventArgs e)
         {
-            if(IsoverlayEnabled)
+            if (IsoverlayEnabled)
             {
                 overlayWindow.Close();
                 IsoverlayEnabled = false;
@@ -70,8 +76,6 @@ namespace PcInfoApp
         }
         private void PrepareTrayIcon()
         {
-            /*Uri iconuri = new Uri("/imgs/systemtray.ico");
-            Stream icon = new Stream(iconuri);*/
             notifyIcon = new Forms.NotifyIcon();
             notifyIcon.Icon = new System.Drawing.Icon("imgs/systemtray.ico");
             notifyIcon.Visible = false;
@@ -120,6 +124,9 @@ namespace PcInfoApp
             notifyIcon.ShowBalloonTip(1000, "Minimzed", "App minimized to tray", Forms.ToolTipIcon.Info);
             this.WindowState = WindowState.Minimized;
             this.ShowInTaskbar = false;
+            this.ShowActivated = false;
+            var helper = new WindowInteropHelper(this).Handle;
+            SetWindowLong(helper, GWL_EX_STYLE, (GetWindowLong(helper, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
         }
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {

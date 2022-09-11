@@ -24,6 +24,8 @@ namespace PCGraph.PcInfoClasses
             foreach (LibreHardwareMonitor.Hardware.Motherboard.Motherboard motherboard in pc.Hardware)
             {
                 this.MBName = motherboard.Name;
+                if (this.MBName.Length > 35)
+                    this.MBName = this.MBName.Substring(0, 35) + "...";
                 this.MBBiosVersion = motherboard.SMBios.Bios.Version;
                 MBBiosDate = motherboard.SMBios.Bios.Date.Value.ToString("dd/MM/yyyy");
             }

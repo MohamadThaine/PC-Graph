@@ -66,8 +66,10 @@ namespace PCGraph.UserControls
         {
             try
             {
-                SpaceProggrass.Value = Convert.ToDouble(StorageClass.StorageSpace[StorageNameComboBox.SelectedIndex] - StorageClass.StorageFreeSpace[StorageNameComboBox.SelectedIndex]);
-                SpaceProggrass.Maximum = Convert.ToDouble(StorageClass.StorageSpace[StorageNameComboBox.SelectedIndex]);
+                string TotalSpace = StorageClass.Storages[StorageNameComboBox.SelectedIndex].TotalSpace;
+                string FreeSpace = StorageClass.Storages[StorageNameComboBox.SelectedIndex].FreeSpace;
+                SpaceProggrass.Value = Convert.ToDouble(TotalSpace.Substring(0, TotalSpace.Length - 2)) - Convert.ToDouble(FreeSpace.Substring(0, FreeSpace.Length - 2));
+                SpaceProggrass.Maximum = Convert.ToDouble(TotalSpace.Substring(0, TotalSpace.Length - 2));
             }
             catch (ArgumentOutOfRangeException ex)
             {

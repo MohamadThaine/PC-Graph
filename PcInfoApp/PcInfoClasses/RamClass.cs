@@ -15,13 +15,16 @@ namespace PCGraph.PcInfoClasses
         public long RamLoad { get; set; }
         public int MaxRamLoad { get; set; }
         public int RamUsage { get; set; }
+        public int RamCounter { get; set; }
         public string RamSpeed { get; set; }
+        public List<string> RamManufacturerName { get; set; }
         public ObservableCollection<string> HighestAppUsing { get; set; }
         public ObservableCollection<string> RamUsageFromTheApp { get; set; }
         private BackgroundWorker GetChangingInfo;
         public event PropertyChangedEventHandler PropertyChanged;
         public RamClass()
         {
+            RamManufacturerName = new List<string>();
             GetRamInfo();
             RamUsageFromTheApp = new ObservableCollection<string>();
             HighestAppUsing = new ObservableCollection<string>();
@@ -64,6 +67,8 @@ namespace PCGraph.PcInfoClasses
                     {
                         RamSize += ram.Size / 1024;
                         RamSpeed = ram.Speed + "MHZ";
+                        RamCounter++;
+                        RamManufacturerName.Add(ram.ManufacturerName);
                     }
                 }
             }

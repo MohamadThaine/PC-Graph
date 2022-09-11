@@ -74,6 +74,16 @@ namespace PCGraph
                 IsoverlayEnabled = true;
             }
         }
+        private void SystemSpecsBT_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserControlEnabled != 4)
+            {
+                ViewGrid.Children.Clear();
+                UserControlEnabled = 4;
+                SystemInfo SystemInfo = new SystemInfo();
+                ViewGrid.Children.Add(SystemInfo);
+            }
+        }
         private void PrepareTrayIcon()
         {
             notifyIcon = new Forms.NotifyIcon();
@@ -128,6 +138,7 @@ namespace PCGraph
             var helper = new WindowInteropHelper(this).Handle;
             SetWindowLong(helper, GWL_EX_STYLE, (GetWindowLong(helper, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
         }
+
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;

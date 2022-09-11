@@ -7,12 +7,12 @@ namespace PCGraph.PcInfoClasses
 {
     public class StorageClass
     {
-        public List<String> StorageNames { get; set; } = new List<String>();
-        public static List<int> StorageSpace { get; set; } = new List<int>();
-        public static List<int> StorageFreeSpace { get; set; } = new List<int>();
+        public int StorageCounter { get; set; }
+        public static List<Storage> Storages { get; set; } = new List<Storage>();
         public StorageClass()
         {
             GetStorageInfo();
+            StorageCounter = Storages.Count;
         }
         private void GetStorageInfo()
         {
@@ -25,14 +25,16 @@ namespace PCGraph.PcInfoClasses
             {
                 int TotalSize = 0;
                 int TotalFreeSize = 0;
-                StorageNames.Add(Storage.Name);
+                long TotalBtyes = 0;
+                long FreeBytes = 0;
                 foreach (var Info in Storage.DriveInfos)
                 {
                     TotalSize += Convert.ToInt32(Info.TotalSize / 1024 / 1024 / 1024);
+                    TotalBtyes += long.Parse(Info.TotalSize.ToString());
                     TotalFreeSize += Convert.ToInt32(Info.TotalFreeSpace / 1024 / 1024 / 1024);
+                    FreeBytes += long.Parse(Info.TotalFreeSpace.ToString());
                 }
-                StorageSpace.Add(TotalSize);
-                StorageFreeSpace.Add(TotalFreeSize);
+                Storages.Add(new Storage(Storage.Name, TotalSize, TotalFreeSize, TotalBtyes, FreeBytes));
             }
         }
         public static double GetStorageTemp(int index)
@@ -53,6 +55,22 @@ namespace PCGraph.PcInfoClasses
                 }
             }
             return Temp;
+        }
+    }
+    public class Storage
+    {
+        public string Name { get; set; }
+        public string TotalSpace { get; set; }
+        public string FreeSpace { get; set; }
+        public long SpaceInBytes { get; set; }
+        public long FreeSpaceInBytes { get; set; }
+        public Storage(string name, int totalSpace, int freeSpace, long spaceInBytes, long freeSpaceInBytes)
+        {
+            Name = name;
+            TotalSpace = totalSpace + "GB";
+            FreeSpace = freeSpace + "GB";
+            SpaceInBytes = spaceInBytes;
+            FreeSpaceInBytes = freeSpaceInBytes;
         }
     }
 }

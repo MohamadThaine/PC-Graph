@@ -26,6 +26,7 @@
     <None Remove="Imgs\OpenFileLocationIcon.png" />
     <None Remove="Imgs\OverlayIcon.png" />
     <None Remove="Imgs\sortfoldersicon.png" />
+    <None Remove="Imgs\SystemInfoIcon.png" />
     <None Remove="Imgs\systemtray.ico" />
   </ItemGroup>
 
@@ -45,6 +46,7 @@
     <Resource Include="Imgs\OpenFileLocationIcon.png" />
     <Resource Include="Imgs\OverlayIcon.png" />
     <Resource Include="Imgs\sortfoldersicon.png" />
+    <Resource Include="Imgs\SystemInfoIcon.png" />
     <Content Include="Imgs\systemtray.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

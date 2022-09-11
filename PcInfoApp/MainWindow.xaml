@@ -66,7 +66,7 @@
                 </Button>
             </ListViewItem>
             <ListViewItem Width="100" Height="90">
-                <Button FontSize="14" Click="FileSizeBT_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="60" ToolTip="Space Analyzer">
+                <Button Click="FileSizeBT_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="60" ToolTip="Space Analyzer">
                     <Image Source="/imgs/FolderIcon.png" />
                 </Button>
             </ListViewItem>
@@ -78,6 +78,11 @@
             <ListViewItem Width="100" Height="90">
                 <Button Name="OverLayBT" Click="OverLayBT_Click" HorizontalAlignment="Center" FontSize="13" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="Overlay for stats">
                     <Image Source="/Imgs/OverlayIcon.png"></Image>
+                </Button>
+            </ListViewItem>
+            <ListViewItem Width="100" Height="90">
+                <Button Name="SystemSpecsBT" Click="SystemSpecsBT_Click" HorizontalAlignment="Center" FontSize="13" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="80" ToolTip="System Specs">
+                    <Image Source="/Imgs/SystemInfoIcon.png"></Image>
                 </Button>
             </ListViewItem>
         </ListView>

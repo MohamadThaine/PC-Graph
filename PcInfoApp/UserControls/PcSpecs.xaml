@@ -363,9 +363,10 @@
                         <ComboBox Name="StorageNameComboBox" Width="240" Height="28" Foreground="White"  BorderBrush="#47B5FF" BorderThickness="0" 
                                   FontSize="15" 
                                   FontFamily="Poppins" 
-                                  ItemsSource="{Binding StorageInfo.StorageNames}"
-                                  SelectedItem="{Binding StorageInfo.StorageNames[0]}"
-                                  SelectionChanged="StorageNameComboBox_SelectionChanged">
+                                  ItemsSource="{Binding StorageInfo.Storages}"
+                                  SelectedItem="{Binding StorageInfo.Storages[0]}"
+                                  SelectionChanged="StorageNameComboBox_SelectionChanged"
+                                  DisplayMemberPath="Name">
                         </ComboBox>
                     </fw:AcrylicPanel>
                     <Grid Width="279" Height="33.56" Margin="0,137.44,0,73.56">

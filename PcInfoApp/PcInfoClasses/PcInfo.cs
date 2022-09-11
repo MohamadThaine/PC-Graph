@@ -9,5 +9,6 @@ namespace PCGraph
         static public MBClass MBInfo { get; set; } = new();
         static public StorageClass StorageInfo { get; set; } = new();
         static public NetworkClass NetworkInfo { get; set; } = new();
+        static public SystemSpecs SystemInfo { get; set; } = new();
     }
 }

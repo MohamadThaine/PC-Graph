@@ -1,26 +1,15 @@
-# PC-Monitor-app
+# PC Graph
 
 (Not Done Yet)
 
-PC monitor app is all in one app program to monitor everything you want in your pc
+[![forthebadge](https://forthebadge.com/images/badges/made-with-c-sharp.svg)](http://forthebadge.com)
 
-Packages used:
+# PC Graph app is all in one app program to monitor everything you want in your pc
+### The App UI is mainly based on FluentWPF , MaterialDesignThemes libraries 
 
-1-FluentWPF
+### The App Backend is Mainly Based on LibreHardwareMonitor
 
-2-LibreHardwareMonitorLib
-
-3-MaterialDesignThemes
-
-4-Microsoft.Diagnostics.Tracing.TraceEvent
-
-5-Microsoft.WindowsAPICodePack-Shell
-
-6-MimeTypeMapOfficial
-
-7-FastSearchLibary
-
-Things i added:
+## What the app used for:
 
 1-Monitor your pc componts temp , loads , clocks , space , size , most app using the ram etc..
 
@@ -32,7 +21,16 @@ Things i added:
 
 5-Overlay where you can see cpu , gpu and ram stats while playing etc..
 
-6-Pc Info widnow where you can see every pc info you need to know.
+6-See System Specs.
 
-Screenshot:
-![alt text](https://snipboard.io/vqABJV.jpg)
+## Screenshots:
+
+#### Home screen:
+![alt text](https://snipboard.io/04gaUc.jpg)
+
+#### Network Monitoring page:
+![alt text](https://snipboard.io/VrR4Du.jpg)
+
+#### System Specs page:
+![alt text](https://snipboard.io/bIh7DH.jpg)
+

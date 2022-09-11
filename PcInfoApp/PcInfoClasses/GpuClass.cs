@@ -80,7 +80,7 @@ namespace PCGraph.PcInfoClasses
         }
         private void GetChangingInfo_DoWork(object? sender, DoWorkEventArgs e)
         {
-            this.GpuFansControl = 0;
+            double FansSpeed = 0;
             int FansCounter = 0;
             string GpuTempS = "", GpuLoadS = "", GpuMemoryS = "";
             Computer pc = new Computer
@@ -103,7 +103,7 @@ namespace PCGraph.PcInfoClasses
                     else if (sensor.SensorType == SensorType.Control)
                     {
                         FansCounter++;
-                        this.GpuFansControl += Convert.ToDouble(sensor.Value);
+                        FansSpeed += Convert.ToDouble(sensor.Value);
                     }
                     else if (sensor.SensorType == SensorType.Clock && sensor.Name == "GPU Core")
                     {
@@ -126,7 +126,7 @@ namespace PCGraph.PcInfoClasses
             if (Convert.ToInt32(this.GpuLoad) > this.MaxGpuLoad)
                 this.MaxGpuLoad = Convert.ToInt32(this.GpuLoad);
             this.GpuLoad = Convert.ToDouble(GpuLoadS);
-            this.GpuFansControl /= FansCounter;
+            this.GpuFansControl = FansSpeed / FansCounter;
             this.CurrentVramUsage = Convert.ToDouble(GpuMemoryS) / 1024;
             this.CurrentVramUsage = Math.Round(this.CurrentVramUsage, 2);
             GetChangingInfo.CancelAsync();

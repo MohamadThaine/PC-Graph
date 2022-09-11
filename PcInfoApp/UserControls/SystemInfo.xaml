@@ -338,12 +338,19 @@
                             </Grid>
                         </Expander.Header>
                         <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
                             <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="25 , 0 , 0 ,0" MaxHeight="100">
                                 <ScrollViewer.Resources>
                                     <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="ScrollBar"/>
                                 </ScrollViewer.Resources>
                                 <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding SystemInfo.AudioDevice}"  Foreground="White"/>
                             </ScrollViewer>
+                            <TextBlock Grid.Row="1">
+                                <LineBreak/>
+                            </TextBlock>
                         </Grid>
                     </Expander>
                 </fw:AcrylicPanel>
@@ -375,12 +382,19 @@
                             </Grid>
                         </Expander.Header>
                         <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
                             <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="25 , 0 , 0 ,0" MaxHeight="100">
                                 <ScrollViewer.Resources>
                                     <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="ScrollBar"/>
                                 </ScrollViewer.Resources>
                                 <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding SystemInfo.NetworkInterFaces}"  Foreground="White"/>
                             </ScrollViewer>
+                            <TextBlock Grid.Row="1">
+                                <LineBreak/>
+                            </TextBlock>
                         </Grid>
                     </Expander>
                 </fw:AcrylicPanel>

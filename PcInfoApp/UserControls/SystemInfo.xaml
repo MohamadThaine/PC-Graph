@@ -43,7 +43,7 @@
                         <fw:AcrylicPanel.OpacityMask>
                             <VisualBrush Stretch="Fill">
                                 <VisualBrush.Visual>
-                                    <Border Name="CpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="90" Background="White">
+                                    <Border Name="CpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
                                         <Expander Background="Transparent">
                                         </Expander>
                                     </Border>
@@ -54,11 +54,14 @@
                             <Expander.Header>
                                 <Grid>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="10"></RowDefinition>
                                         <RowDefinition Height="50"></RowDefinition>
+                                        <RowDefinition Height="5"></RowDefinition>
                                         <RowDefinition Height="AUTO"></RowDefinition>
+                                        <RowDefinition Height="10"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="CPU" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                    <TextBlock Grid.Row="1" Text="{Binding CpuInfo.CpuName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="CPU" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                    <TextBlock Grid.Row="3" Text="{Binding CpuInfo.CpuName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
                                 </Grid>
                             </Expander.Header>
                             <Grid>
@@ -92,7 +95,7 @@
                         <fw:AcrylicPanel.OpacityMask>
                             <VisualBrush Stretch="Fill">
                                 <VisualBrush.Visual>
-                                    <Border Name="GpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="90" Background="White">
+                                    <Border Name="GpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
                                         <Expander Background="Transparent">
                                         </Expander>
                                     </Border>
@@ -103,11 +106,14 @@
                             <Expander.Header>
                                 <Grid>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="10"></RowDefinition>
                                         <RowDefinition Height="50"></RowDefinition>
+                                        <RowDefinition Height="5"></RowDefinition>
                                         <RowDefinition Height="AUTO"></RowDefinition>
+                                        <RowDefinition Height="10"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="GPU" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                    <TextBlock Grid.Row="1" Text="{Binding GpuInfo.GpuName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="GPU" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                    <TextBlock Grid.Row="3" Text="{Binding GpuInfo.GpuName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
                                 </Grid>
                             </Expander.Header>
                             <Grid>
@@ -143,7 +149,7 @@
                         <fw:AcrylicPanel.OpacityMask>
                             <VisualBrush Stretch="Fill">
                                 <VisualBrush.Visual>
-                                    <Border Name="MBBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="90" Background="White">
+                                    <Border Name="MBBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
                                         <Expander Background="Transparent">
                                         </Expander>
                                     </Border>
@@ -154,11 +160,14 @@
                             <Expander.Header>
                                 <Grid>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="10"></RowDefinition>
                                         <RowDefinition Height="50"></RowDefinition>
+                                        <RowDefinition Height="5"></RowDefinition>
                                         <RowDefinition Height="AUTO"></RowDefinition>
+                                        <RowDefinition Height="10"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="MOTHERBOARD" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                    <TextBlock Grid.Row="1" Text="{Binding MBInfo.MBName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="Motherboard" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                    <TextBlock Grid.Row="3" Text="{Binding MBInfo.MBName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
                                 </Grid>
                             </Expander.Header>
                             <Grid>
@@ -186,7 +195,7 @@
                         <fw:AcrylicPanel.OpacityMask>
                             <VisualBrush Stretch="Fill">
                                 <VisualBrush.Visual>
-                                    <Border x:Name="RamBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="100" Background="White">
+                                    <Border x:Name="RamBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
                                         <Expander Background="Transparent">
                                         </Expander>
                                     </Border>
@@ -197,12 +206,14 @@
                             <Expander.Header>
                                 <Grid>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="10"></RowDefinition>
                                         <RowDefinition Height="50"></RowDefinition>
+                                        <RowDefinition Height="5"></RowDefinition>
                                         <RowDefinition Height="AUTO"></RowDefinition>
-                                        <RowDefinition Height="AUTO"></RowDefinition>
+                                        <RowDefinition Height="10"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="RAM" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
+                                    <TextBlock Grid.Row="1" Text="RAM" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                    <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
                                     <Run Text="{Binding RamInfo.RamCounter}"></Run>
                                     <Run Text="Ram Sticks Found"/>
                                     </TextBlock>
@@ -249,7 +260,7 @@
                     <fw:AcrylicPanel.OpacityMask>
                         <VisualBrush Stretch="Fill">
                             <VisualBrush.Visual>
-                                <Border Name="STORAGEBorderVusual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="90" Background="White">
+                                <Border Name="STORAGEBorderVusual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
                                     <Expander Background="Transparent">
                                     </Expander>
                                 </Border>
@@ -260,11 +271,14 @@
                         <Expander.Header>
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="10"></RowDefinition>
                                     <RowDefinition Height="50"></RowDefinition>
+                                    <RowDefinition Height="5"></RowDefinition>
                                     <RowDefinition Height="AUTO"></RowDefinition>
+                                    <RowDefinition Height="10"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="STORAGE" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
+                                <TextBlock Grid.Row="1" Text="Storage" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
                                     <Run Text="{Binding StorageInfo.StorageCounter}"/>
                                     <Run Text="Storage Devices Found"/>
                                 </TextBlock>
@@ -316,7 +330,7 @@
                     <fw:AcrylicPanel.OpacityMask>
                         <VisualBrush Stretch="Fill">
                             <VisualBrush.Visual>
-                                <Border x:Name="AudioBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="90" Background="White">
+                                <Border x:Name="AudioBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
                                     <Expander Background="Transparent">
                                     </Expander>
                                 </Border>
@@ -327,11 +341,14 @@
                         <Expander.Header>
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="10"></RowDefinition>
                                     <RowDefinition Height="50"></RowDefinition>
+                                    <RowDefinition Height="5"></RowDefinition>
                                     <RowDefinition Height="AUTO"></RowDefinition>
+                                    <RowDefinition Height="10"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="AUDIO" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
+                                <TextBlock Grid.Row="1"  Text="Audio" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
                                     <Run Text="{Binding SystemInfo.AudioCount}"/>
                                     <Run Text="Audio Devices Found"/>
                                 </TextBlock>
@@ -360,7 +377,7 @@
                     <fw:AcrylicPanel.OpacityMask>
                         <VisualBrush Stretch="Fill">
                             <VisualBrush.Visual>
-                                <Border x:Name="NETWORKBorderVisual"  CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="100" Background="White">
+                                <Border x:Name="NETWORKBorderVisual"  CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
                                     <Expander Background="Transparent">
                                     </Expander>
                                 </Border>
@@ -371,11 +388,14 @@
                         <Expander.Header>
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="10"></RowDefinition>
                                     <RowDefinition Height="50"></RowDefinition>
+                                    <RowDefinition Height="5"></RowDefinition>
                                     <RowDefinition Height="AUTO"></RowDefinition>
+                                    <RowDefinition Height="10"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="NETWORK" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
+                                <TextBlock Grid.Row="1" Text="Network" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
                                     <Run Text="{Binding SystemInfo.NetworkCount}"/>
                                     <Run Text="Network Interfaces Found"/>
                                 </TextBlock>

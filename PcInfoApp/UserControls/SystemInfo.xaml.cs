@@ -37,7 +37,7 @@ namespace PCGraph.UserControls
 
         private void ExpanderCollepsed(object sender, RoutedEventArgs e)
         {
-            double height = 90;
+            double height = 110;
             Expander GetNameEx = (Expander)sender;
             string Name = GetNameEx.Name;
             if (Name == "CPUExpander")

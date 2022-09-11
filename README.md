@@ -32,9 +32,7 @@ Things i added:
 
 5-Overlay where you can see cpu , gpu and ram stats while playing etc..
 
-Things i plan to add for now(may be changed):
-
-1-Pc Info widnow where you can see every pc info you need to know.
+6-Pc Info widnow where you can see every pc info you need to know.
 
 Screenshot:
 ![alt text](https://snipboard.io/vqABJV.jpg)

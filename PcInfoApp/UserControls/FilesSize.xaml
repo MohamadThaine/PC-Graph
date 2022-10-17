@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PCGraph.UserControls"
+             xmlns:fonts="clr-namespace:PCGraph"
              xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:pcinfoclasses="clr-namespace:PCGraph.PcInfoClasses"
              xmlns:Util="clr-namespace:PCGraph.Util"
@@ -18,47 +19,58 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="107"></RowDefinition>
             <RowDefinition Height="5"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="5"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Background="White" Height="1" VerticalAlignment="Bottom" Grid.ColumnSpan="4"></Grid>
-            <MenuItem Name="ChooseFolder" Height="90" BorderThickness="1" Margin="13,3,90,-3" Style="{StaticResource AcrylicMenuItemStyle}" Click="ChooseFolder_Click">
-                <MenuItem.Header>
-                    <StackPanel Width="90" HorizontalAlignment="Center">
-                        <Image Source="/Imgs/folder-management.png" Width="90" Height="70"></Image>
-                        <TextBlock Text="Select Folder" Foreground="White" HorizontalAlignment="Center" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                    </StackPanel>
-                </MenuItem.Header>
-            </MenuItem>
-            <Button Grid.Column="1" Height="100" Name="DeleteFile" Background="Transparent" BorderBrush="Transparent" Click="DeleteFile_Click" IsEnabled="False" Margin="13,3,90,-3">
-                <StackPanel HorizontalAlignment="Center">
-                    <Image Source="/Imgs/deletefile.png" Width="90" Height="70"></Image>
-                    <TextBlock Text="Delete Selected File" Foreground="White" HorizontalAlignment="Center" FontFamily="Poppins" FontSize="12"></TextBlock>
-                </StackPanel>
-            </Button>
-            <Button Grid.Column="2" Height="100" Name="ShowFolder" Background="Transparent" BorderBrush="Transparent" Click="ShowFolder_Click" IsEnabled="False">
-                <StackPanel HorizontalAlignment="Center">
-                    <Image Source="/Imgs/OpenFileLocationIcon.png" Width="90" Height="70"></Image>
-                    <TextBlock Text="Open File Location" Foreground="White" HorizontalAlignment="Center" FontFamily="Poppins" FontSize="12"></TextBlock>
-                </StackPanel>
-            </Button>
-            <Button Grid.Column="3" Height="100" Name="SortFolders" Background="Transparent" BorderBrush="Transparent" Click="SortFolders_Click" IsEnabled="{Binding EnableSortFolderBT}">
-                <StackPanel HorizontalAlignment="Center">
-                    <Image Source="/Imgs/sortfoldersicon.png" Width="90" Height="70"></Image>
-                    <TextBlock Text="Sort Folder By Biggest" Foreground="White" HorizontalAlignment="Center" FontFamily="Poppins" FontSize="12"></TextBlock>
-                </StackPanel>
-            </Button>
-        </Grid>
+        <Border CornerRadius="21" Width="1017" Height="82" Grid.Column="1" BorderBrush="#70707049" BorderThickness="1" Margin="30,21,0,0">
+            <fw:AcrylicPanel TintColor="#FFFFFF" TintOpacity="0.038" Width="1017" Height="82" NoiseOpacity="0">
+                <fw:AcrylicPanel.OpacityMask>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Border CornerRadius="21"  Width="1017" Height="82" Background="White">
+                            </Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </fw:AcrylicPanel.OpacityMask>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <MenuItem Name="ChooseFolder" Width="260" Height="auto" BorderThickness="1"  Style="{StaticResource AcrylicMenuItemStyle}" Click="ChooseFolder_Click" VerticalAlignment="Center" Margin="40,0,0,0">
+                        <MenuItem.Header>
+                            <StackPanel Width="170" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Source="/Imgs/folder-management.png" Width="53" Height="48"></Image>
+                                <TextBlock Text="Select Folder" Foreground="White" FontFamily="{StaticResource MaterialDesignFont}" FontWeight="Regular" Margin="10,17,0,0" FontSize="17"></TextBlock>
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <Button Grid.Column="1" Height="82.04" Name="DeleteFile" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" Click="DeleteFile_Click" IsEnabled="False" Margin="40 , 0 ,0 ,0">
+                        <StackPanel Width="170" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 , 0 ,20 ,0">
+                            <Image Source="/Imgs/deletefile.png" Width="53" Height="48"></Image>
+                            <TextBlock Text="Delete" Foreground="White" FontFamily="{StaticResource MaterialDesignFont}" FontWeight="Regular" Margin="5,17,0,0" FontSize="17"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="2" Height="82.04" Name="ShowFolder" Background="Transparent" BorderBrush="Transparent" Click="ShowFolder_Click" IsEnabled="False" VerticalAlignment="Center">
+                        <StackPanel Width="172" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 , 0 ,50 ,0">
+                            <Image Source="/Imgs/OpenFileLocationIcon.png" Width="53" Height="48"></Image>
+                            <TextBlock Text="Open Location" Foreground="White" FontFamily="{StaticResource MaterialDesignFont}" FontWeight="Regular" Margin="10,17,0,0" FontSize="17"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="3" Height="82.04" Name="SortFolders" Background="Transparent" BorderBrush="Transparent" Click="SortFolders_Click" IsEnabled="{Binding EnableSortFolderBT}">
+                        <StackPanel Width="172" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 , 0 ,50 ,0">
+                            <Image Source="/Imgs/sortfoldersicon.png" Width="53" Height="48"></Image>
+                            <TextBlock Text="Sort By Size" Foreground="White" FontFamily="{StaticResource MaterialDesignFont}" FontWeight="Regular" Margin="10,17,0,0" FontSize="17"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </fw:AcrylicPanel>
+        </Border>
         <ListView Grid.Column="1" Grid.Row="2" Margin="0 ,20 ,0 ,0" x:Name="FolderListView" ItemsSource="{Binding Folders}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="30" FontFamily="/fonts/#Poppins-ExtraBold" Background="{x:Null}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
@@ -81,7 +93,7 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <fw:AcrylicPanel TintColor="#FFFFFF" TintOpacity="0.038" NoiseOpacity="0" Width="1014.55" Margin="30 , 0 , 0 , 7">
+                    <fw:AcrylicPanel TintColor="#FFFFFF" TintOpacity="0.038" NoiseOpacity="0" Width="1014.55" Margin="30 , 0 , 0 , 10">
                         <fw:AcrylicPanel.OpacityMask>
                             <VisualBrush Stretch="Fill">
                                 <VisualBrush.Visual>
@@ -106,10 +118,9 @@
                                          <Run Text="Folder Size:"></Run> <Run Text="{Binding FolderSize}"></Run>
                                     </TextBlock>
                                 </Grid>
-                               
                             </Expander.Header>
                             <ListView Name="FilesListView" ItemsSource="{Binding FolderFiles}" SelectionChanged="FilesListView_SelectionChanged" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                  MaxHeight="300" FontSize="20" FontFamily="/fonts/#Poppins-ExtraBold" Util:GridViewSort.AutoSort="True">
+                                  MaxHeight="300"  FontSize="20" FontFamily="/fonts/#Poppins-ExtraBold" Util:GridViewSort.AutoSort="True">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="File Name" DisplayMemberBinding="{Binding Name}"  Util:GridViewSort.PropertyName="Name">

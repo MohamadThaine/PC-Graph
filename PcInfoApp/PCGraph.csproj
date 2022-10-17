@@ -43,13 +43,16 @@
     <Resource Include="Imgs\FolderIcon.png" />
     <Resource Include="Imgs\MinimizeIcon.png" />
     <Resource Include="Imgs\NetworkIcon.png" />
-    <Resource Include="Imgs\OpenFileLocationIcon.png" />
-    <Resource Include="Imgs\OverlayIcon.png" />
     <Resource Include="Imgs\sortfoldersicon.png" />
     <Resource Include="Imgs\SystemInfoIcon.png" />
+    <Resource Include="Imgs\OpenFileLocationIcon.png" />
     <Content Include="Imgs\systemtray.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <DesignDataWithDesignTimeCreatableTypes Include="Imgs\OverlayIcon.png" />
   </ItemGroup>
 
   <ItemGroup>

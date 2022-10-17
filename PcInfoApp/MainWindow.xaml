@@ -107,24 +107,24 @@
                         <ListViewItem.OpacityMask>
                             <VisualBrush Stretch="Fill">
                                 <VisualBrush.Visual>
-                                    <Border CornerRadius="0 , 23 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </ListViewItem.OpacityMask>
-                        <Button Name="OverLayBT" Click="OverLayBT_Click" HorizontalAlignment="Center" FontSize="13" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="Overlay for stats">
-                            <Image Source="/Imgs/OverlayIcon.png"></Image>
-                        </Button>
-                    </ListViewItem>
-                    <ListViewItem Width="100" Height="90">
-                        <ListViewItem.OpacityMask>
-                            <VisualBrush Stretch="Fill">
-                                <VisualBrush.Visual>
                                     <Border CornerRadius="0 , 23 , 0 , 0"  Width="100" Height="90" Background="White"></Border>
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </ListViewItem.OpacityMask>
                         <Button Name="SystemSpecsBT" Click="SystemSpecsBT_Click" HorizontalAlignment="Center" FontSize="13" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="80" ToolTip="System Specs">
                             <Image Source="/Imgs/SystemInfoIcon.png"></Image>
+                        </Button>
+                    </ListViewItem>
+                    <ListViewItem Width="100" Height="90">
+                        <ListViewItem.OpacityMask>
+                            <VisualBrush Stretch="Fill">
+                                <VisualBrush.Visual>
+                                    <Border CornerRadius="0 , 23 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </ListViewItem.OpacityMask>
+                        <Button Name="OverLayBT" Click="OverLayBT_Click" HorizontalAlignment="Center" FontSize="13" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="Overlay for stats">
+                            <Image Source="/Imgs/OverlayIcon.png"></Image>
                         </Button>
                     </ListViewItem>
                 </ListView>

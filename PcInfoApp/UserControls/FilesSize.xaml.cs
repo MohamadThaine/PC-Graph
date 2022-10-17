@@ -1,5 +1,6 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using PCGraph.PcInfoClasses;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;

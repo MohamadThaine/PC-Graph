@@ -5,10 +5,84 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PCGraph.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf"
              xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
              xmlns:Util="clr-namespace:PCGraph.Util"
              mc:Ignorable="d" 
              d:DesignHeight="774.86" d:DesignWidth="1100">
+
+    <UserControl.Resources>
+        <Style x:Key="RepeatButtonTransparent" TargetType="{x:Type RepeatButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" CornerRadius="10"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScrollBarThumbVertical" TargetType="{x:Type Thumb}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <!--<Setter Property="Margin" Value="3"/>-->
+
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border x:Name="rectangle" Background="LightGray" Opacity="0.1" Height="{TemplateBinding Height}" SnapsToDevicePixels="True" Width="10" CornerRadius="8"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="rectangle" Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="true">
+                                <Setter Property="Background" TargetName="rectangle" Value="LightGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="GlassScrollBar" TargetType="{x:Type ScrollBar}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="Bg" SnapsToDevicePixels="true">
+                            <Grid.RowDefinitions>
+                                <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+                                <RowDefinition Height="0.00001*"/>
+                                <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+                            </Grid.RowDefinitions>
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="1" CornerRadius="10"/>
+                            <!--<RepeatButton x:Name="PART_LineUpButton" Command="{x:Static ScrollBar.LineUpCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBarButton}" Margin="0,0,0,-20">    
+                                <Path x:Name="ArrowTop" Data="M 0,4 C0,4 0,6 0,6 0,6 3.5,2.5 3.5,2.5 3.5,2.5 7,6 7,6 7,6 7,4 7,4 7,4 3.5,0.5 3.5,0.5 3.5,0.5 0,4 0,4 z" Fill="{StaticResource ScrollBar.Static.Glyph}" Margin="3,4,3,3" Stretch="Uniform"/>    
+                            </RepeatButton>-->
+                            <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource RepeatButtonTransparent}" HorizontalAlignment="Left" Width="17"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource RepeatButtonTransparent}"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollBarThumbVertical}" Margin="2"/>
+                                </Track.Thumb>
+                            </Track>
+                            <!--<RepeatButton x:Name="PART_LineDownButton" Command="{x:Static ScrollBar.LineDownCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="2" Style="{StaticResource ScrollBarButton}"  Margin="0,-20,0,0">    
+                                <Path x:Name="ArrowBottom" Data="M 0,2.5 C0,2.5 0,0.5 0,0.5 0,0.5 3.5,4 3.5,4 3.5,4 7,0.5 7,0.5 7,0.5 7,2.5 7,2.5 7,2.5 3.5,6 3.5,6 3.5,6 0,2.5 0,2.5 z" Fill="{StaticResource ScrollBar.Static.Glyph}" Margin="3,4,3,3" Stretch="Uniform"/>    
+                            </RepeatButton>-->
+                        </Grid>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -24,7 +98,7 @@
         </Grid.ColumnDefinitions>
         <ScrollViewer Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <ScrollViewer.Resources>
-                <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="ScrollBar"/>
+                <Style BasedOn="{StaticResource GlassScrollBar}" TargetType="ScrollBar"/>
             </ScrollViewer.Resources>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -50,14 +124,17 @@
                             <fw:AcrylicPanel.OpacityMask>
                                 <VisualBrush Stretch="Fill">
                                     <VisualBrush.Visual>
-                                        <Border Name="CpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                        <Border Name="CpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="{Binding ActualHeight , ElementName=CPUExpander}" Background="White">
                                             <Expander Background="Transparent">
                                             </Expander>
                                         </Border>
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </fw:AcrylicPanel.OpacityMask>
-                            <Expander x:Name="CPUExpander" Background="Transparent" Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                            <Expander x:Name="CPUExpander" Background="Transparent" Style="{DynamicResource MaterialDesignExpander}">
+                                <Expander.Resources>
+                                    <Style BasedOn="{DynamicResource ResourceKey=s}" TargetType="ToggleButton"></Style>
+                                </Expander.Resources>
                                 <Expander.Header>
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -71,27 +148,27 @@
                                         <TextBlock Grid.Row="3" Text="{Binding CpuInfo.CpuName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
                                     </Grid>
                                 </Expander.Header>
-                                <Grid>
+                                <Grid Margin="0 ,-10 ,0 ,0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
-                                        <Run Text="Cores Count:" FontWeight="SemiBold"></Run>
+                                    <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,-10">
+                                        <Run Text="Cores Count:" FontWeight="Regular"></Run>
                                     <Run Text="{Binding CpuInfo.CoresCount}"></Run>
                                     <LineBreak></LineBreak>
                                     </TextBlock>
-                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
-                            <Run Text="Max Clock Rate:" FontWeight="SemiBold"></Run>
-                            <Run Text="{Binding CpuInfo.CpuMaxClock}"></Run>
-                            <Run Text="MHZ"></Run>
-                            <LineBreak></LineBreak>
+                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,-10">
+                                        <Run Text="Max Clock Rate:" FontWeight="Regular"></Run>
+                                        <Run Text="{Binding CpuInfo.CpuMaxClock}"></Run>
+                                        <Run Text="MHZ"></Run>
+                                        <LineBreak></LineBreak>
                                     </TextBlock>
                                     <TextBlock Grid.Row="2" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
-                            <Run Text="Voltage:" FontWeight="SemiBold"></Run>
-                            <Run Text="{Binding CpuInfo.CpuVolatge}"></Run>
-                            <LineBreak/>
+                                        <Run Text="Voltage:" FontWeight="Regular"></Run>
+                                        <Run Text="{Binding CpuInfo.CpuVolatge}"></Run>
+                                        <LineBreak/>
                                     </TextBlock>
                                 </Grid>
                             </Expander>
@@ -102,14 +179,14 @@
                             <fw:AcrylicPanel.OpacityMask>
                                 <VisualBrush Stretch="Fill">
                                     <VisualBrush.Visual>
-                                        <Border Name="GpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                        <Border Name="GpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="{Binding ActualHeight , ElementName=GPUExpander}" Background="White">
                                             <Expander Background="Transparent">
                                             </Expander>
                                         </Border>
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </fw:AcrylicPanel.OpacityMask>
-                            <Expander x:Name="GPUExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                            <Expander x:Name="GPUExpander" Background="Transparent" >
                                 <Expander.Header>
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -123,25 +200,25 @@
                                         <TextBlock Grid.Row="3" Text="{Binding GpuInfo.GpuName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
                                     </Grid>
                                 </Expander.Header>
-                                <Grid>
+                                <Grid Margin="0 ,-10 ,0 ,0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                    <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,-10">
                              <Run Text="VRAM:" FontWeight="SemiBold"></Run>
                              <Run Text="{Binding GpuInfo.GpuMemoryMaxSize}"></Run>
                              <Run Text="GB"></Run>
                             <LineBreak/>
                                     </TextBlock>
-                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,-10">
                             <Run Text="Max Clock Rate:" FontWeight="SemiBold"></Run>
                             <Run Text="{Binding GpuInfo.GpuMaxClock}"></Run>
                             <Run Text="MHZ"></Run>
                             <LineBreak/>
                                     </TextBlock>
-                                    <TextBlock Grid.Row="2" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                    <TextBlock Grid.Row="2" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,-10">
                             <Run Text="Fans Speed:" FontWeight="SemiBold"></Run>
                             <Run Text="{Binding GpuInfo.GpuFansControl}"></Run>
                             <Run Text="%"></Run>
@@ -156,16 +233,16 @@
                             <fw:AcrylicPanel.OpacityMask>
                                 <VisualBrush Stretch="Fill">
                                     <VisualBrush.Visual>
-                                        <Border Name="MBBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                        <Border Name="MBBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="{Binding ActualHeight , ElementName=MBExpander}" Background="White">
                                             <Expander Background="Transparent">
                                             </Expander>
                                         </Border>
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </fw:AcrylicPanel.OpacityMask>
-                            <Expander x:Name="MBExpander" Background="Transparent" Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                            <Expander x:Name="MBExpander" Background="Transparent">
                                 <Expander.Header>
-                                    <Grid>
+                                    <Grid Margin="0 ,-10 ,0 ,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="10"></RowDefinition>
                                             <RowDefinition Height="50"></RowDefinition>
@@ -183,15 +260,15 @@
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
-                            <Run Text="Bios Version:" FontWeight="SemiBold"></Run>
-                            <Run Text="{Binding MBInfo.MBBiosVersion}"></Run>
+                                    <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,-10">
+                                        <Run Text="Bios Version:" FontWeight="SemiBold"></Run>
+                                        <Run Text="{Binding MBInfo.MBBiosVersion}"></Run>
                             <LineBreak></LineBreak>
                                     </TextBlock>
-                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
-                            <Run Text="Bios Date:" FontWeight="SemiBold"></Run>
-                            <Run Text="{Binding MBInfo.MBBiosDate}"></Run>
-                            <LineBreak/>
+                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,-10">
+                                        <Run Text="Bios Date:" FontWeight="SemiBold"></Run>
+                                        <Run Text="{Binding MBInfo.MBBiosDate}"></Run>
+                                        <LineBreak/>
                                     </TextBlock>
                                 </Grid>
                             </Expander>
@@ -202,14 +279,14 @@
                             <fw:AcrylicPanel.OpacityMask>
                                 <VisualBrush Stretch="Fill">
                                     <VisualBrush.Visual>
-                                        <Border x:Name="RamBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                        <Border x:Name="RamBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="{Binding ActualHeight , ElementName=RAMExpander}" Background="White">
                                             <Expander Background="Transparent">
                                             </Expander>
                                         </Border>
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </fw:AcrylicPanel.OpacityMask>
-                            <Expander x:Name="RAMExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                            <Expander x:Name="RAMExpander" Background="Transparent" >
                                 <Expander.Header>
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -226,25 +303,25 @@
                                         </TextBlock>
                                     </Grid>
                                 </Expander.Header>
-                                <Grid>
+                                <Grid Margin="0 ,-10 ,0 ,0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding RamInfo.RamManufacturerName}" Foreground="White" FontWeight="SemiBold" Margin="25 , 0 , 0 ,0">
+                                    <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding RamInfo.RamManufacturerName}" Foreground="White" FontWeight="SemiBold" Margin="25 , 0 , 0 ,-10">
                                     </ItemsControl>
-                                    <TextBlock Grid.Row="2" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
-                            <Run Text="Ram Size:" FontWeight="SemiBold"></Run>
-                            <Run Text="{Binding RamInfo.RamSize}"></Run>
-                            <Run Text="GB"></Run>
-                            <LineBreak/>
+                                    <TextBlock Grid.Row="2" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,-10">
+                                        <Run Text="Ram Size:" FontWeight="SemiBold"></Run>
+                                        <Run Text="{Binding RamInfo.RamSize}"></Run>
+                                        <Run Text="GB"></Run>
+                                        <LineBreak/>
                                     </TextBlock>
-                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
-                            <LineBreak/>
-                            <Run Text="Ram Speed:" FontWeight="SemiBold"></Run>
-                            <Run Text="{Binding RamInfo.RamSpeed}"></Run>
-                            <LineBreak/>
+                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,-10">
+                                        <LineBreak/>
+                                        <Run Text="Ram Speed:" FontWeight="SemiBold"></Run>
+                                        <Run Text="{Binding RamInfo.RamSpeed}"></Run>
+                                        <LineBreak/>
                                     </TextBlock>
                                 </Grid>
                             </Expander>
@@ -265,14 +342,14 @@
                             <fw:AcrylicPanel.OpacityMask>
                                 <VisualBrush Stretch="Fill">
                                     <VisualBrush.Visual>
-                                        <Border Name="STORAGEBorderVusual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                        <Border Name="STORAGEBorderVusual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="{Binding ActualHeight , ElementName=STORAGEExpander}" Background="White">
                                             <Expander Background="Transparent">
                                             </Expander>
                                         </Border>
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </fw:AcrylicPanel.OpacityMask>
-                            <Expander Name="STORAGEExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                            <Expander Name="STORAGEExpander" Background="Transparent" >
                                 <Expander.Header>
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -290,7 +367,7 @@
                                     </Grid>
                                 </Expander.Header>
                                 <Grid>
-                                    <ListView FontFamily="Poppins" FontSize="15" ItemsSource="{Binding StorageInfo.Storages}" Foreground="White" FontWeight="SemiBold" Margin="-20 , 0 , 0 ,0" Width="430" Util:GridViewSort.AutoSort="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListView FontFamily="Poppins" FontSize="15" ItemsSource="{Binding StorageInfo.Storages}" Foreground="White" FontWeight="SemiBold" Margin="-20 , 0 , 0 ,15" Width="430" Util:GridViewSort.AutoSort="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                         <ListView.View>
                                             <GridView>
                                                 <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Util:GridViewSort.PropertyName="Name">
@@ -335,14 +412,14 @@
                             <fw:AcrylicPanel.OpacityMask>
                                 <VisualBrush Stretch="Fill">
                                     <VisualBrush.Visual>
-                                        <Border x:Name="AudioBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                        <Border x:Name="AudioBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="{Binding ActualHeight , ElementName=AUDIOExpander}" Background="White">
                                             <Expander Background="Transparent">
                                             </Expander>
                                         </Border>
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </fw:AcrylicPanel.OpacityMask>
-                            <Expander x:Name="AUDIOExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                            <Expander x:Name="AUDIOExpander" Background="Transparent">
                                 <Expander.Header>
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -364,9 +441,10 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="20"/>
                                     </Grid.RowDefinitions>
-                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="25 , 0 , 0 ,0" MaxHeight="100">
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="25 , 0 , 0 ,0" MaxHeight="150">
                                         <ScrollViewer.Resources>
-                                            <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="ScrollBar"/>
+                                            <Style BasedOn="{StaticResource GlassScrollBar}" TargetType="ScrollBar">
+                                            </Style>
                                         </ScrollViewer.Resources>
                                         <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding SystemInfo.AudioDevice}"  Foreground="White"/>
                                     </ScrollViewer>
@@ -382,14 +460,14 @@
                             <fw:AcrylicPanel.OpacityMask>
                                 <VisualBrush Stretch="Fill">
                                     <VisualBrush.Visual>
-                                        <Border x:Name="NETWORKBorderVisual"  CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                        <Border x:Name="NETWORKBorderVisual"  CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="{Binding ActualHeight , ElementName=NETWORKExpander}" Background="White">
                                             <Expander Background="Transparent">
                                             </Expander>
                                         </Border>
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </fw:AcrylicPanel.OpacityMask>
-                            <Expander x:Name="NETWORKExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                            <Expander x:Name="NETWORKExpander" Background="Transparent" >
                                 <Expander.Header>
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -411,9 +489,10 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="20"/>
                                     </Grid.RowDefinitions>
-                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="25 , 0 , 0 ,0" MaxHeight="100">
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="25 , 0 , 0 ,0" MaxHeight="150">
                                         <ScrollViewer.Resources>
-                                            <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="ScrollBar"/>
+                                            <Style BasedOn="{StaticResource GlassScrollBar}" TargetType="ScrollBar">
+                                            </Style>
                                         </ScrollViewer.Resources>
                                         <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding SystemInfo.NetworkInterFaces}"  Foreground="White"/>
                                     </ScrollViewer>

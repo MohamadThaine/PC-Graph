@@ -2,6 +2,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using Forms = System.Windows.Forms;
@@ -38,6 +39,14 @@ namespace PCGraph
                 UserControlEnabled = 1;
                 PcSpecs pcSpecs = new PcSpecs();
                 ViewGrid.Children.Add(pcSpecs);
+                var btn = sender as Button;
+                var lvi = FindAncestor<ListViewItem>(btn);
+                if (lvi != null)
+                {
+                    var listview = FindAncestor<ListView>(lvi);
+                    listview.SelectedItem = lvi;
+                    lvi.IsSelected = true;
+                }
             }
         }
         private void FileSizeBT_Click(object sender, RoutedEventArgs e)
@@ -48,6 +57,14 @@ namespace PCGraph
                 UserControlEnabled = 2;
                 FilesSize filesSize = new FilesSize();
                 ViewGrid.Children.Add(filesSize);
+                var btn = sender as Button;
+                var lvi = FindAncestor<ListViewItem>(btn);
+                if (lvi != null)
+                {
+                    var listview = FindAncestor<ListView>(lvi);
+                    listview.SelectedItem = lvi;
+                    lvi.IsSelected = true;
+                }
             }
         }
         private void NetworkBt_Click(object sender, RoutedEventArgs e)
@@ -58,6 +75,14 @@ namespace PCGraph
                 UserControlEnabled = 3;
                 NetworkMonitoring networkMonitoring = new NetworkMonitoring();
                 ViewGrid.Children.Add(networkMonitoring);
+                var btn = sender as Button;
+                var lvi = FindAncestor<ListViewItem>(btn);
+                if (lvi != null)
+                {
+                    var listview = FindAncestor<ListView>(lvi);
+                    listview.SelectedItem = lvi;
+                    lvi.IsSelected = true;
+                }
             }
         }
         private void OverLayBT_Click(object sender, RoutedEventArgs e)
@@ -73,6 +98,12 @@ namespace PCGraph
                 overlayWindow.Show();
                 IsoverlayEnabled = true;
             }
+            var btn = sender as Button;
+            var lvi = FindAncestor<ListViewItem>(btn);
+            if (lvi != null)
+            {
+                lvi.IsSelected = false;
+            }
         }
         private void SystemSpecsBT_Click(object sender, RoutedEventArgs e)
         {
@@ -82,6 +113,14 @@ namespace PCGraph
                 UserControlEnabled = 4;
                 SystemInfo SystemInfo = new SystemInfo();
                 ViewGrid.Children.Add(SystemInfo);
+                var btn = sender as Button;
+                var lvi = FindAncestor<ListViewItem>(btn);
+                if (lvi != null)
+                {
+                    var listview = FindAncestor<ListView>(lvi);
+                    listview.SelectedItem = lvi;
+                    lvi.IsSelected = true;
+                }
             }
         }
         private void PrepareTrayIcon()
@@ -142,6 +181,20 @@ namespace PCGraph
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+        private static T FindAncestor<T>(FrameworkElement fe) where T : FrameworkElement
+        {
+            if (fe == null)
+            {
+                return null;
+            }
+            var p = fe.Parent as FrameworkElement ?? fe.TemplatedParent as FrameworkElement;
+            if (p == null)
+            {
+                return null;
+            }
+            var match = p as T;
+            return match ?? FindAncestor<T>(p);
         }
     }
 }

@@ -18,7 +18,7 @@
         Background="Transparent"
         IsEnabled="False"
         Loaded="Window_Loaded"
-        Title="OverlayWindow" Height="30" Width="550">
+        Title="OverlayWindow" Height="30" Width="570">
     <Window.DataContext>
         <local:PcInfo/>
     </Window.DataContext>
@@ -28,8 +28,10 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="10"/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="10"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12.5" FontFamily="Poppins" FontWeight="SemiBold" Foreground="White">
@@ -43,18 +45,18 @@
                     <Run Text="%"></Run>
                 </TextBlock>
                 <Grid Width="1" Grid.Column="1" Background="White" HorizontalAlignment="Right"></Grid>
-                <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12.5" FontFamily="Poppins" FontWeight="SemiBold" Foreground="White">
+                <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12.5" FontFamily="Poppins" FontWeight="SemiBold" Foreground="White">
                     <Run Text="Cpu Temp:"></Run>
                     <Run Text="{Binding CpuInfo.CpuTemp}"></Run>
                     <Run Text="°C"></Run>
                 </TextBlock>
-                <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12.5" FontFamily="Poppins" FontWeight="SemiBold" Foreground="White">
+                <TextBlock Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12.5" FontFamily="Poppins" FontWeight="SemiBold" Foreground="White">
                     <Run Text="Cpu Load:"></Run>
                     <Run Text="{Binding CpuInfo.CpuLoad}"></Run>
                     <Run Text="%"></Run>
                 </TextBlock>
-                <Grid Width="1" Grid.Column="3" Background="White" HorizontalAlignment="Right"></Grid>
-                <TextBlock Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12.5" FontFamily="Poppins" FontWeight="SemiBold" Foreground="White">
+                <Grid Width="1" Grid.Column="5" Background="White" HorizontalAlignment="Right"></Grid>
+                <TextBlock Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12.5" FontFamily="Poppins" FontWeight="SemiBold" Foreground="White">
                     <Run Text="Ram Load:"></Run>
                     <Run Text="{Binding RamInfo.RamUsage}"></Run>
                     <Run Text="%"></Run>

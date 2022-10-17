@@ -121,7 +121,7 @@ namespace PCGraph.PcInfoClasses
             this.GpuTemp = Convert.ToDouble(GpuTempS);
             if (Convert.ToInt32(this.GpuTemp) > this.MaxGpuTemp)
                 this.MaxGpuTemp = Convert.ToInt32(this.GpuTemp);
-            if (GpuLoadS.Length > 2)
+            if (GpuLoadS.Length > 2 && GpuLoadS != "100")
                 GpuLoadS = GpuLoadS.Substring(0, 2);
             if (Convert.ToInt32(this.GpuLoad) > this.MaxGpuLoad)
                 this.MaxGpuLoad = Convert.ToInt32(this.GpuLoad);

@@ -26,399 +26,406 @@
             <ScrollViewer.Resources>
                 <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="ScrollBar"/>
             </ScrollViewer.Resources>
-            <Grid HorizontalAlignment="Left">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Border BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
-                    <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
-                        <fw:AcrylicPanel.OpacityMask>
-                            <VisualBrush Stretch="Fill">
-                                <VisualBrush.Visual>
-                                    <Border Name="CpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
-                                        <Expander Background="Transparent">
-                                        </Expander>
-                                    </Border>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </fw:AcrylicPanel.OpacityMask>
-                        <Expander x:Name="CPUExpander" Background="Transparent" Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
-                            <Expander.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
+                        <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
+                            <fw:AcrylicPanel.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border Name="CpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                            <Expander Background="Transparent">
+                                            </Expander>
+                                        </Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </fw:AcrylicPanel.OpacityMask>
+                            <Expander x:Name="CPUExpander" Background="Transparent" Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                                <Expander.Header>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                            <RowDefinition Height="5"></RowDefinition>
+                                            <RowDefinition Height="AUTO"></RowDefinition>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="1" Text="CPU" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Grid.Row="3" Text="{Binding CpuInfo.CpuName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
+                                    </Grid>
+                                </Expander.Header>
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="10"></RowDefinition>
-                                        <RowDefinition Height="50"></RowDefinition>
-                                        <RowDefinition Height="5"></RowDefinition>
-                                        <RowDefinition Height="AUTO"></RowDefinition>
-                                        <RowDefinition Height="10"></RowDefinition>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="1" Text="CPU" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                    <TextBlock Grid.Row="3" Text="{Binding CpuInfo.CpuName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
-                                </Grid>
-                            </Expander.Header>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
-                            <Run Text="Cores Count:" FontWeight="SemiBold"></Run>
-                            <Run Text="{Binding CpuInfo.CoresCount}"></Run>
-                            <LineBreak></LineBreak>
-                                </TextBlock>
-                                <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                    <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                        <Run Text="Cores Count:" FontWeight="SemiBold"></Run>
+                                    <Run Text="{Binding CpuInfo.CoresCount}"></Run>
+                                    <LineBreak></LineBreak>
+                                    </TextBlock>
+                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
                             <Run Text="Max Clock Rate:" FontWeight="SemiBold"></Run>
                             <Run Text="{Binding CpuInfo.CpuMaxClock}"></Run>
                             <Run Text="MHZ"></Run>
                             <LineBreak></LineBreak>
-                                </TextBlock>
-                                <TextBlock Grid.Row="2" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                    </TextBlock>
+                                    <TextBlock Grid.Row="2" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
                             <Run Text="Voltage:" FontWeight="SemiBold"></Run>
                             <Run Text="{Binding CpuInfo.CpuVolatge}"></Run>
                             <LineBreak/>
-                                </TextBlock>
-                            </Grid>
-                        </Expander>
-                    </fw:AcrylicPanel>
-                </Border>
-                <Border Grid.Row="2" BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
-                    <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
-                        <fw:AcrylicPanel.OpacityMask>
-                            <VisualBrush Stretch="Fill">
-                                <VisualBrush.Visual>
-                                    <Border Name="GpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
-                                        <Expander Background="Transparent">
-                                        </Expander>
-                                    </Border>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </fw:AcrylicPanel.OpacityMask>
-                        <Expander x:Name="GPUExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
-                            <Expander.Header>
+                                    </TextBlock>
+                                </Grid>
+                            </Expander>
+                        </fw:AcrylicPanel>
+                    </Border>
+                    <Border Grid.Row="2" BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
+                        <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
+                            <fw:AcrylicPanel.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border Name="GpuBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                            <Expander Background="Transparent">
+                                            </Expander>
+                                        </Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </fw:AcrylicPanel.OpacityMask>
+                            <Expander x:Name="GPUExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                                <Expander.Header>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                            <RowDefinition Height="5"></RowDefinition>
+                                            <RowDefinition Height="AUTO"></RowDefinition>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="1" Text="GPU" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Grid.Row="3" Text="{Binding GpuInfo.GpuName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
+                                    </Grid>
+                                </Expander.Header>
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="10"></RowDefinition>
-                                        <RowDefinition Height="50"></RowDefinition>
-                                        <RowDefinition Height="5"></RowDefinition>
-                                        <RowDefinition Height="AUTO"></RowDefinition>
-                                        <RowDefinition Height="10"></RowDefinition>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="1" Text="GPU" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                    <TextBlock Grid.Row="3" Text="{Binding GpuInfo.GpuName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
-                                </Grid>
-                            </Expander.Header>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                    <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
                              <Run Text="VRAM:" FontWeight="SemiBold"></Run>
                              <Run Text="{Binding GpuInfo.GpuMemoryMaxSize}"></Run>
                              <Run Text="GB"></Run>
                             <LineBreak/>
-                                </TextBlock>
-                                <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                    </TextBlock>
+                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
                             <Run Text="Max Clock Rate:" FontWeight="SemiBold"></Run>
                             <Run Text="{Binding GpuInfo.GpuMaxClock}"></Run>
                             <Run Text="MHZ"></Run>
                             <LineBreak/>
-                                </TextBlock>
-                                <TextBlock Grid.Row="2" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                    </TextBlock>
+                                    <TextBlock Grid.Row="2" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
                             <Run Text="Fans Speed:" FontWeight="SemiBold"></Run>
                             <Run Text="{Binding GpuInfo.GpuFansControl}"></Run>
                             <Run Text="%"></Run>
                              <LineBreak/>
-                                </TextBlock>
-                            </Grid>
-                        </Expander>
-                    </fw:AcrylicPanel>
-                </Border>
-                <Border Grid.Column="1" Grid.Row="4" BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
-                    <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
-                        <fw:AcrylicPanel.OpacityMask>
-                            <VisualBrush Stretch="Fill">
-                                <VisualBrush.Visual>
-                                    <Border Name="MBBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
-                                        <Expander Background="Transparent">
-                                        </Expander>
-                                    </Border>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </fw:AcrylicPanel.OpacityMask>
-                        <Expander x:Name="MBExpander" Background="Transparent" Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
-                            <Expander.Header>
+                                    </TextBlock>
+                                </Grid>
+                            </Expander>
+                        </fw:AcrylicPanel>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="4" BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
+                        <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
+                            <fw:AcrylicPanel.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border Name="MBBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                            <Expander Background="Transparent">
+                                            </Expander>
+                                        </Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </fw:AcrylicPanel.OpacityMask>
+                            <Expander x:Name="MBExpander" Background="Transparent" Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                                <Expander.Header>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                            <RowDefinition Height="5"></RowDefinition>
+                                            <RowDefinition Height="AUTO"></RowDefinition>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="1" Text="Motherboard" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Grid.Row="3" Text="{Binding MBInfo.MBName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
+                                    </Grid>
+                                </Expander.Header>
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="10"></RowDefinition>
-                                        <RowDefinition Height="50"></RowDefinition>
-                                        <RowDefinition Height="5"></RowDefinition>
-                                        <RowDefinition Height="AUTO"></RowDefinition>
-                                        <RowDefinition Height="10"></RowDefinition>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="1" Text="Motherboard" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                    <TextBlock Grid.Row="3" Text="{Binding MBInfo.MBName}" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold"></TextBlock>
-                                </Grid>
-                            </Expander.Header>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                    <TextBlock FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
                             <Run Text="Bios Version:" FontWeight="SemiBold"></Run>
                             <Run Text="{Binding MBInfo.MBBiosVersion}"></Run>
                             <LineBreak></LineBreak>
-                                </TextBlock>
-                                <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                    </TextBlock>
+                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
                             <Run Text="Bios Date:" FontWeight="SemiBold"></Run>
                             <Run Text="{Binding MBInfo.MBBiosDate}"></Run>
                             <LineBreak/>
-                                </TextBlock>
-                            </Grid>
-                        </Expander>
-                    </fw:AcrylicPanel>
-                </Border>
-                <Border Grid.Column="1" Grid.Row="6" BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
-                    <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
-                        <fw:AcrylicPanel.OpacityMask>
-                            <VisualBrush Stretch="Fill">
-                                <VisualBrush.Visual>
-                                    <Border x:Name="RamBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
-                                        <Expander Background="Transparent">
-                                        </Expander>
-                                    </Border>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </fw:AcrylicPanel.OpacityMask>
-                        <Expander x:Name="RAMExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
-                            <Expander.Header>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="10"></RowDefinition>
-                                        <RowDefinition Height="50"></RowDefinition>
-                                        <RowDefinition Height="5"></RowDefinition>
-                                        <RowDefinition Height="AUTO"></RowDefinition>
-                                        <RowDefinition Height="10"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="1" Text="RAM" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                    <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
-                                    <Run Text="{Binding RamInfo.RamCounter}"></Run>
-                                    <Run Text="Ram Sticks Found"/>
                                     </TextBlock>
                                 </Grid>
-                            </Expander.Header>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding RamInfo.RamManufacturerName}" Foreground="White" FontWeight="SemiBold" Margin="25 , 0 , 0 ,0">
-                                </ItemsControl>
-                                <TextBlock Grid.Row="2" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                            </Expander>
+                        </fw:AcrylicPanel>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="6" BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
+                        <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
+                            <fw:AcrylicPanel.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border x:Name="RamBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                            <Expander Background="Transparent">
+                                            </Expander>
+                                        </Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </fw:AcrylicPanel.OpacityMask>
+                            <Expander x:Name="RAMExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                                <Expander.Header>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                            <RowDefinition Height="5"></RowDefinition>
+                                            <RowDefinition Height="AUTO"></RowDefinition>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="1" Text="RAM" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
+                                    <Run Text="{Binding RamInfo.RamCounter}"></Run>
+                                    <Run Text="Ram Sticks Found"/>
+                                        </TextBlock>
+                                    </Grid>
+                                </Expander.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding RamInfo.RamManufacturerName}" Foreground="White" FontWeight="SemiBold" Margin="25 , 0 , 0 ,0">
+                                    </ItemsControl>
+                                    <TextBlock Grid.Row="2" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
                             <Run Text="Ram Size:" FontWeight="SemiBold"></Run>
                             <Run Text="{Binding RamInfo.RamSize}"></Run>
                             <Run Text="GB"></Run>
                             <LineBreak/>
-                                </TextBlock>
-                                <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
+                                    </TextBlock>
+                                    <TextBlock Grid.Row="1" FontSize="20" Foreground="White" FontFamily="Poppins" Margin="25 , 0 , 0 ,0">
                             <LineBreak/>
                             <Run Text="Ram Speed:" FontWeight="SemiBold"></Run>
                             <Run Text="{Binding RamInfo.RamSpeed}"></Run>
                             <LineBreak/>
-                                </TextBlock>
-                            </Grid>
-                        </Expander>
-                    </fw:AcrylicPanel>
-                </Border>
-            </Grid>
-        </ScrollViewer>
-        
-        <Grid Grid.Column="3" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="AUTO"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="AUTO"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="AUTO"/>
-                <RowDefinition Height="35"/>
-            </Grid.RowDefinitions>
-            <Border BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
-                <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
-                    <fw:AcrylicPanel.OpacityMask>
-                        <VisualBrush Stretch="Fill">
-                            <VisualBrush.Visual>
-                                <Border Name="STORAGEBorderVusual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
-                                    <Expander Background="Transparent">
-                                    </Expander>
-                                </Border>
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </fw:AcrylicPanel.OpacityMask>
-                    <Expander Name="STORAGEExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
-                        <Expander.Header>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="10"></RowDefinition>
-                                    <RowDefinition Height="50"></RowDefinition>
-                                    <RowDefinition Height="5"></RowDefinition>
-                                    <RowDefinition Height="AUTO"></RowDefinition>
-                                    <RowDefinition Height="10"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="1" Text="Storage" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
+                                    </TextBlock>
+                                </Grid>
+                            </Expander>
+                        </fw:AcrylicPanel>
+                    </Border>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="35"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
+                        <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
+                            <fw:AcrylicPanel.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border Name="STORAGEBorderVusual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                            <Expander Background="Transparent">
+                                            </Expander>
+                                        </Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </fw:AcrylicPanel.OpacityMask>
+                            <Expander Name="STORAGEExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                                <Expander.Header>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                            <RowDefinition Height="5"></RowDefinition>
+                                            <RowDefinition Height="AUTO"></RowDefinition>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="1" Text="Storage" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
                                     <Run Text="{Binding StorageInfo.StorageCounter}"/>
                                     <Run Text="Storage Devices Found"/>
-                                </TextBlock>
-                            </Grid>
-                        </Expander.Header>
-                        <Grid>
-                            <ListView FontFamily="Poppins" FontSize="15" ItemsSource="{Binding StorageInfo.Storages}" Foreground="White" FontWeight="SemiBold" Margin="-20 , 0 , 0 ,0" Width="430" Util:GridViewSort.AutoSort="True">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Util:GridViewSort.PropertyName="Name">
-                                            <GridViewColumn.HeaderContainerStyle>
-                                                <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
-                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                                    <Setter Property="FontSize" Value="15"/>
-                                                    <Setter Property="Foreground" Value="White"/>
-                                                    <Setter Property="FontFamily" Value="/fonts/#Poppins"/>
-                                                </Style>
-                                            </GridViewColumn.HeaderContainerStyle>
-                                        </GridViewColumn>
-                                        <GridViewColumn Header="Total Space" DisplayMemberBinding="{Binding TotalSpace}" Width="140"  Util:GridViewSort.PropertyName="SpaceInBytes">
-                                            <GridViewColumn.HeaderContainerStyle>
-                                                <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
-                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                                    <Setter Property="FontSize" Value="15"/>
-                                                    <Setter Property="Foreground" Value="White"/>
-                                                    <Setter Property="FontFamily" Value="/fonts/#Poppins"/>
-                                                </Style>
-                                            </GridViewColumn.HeaderContainerStyle>
-                                        </GridViewColumn>
-                                        <GridViewColumn Header="Free Space" DisplayMemberBinding="{Binding FreeSpace}"  Util:GridViewSort.PropertyName="FreeSpaceInBytes">
-                                            <GridViewColumn.HeaderContainerStyle>
-                                                <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
-                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                                    <Setter Property="FontSize" Value="15"/>
-                                                    <Setter Property="Foreground" Value="White"/>
-                                                    <Setter Property="FontFamily" Value="/fonts/#Poppins"/>
-                                                </Style>
-                                            </GridViewColumn.HeaderContainerStyle>
-                                        </GridViewColumn>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </Grid>
-                    </Expander>
-                </fw:AcrylicPanel>
-            </Border>
-            <Border Grid.Row="2" BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
-                <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
-                    <fw:AcrylicPanel.OpacityMask>
-                        <VisualBrush Stretch="Fill">
-                            <VisualBrush.Visual>
-                                <Border x:Name="AudioBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
-                                    <Expander Background="Transparent">
-                                    </Expander>
-                                </Border>
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </fw:AcrylicPanel.OpacityMask>
-                    <Expander x:Name="AUDIOExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
-                        <Expander.Header>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="10"></RowDefinition>
-                                    <RowDefinition Height="50"></RowDefinition>
-                                    <RowDefinition Height="5"></RowDefinition>
-                                    <RowDefinition Height="AUTO"></RowDefinition>
-                                    <RowDefinition Height="10"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="1"  Text="Audio" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
+                                        </TextBlock>
+                                    </Grid>
+                                </Expander.Header>
+                                <Grid>
+                                    <ListView FontFamily="Poppins" FontSize="15" ItemsSource="{Binding StorageInfo.Storages}" Foreground="White" FontWeight="SemiBold" Margin="-20 , 0 , 0 ,0" Width="430" Util:GridViewSort.AutoSort="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Util:GridViewSort.PropertyName="Name">
+                                                    <GridViewColumn.HeaderContainerStyle>
+                                                        <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
+                                                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                            <Setter Property="FontSize" Value="15"/>
+                                                            <Setter Property="Foreground" Value="White"/>
+                                                            <Setter Property="FontFamily" Value="/fonts/#Poppins"/>
+                                                        </Style>
+                                                    </GridViewColumn.HeaderContainerStyle>
+                                                </GridViewColumn>
+                                                <GridViewColumn Header="Total Space" DisplayMemberBinding="{Binding TotalSpace}" Width="140"  Util:GridViewSort.PropertyName="SpaceInBytes">
+                                                    <GridViewColumn.HeaderContainerStyle>
+                                                        <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
+                                                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                            <Setter Property="FontSize" Value="15"/>
+                                                            <Setter Property="Foreground" Value="White"/>
+                                                            <Setter Property="FontFamily" Value="/fonts/#Poppins"/>
+                                                        </Style>
+                                                    </GridViewColumn.HeaderContainerStyle>
+                                                </GridViewColumn>
+                                                <GridViewColumn Header="Free Space" DisplayMemberBinding="{Binding FreeSpace}"  Util:GridViewSort.PropertyName="FreeSpaceInBytes">
+                                                    <GridViewColumn.HeaderContainerStyle>
+                                                        <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
+                                                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                            <Setter Property="FontSize" Value="15"/>
+                                                            <Setter Property="Foreground" Value="White"/>
+                                                            <Setter Property="FontFamily" Value="/fonts/#Poppins"/>
+                                                        </Style>
+                                                    </GridViewColumn.HeaderContainerStyle>
+                                                </GridViewColumn>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </Grid>
+                            </Expander>
+                        </fw:AcrylicPanel>
+                    </Border>
+                    <Border Grid.Row="2" BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
+                        <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
+                            <fw:AcrylicPanel.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border x:Name="AudioBorderVisual" CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                            <Expander Background="Transparent">
+                                            </Expander>
+                                        </Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </fw:AcrylicPanel.OpacityMask>
+                            <Expander x:Name="AUDIOExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                                <Expander.Header>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                            <RowDefinition Height="5"></RowDefinition>
+                                            <RowDefinition Height="AUTO"></RowDefinition>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="1"  Text="Audio" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
                                     <Run Text="{Binding SystemInfo.AudioCount}"/>
                                     <Run Text="Audio Devices Found"/>
-                                </TextBlock>
-                            </Grid>
-                        </Expander.Header>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="20"/>
-                            </Grid.RowDefinitions>
-                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="25 , 0 , 0 ,0" MaxHeight="100">
-                                <ScrollViewer.Resources>
-                                    <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="ScrollBar"/>
-                                </ScrollViewer.Resources>
-                                <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding SystemInfo.AudioDevice}"  Foreground="White"/>
-                            </ScrollViewer>
-                            <TextBlock Grid.Row="1">
+                                        </TextBlock>
+                                    </Grid>
+                                </Expander.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="25 , 0 , 0 ,0" MaxHeight="100">
+                                        <ScrollViewer.Resources>
+                                            <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="ScrollBar"/>
+                                        </ScrollViewer.Resources>
+                                        <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding SystemInfo.AudioDevice}"  Foreground="White"/>
+                                    </ScrollViewer>
+                                    <TextBlock Grid.Row="1">
                                 <LineBreak/>
-                            </TextBlock>
-                        </Grid>
-                    </Expander>
-                </fw:AcrylicPanel>
-            </Border>
-            <Border Grid.Row="4" BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
-                <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
-                    <fw:AcrylicPanel.OpacityMask>
-                        <VisualBrush Stretch="Fill">
-                            <VisualBrush.Visual>
-                                <Border x:Name="NETWORKBorderVisual"  CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
-                                    <Expander Background="Transparent">
-                                    </Expander>
-                                </Border>
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </fw:AcrylicPanel.OpacityMask>
-                    <Expander x:Name="NETWORKExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
-                        <Expander.Header>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="10"></RowDefinition>
-                                    <RowDefinition Height="50"></RowDefinition>
-                                    <RowDefinition Height="5"></RowDefinition>
-                                    <RowDefinition Height="AUTO"></RowDefinition>
-                                    <RowDefinition Height="10"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="1" Text="Network" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
-                                <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
+                                    </TextBlock>
+                                </Grid>
+                            </Expander>
+                        </fw:AcrylicPanel>
+                    </Border>
+                    <Border Grid.Row="4" BorderThickness="0.5" BorderBrush="#7070703D" CornerRadius="24" VerticalAlignment="Center" Width="467.17">
+                        <fw:AcrylicPanel  NoiseOpacity="0" TintColor="White" TintOpacity="0.038" Width="467.17">
+                            <fw:AcrylicPanel.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border x:Name="NETWORKBorderVisual"  CornerRadius="24 , 24 , 27 , 24"  Width="467.17" Height="110" Background="White">
+                                            <Expander Background="Transparent">
+                                            </Expander>
+                                        </Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </fw:AcrylicPanel.OpacityMask>
+                            <Expander x:Name="NETWORKExpander" Background="Transparent"  Expanded="ExpanderExpanded" Collapsed="ExpanderCollepsed">
+                                <Expander.Header>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                            <RowDefinition Height="5"></RowDefinition>
+                                            <RowDefinition Height="AUTO"></RowDefinition>
+                                            <RowDefinition Height="10"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="1" Text="Network" FontSize="38" Foreground="White" FontFamily="Poppins" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Grid.Row="3" FontSize="20" Foreground="White" FontFamily="Poppins" FontWeight="SemiBold">
                                     <Run Text="{Binding SystemInfo.NetworkCount}"/>
                                     <Run Text="Network Interfaces Found"/>
-                                </TextBlock>
-                            </Grid>
-                        </Expander.Header>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="20"/>
-                            </Grid.RowDefinitions>
-                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="25 , 0 , 0 ,0" MaxHeight="100">
-                                <ScrollViewer.Resources>
-                                    <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="ScrollBar"/>
-                                </ScrollViewer.Resources>
-                                <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding SystemInfo.NetworkInterFaces}"  Foreground="White"/>
-                            </ScrollViewer>
-                            <TextBlock Grid.Row="1">
+                                        </TextBlock>
+                                    </Grid>
+                                </Expander.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="25 , 0 , 0 ,0" MaxHeight="100">
+                                        <ScrollViewer.Resources>
+                                            <Style BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" TargetType="ScrollBar"/>
+                                        </ScrollViewer.Resources>
+                                        <ItemsControl FontFamily="Poppins" FontSize="20" ItemsSource="{Binding SystemInfo.NetworkInterFaces}"  Foreground="White"/>
+                                    </ScrollViewer>
+                                    <TextBlock Grid.Row="1">
                                 <LineBreak/>
-                            </TextBlock>
-                        </Grid>
-                    </Expander>
-                </fw:AcrylicPanel>
-            </Border>
-        </Grid>
+                                    </TextBlock>
+                                </Grid>
+                            </Expander>
+                        </fw:AcrylicPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

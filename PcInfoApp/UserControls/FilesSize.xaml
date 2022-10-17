@@ -59,55 +59,95 @@
                 </StackPanel>
             </Button>
         </Grid>
-        <ListView Grid.Column="1" Grid.Row="2" x:Name="FolderListView" Style="{DynamicResource MaterialDesignCardsListBox }" ItemsSource="{Binding Folders}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="30" FontFamily="/fonts/#Poppins-ExtraBold">
+        <ListView Grid.Column="1" Grid.Row="2" Margin="0 ,20 ,0 ,0" x:Name="FolderListView" ItemsSource="{Binding Folders}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="30" FontFamily="/fonts/#Poppins-ExtraBold" Background="{x:Null}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Border x:Name="RootBorder">
+                                    <ContentPresenter/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="RootBorder" Property="BorderBrush" Value="transparent"/>
+                                        <Setter TargetName="RootBorder" Property="BorderThickness" Value="0"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Expander>
-                        <Expander.Header>
-                            <TextBlock FontSize="20" FontFamily="/fonts/#Poppins-ExtraBold">
-                                <Run Text="Folder Name:"></Run>  <Run Text="{Binding FolderName}"></Run>
-                                <Run Text="||"></Run>
-                                <Run Text="Folder Size:"></Run> <Run Text="{Binding FolderSize}"></Run>
-                            </TextBlock>
-                        </Expander.Header>
-                        <ListView Name="FilesListView" ItemsSource="{Binding FolderFiles}" SelectionChanged="FilesListView_SelectionChanged" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    <fw:AcrylicPanel TintColor="#FFFFFF" TintOpacity="0.038" NoiseOpacity="0" Width="1014.55" Margin="30 , 0 , 0 , 7">
+                        <fw:AcrylicPanel.OpacityMask>
+                            <VisualBrush Stretch="Fill">
+                                <VisualBrush.Visual>
+                                    <Border CornerRadius="11"  Width="1014.55" Height="AUTO" Background="White">
+                                        <Expander Background="Transparent">
+                                        </Expander>
+                                    </Border>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </fw:AcrylicPanel.OpacityMask>
+                        <Expander Background="Transparent">
+                            <Expander.Header>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock FontSize="20" FontFamily="/fonts/#Poppins-ExtraBold" FontWeight="Medium">
+                                    <Run Text="Folder Name:"></Run>  <Run Text="{Binding FolderName}"></Run>
+                                    </TextBlock>
+                                    <TextBlock FontSize="20" FontFamily="/fonts/#Poppins-ExtraBold" FontWeight="Medium" Grid.Column="2">
+                                         <Run Text="Folder Size:"></Run> <Run Text="{Binding FolderSize}"></Run>
+                                    </TextBlock>
+                                </Grid>
+                               
+                            </Expander.Header>
+                            <ListView Name="FilesListView" ItemsSource="{Binding FolderFiles}" SelectionChanged="FilesListView_SelectionChanged" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
                                   MaxHeight="300" FontSize="20" FontFamily="/fonts/#Poppins-ExtraBold" Util:GridViewSort.AutoSort="True">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="File Name" DisplayMemberBinding="{Binding Name}"  Util:GridViewSort.PropertyName="Name">
-                                        <GridViewColumn.HeaderContainerStyle>
-                                            <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
-                                                <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                                <Setter Property="FontSize" Value="20"/>
-                                                <Setter Property="Foreground" Value="White"/>
-                                                <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
-                                            </Style>
-                                        </GridViewColumn.HeaderContainerStyle>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="File Size" DisplayMemberBinding="{Binding Size}" Util:GridViewSort.PropertyName="SizeInBytes">
-                                        <GridViewColumn.HeaderContainerStyle>
-                                            <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
-                                                <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                                <Setter Property="FontSize" Value="20"/>
-                                                <Setter Property="Foreground" Value="White"/>
-                                                <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
-                                            </Style>
-                                        </GridViewColumn.HeaderContainerStyle>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="File Type" DisplayMemberBinding="{Binding FileType}" Util:GridViewSort.PropertyName="FileType">
-                                        <GridViewColumn.HeaderContainerStyle>
-                                            <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
-                                                <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                                <Setter Property="FontSize" Value="20"/>
-                                                <Setter Property="Foreground" Value="White"/>
-                                                <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
-                                            </Style>
-                                        </GridViewColumn.HeaderContainerStyle>
-                                    </GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </Expander>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="File Name" DisplayMemberBinding="{Binding Name}"  Util:GridViewSort.PropertyName="Name">
+                                            <GridViewColumn.HeaderContainerStyle>
+                                                <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
+                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                    <Setter Property="FontSize" Value="20"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                    <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
+                                                </Style>
+                                            </GridViewColumn.HeaderContainerStyle>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="File Size" DisplayMemberBinding="{Binding Size}" Util:GridViewSort.PropertyName="SizeInBytes">
+                                            <GridViewColumn.HeaderContainerStyle>
+                                                <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
+                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                    <Setter Property="FontSize" Value="20"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                    <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
+                                                </Style>
+                                            </GridViewColumn.HeaderContainerStyle>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="File Type" DisplayMemberBinding="{Binding FileType}" Util:GridViewSort.PropertyName="FileType">
+                                            <GridViewColumn.HeaderContainerStyle>
+                                                <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
+                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                    <Setter Property="FontSize" Value="20"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                    <Setter Property="FontFamily" Value="/fonts/#Poppins-ExtraBold"/>
+                                                </Style>
+                                            </GridViewColumn.HeaderContainerStyle>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Expander>
+                    </fw:AcrylicPanel>
+                    
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

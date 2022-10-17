@@ -98,7 +98,7 @@ namespace PCGraph.PcInfoClasses
             else
                 this.CpuVolatge += "V";
             CpuLoadS = CpuLoad.ToString();
-            if (CpuLoadS.Length > 2)
+            if (CpuLoadS.Length > 2 && CpuLoadS != "100")
                 CpuLoadS = CpuLoadS.Substring(0, 2);
             CpuLoad = Convert.ToDouble(CpuLoadS);
             if (Convert.ToInt32(this.CpuLoad) > this.MaxCpuLoad)

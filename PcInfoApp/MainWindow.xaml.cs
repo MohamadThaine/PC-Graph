@@ -170,7 +170,6 @@ namespace PCGraph
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             notifyIcon.Visible = true;
-            notifyIcon.ShowBalloonTip(1000, "Minimzed", "App minimized to tray", Forms.ToolTipIcon.Info);
             this.WindowState = WindowState.Minimized;
             this.ShowInTaskbar = false;
             this.ShowActivated = false;

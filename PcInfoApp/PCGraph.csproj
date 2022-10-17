@@ -52,7 +52,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <DesignDataWithDesignTimeCreatableTypes Include="Imgs\OverlayIcon.png" />
+    <Resource Include="Imgs\OverlayIcon.png" />
   </ItemGroup>
 
   <ItemGroup>

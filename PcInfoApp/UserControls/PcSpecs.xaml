@@ -10,6 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="774.86" d:DesignWidth="1100">
     <UserControl.Resources>
+        <FontFamily x:Key="Poppins" >/fonts/#Poppins-Regular</FontFamily>
         <ControlTemplate x:Key="CuttingBorder" TargetType="{x:Type ProgressBar}">
             <Grid x:Name="TemplateRoot" Background="{x:Null}">
                 <Grid>
@@ -199,7 +200,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="192.68"></RowDefinition>
         </Grid.RowDefinitions>
-        <Border Name="GPUborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Width="485"  Height="237" Margin="0,50,0,0">
+        <Border Name="GPUborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Width="485"  Height="237" Margin="0,34,0,0">
             <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="485" Height="237">
                 <fw:AcrylicPanel.OpacityMask>
                     <VisualBrush Stretch="Fill">
@@ -209,7 +210,7 @@
                     </VisualBrush>
                 </fw:AcrylicPanel.OpacityMask>
                 <Grid>
-                    <TextBlock FontFamily="Poppins" Text="GPU" Foreground="White" FontSize="34" Margin="-119,15,240,174" FontWeight="Bold" Width="71" Height="48"/>
+                    <TextBlock FontFamily="Poppins"  Text="GPU" Foreground="White" FontSize="34" Margin="-119,15,240,174" FontWeight="Bold" Width="71" Height="48"/>
                     <TextBlock FontFamily="Poppins" Text="{Binding GpuInfo.GpuName}"  Foreground="White" FontSize="15" Margin="107,28,18,187">
                     </TextBlock>
                     <Grid Width="420.3" Height="33.56" Margin="0,84.88,0,125.56">
@@ -239,7 +240,7 @@
                 </Grid>
             </fw:AcrylicPanel>
         </Border>
-        <Border Grid.Column="3" Grid.ColumnSpan="3" Name="CpuBorder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Width="485"  Height="237" HorizontalAlignment="Right" Margin="0,50,0,0">
+        <Border Grid.Column="3" Grid.ColumnSpan="3" Name="CpuBorder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Width="485"  Height="237" HorizontalAlignment="Right" Margin="0,34,0,0">
             <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="485" Height="237">
                 <fw:AcrylicPanel.OpacityMask>
                     <VisualBrush Stretch="Fill">
@@ -254,7 +255,7 @@
                     </TextBlock>
                     <Grid Width="420.3" Height="33.56" Margin="0,84.88,0,125.56">
                         <ProgressBar Template="{DynamicResource CuttingBorder}" Width="420.3" Height="7" Value="{Binding GpuInfo.GpuTemp}" Maximum="100" VerticalAlignment="Top" ></ProgressBar>
-                        <TextBlock Text="Temperature" Foreground="White" FontSize="13" VerticalAlignment="Center" FontFamily="Poppins" Margin="1.5,0,0,0"></TextBlock>
+                        <TextBlock Text="Temperature" Foreground="White" FontSize="13" VerticalAlignment="Center"  Margin="1.5,0,0,0" FontFamily="Poppins"></TextBlock>
                         <TextBlock Foreground="White" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Poppins">
                             <Run Text="{Binding CpuInfo.CpuTemp}"></Run>
                         <Run Text="°C"></Run>
@@ -279,7 +280,7 @@
                 </Grid>
             </fw:AcrylicPanel>
         </Border>
-        <Border Name="RamBorder2" Grid.Row="1" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Column="1" Width="338"  Height="237" Margin="0,20,0,0">
+        <Border Name="RamBorder2" Grid.Row="1" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Column="1" Width="338"  Height="237" Margin="0,4,0,0">
             <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="338" Height="237">
                 <fw:AcrylicPanel.OpacityMask>
                     <VisualBrush Stretch="Fill">
@@ -341,7 +342,7 @@
                 </Grid>
             </fw:AcrylicPanel>
         </Border>
-        <Border Name="StorageBorder" Grid.Row="1" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Column="3" Width="338"  Height="237" Margin="0,20,0,0">
+        <Border Name="StorageBorder" Grid.Row="1" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Column="3" Width="338"  Height="237" Margin="0,4,0,0">
             <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="338" Height="237">
                 <fw:AcrylicPanel.OpacityMask>
                     <VisualBrush Stretch="Fill">
@@ -390,8 +391,8 @@
                 </Grid>
             </fw:AcrylicPanel>
         </Border>
-        
-        <Border Grid.Row="1" Grid.Column="5" Name="NetworkBorder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Width="259"  Height="237" Margin="0,20,0,0">
+
+        <Border Grid.Row="1" Grid.Column="5" Name="NetworkBorder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Width="259"  Height="237" Margin="0,4,0,0">
             <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="259" Height="237">
                 <fw:AcrylicPanel.OpacityMask>
                     <VisualBrush Stretch="Fill">
@@ -457,7 +458,7 @@
                 </Grid>
             </fw:AcrylicPanel>
         </Border>
-        <Border Name="GPUMaxborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Row="2" Grid.Column="1" Width="338"  Height="147" Margin="0,-30,0,0">
+        <Border Name="GPUMaxborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Row="2" Grid.Column="1" Width="338"  Height="147" Margin="0,-26,0,0">
             <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="338" Height="147">
                 <fw:AcrylicPanel.OpacityMask>
                     <VisualBrush Stretch="Fill">
@@ -487,7 +488,7 @@
                 </Grid>
             </fw:AcrylicPanel>
         </Border>
-        <Border Name="CPUMaxborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Row="2" Grid.Column="3" Width="338"  Height="147" Margin="0,-30,0,0">
+        <Border Name="CPUMaxborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Row="2" Grid.Column="3" Width="338"  Height="147" Margin="0,-26,0,0">
             <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="338" Height="147">
                 <fw:AcrylicPanel.OpacityMask>
                     <VisualBrush Stretch="Fill">
@@ -517,7 +518,7 @@
                 </Grid>
             </fw:AcrylicPanel>
         </Border>
-        <Border Name="RamMaxborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Row="2" Grid.Column="5" Width="259"  Height="147" Margin="0,-30,0,0">
+        <Border Name="RamMaxborder" BorderBrush="#7070703D" BorderThickness="1" CornerRadius="24" Grid.Row="2" Grid.Column="5" Width="259"  Height="147" Margin="0,-26,0,0">
             <fw:AcrylicPanel NoiseOpacity="0" TintColor="White" TintOpacity="0.038" fw:PointerTracker.Enabled="True"  Width="259" Height="147">
                 <fw:AcrylicPanel.OpacityMask>
                     <VisualBrush Stretch="Fill">

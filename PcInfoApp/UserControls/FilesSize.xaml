@@ -13,6 +13,9 @@
     <UserControl.DataContext>
         <pcinfoclasses:FilesSizeClass/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <FontFamily x:Key="Poppins" >/fonts/#Poppins-Regular</FontFamily>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"></ColumnDefinition>
@@ -42,7 +45,7 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <MenuItem Name="ChooseFolder" Width="260" Height="auto" BorderThickness="1"  Style="{StaticResource AcrylicMenuItemStyle}" Click="ChooseFolder_Click" VerticalAlignment="Center" Margin="40,0,0,0">
+                    <MenuItem Name="ChooseFolder" Width="400" Height="60" BorderThickness="1"  Style="{StaticResource MaterialDesignMenuItem}" Click="ChooseFolder_Click" VerticalAlignment="Center" Margin="40,0,0,0">
                         <MenuItem.Header>
                             <StackPanel Width="170" HorizontalAlignment="Center" Orientation="Horizontal">
                                 <Image Source="/Imgs/folder-management.png" Width="53" Height="48"></Image>
@@ -111,10 +114,10 @@
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock FontSize="20" FontFamily="/fonts/#Poppins-ExtraBold" FontWeight="Medium">
+                                    <TextBlock FontSize="20" FontFamily="{StaticResource MaterialDesignFont}" FontWeight="Regular">
                                     <Run Text="Folder Name:"></Run>  <Run Text="{Binding FolderName}"></Run>
                                     </TextBlock>
-                                    <TextBlock FontSize="20" FontFamily="/fonts/#Poppins-ExtraBold" FontWeight="Medium" Grid.Column="2">
+                                    <TextBlock FontSize="20" FontFamily="{StaticResource MaterialDesignFont}" FontWeight="Regular" Grid.Column="2">
                                          <Run Text="Folder Size:"></Run> <Run Text="{Binding FolderSize}"></Run>
                                     </TextBlock>
                                 </Grid>

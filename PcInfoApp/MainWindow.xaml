@@ -50,10 +50,10 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource NoGlow}" Name="Close" Grid.Column="1"  Click="Close_Click" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+            <Button Style="{StaticResource NoGlow}" Name="Close" Grid.Column="1" Width="62" Height="48" Click="Close_Click" Background="Transparent" BorderBrush="{x:Null}" VerticalAlignment="Center">
                 <Image Source="/imgs/CloseIcon.png" Width="16"></Image>
             </Button>
-            <Button Style="{StaticResource NoGlow}" Name="Minimize"  Click="Minimize_Click" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+            <Button Style="{StaticResource NoGlow}" Name="Minimize"  Click="Minimize_Click" Background="Transparent" BorderBrush="{x:Null}" VerticalAlignment="Center" Width="50" Height="48">
                 <Image Source="/imgs/MinimizeIcon.png" Width="17"></Image>
             </Button>
         </Grid>
@@ -107,7 +107,7 @@
                         <ListViewItem.OpacityMask>
                             <VisualBrush Stretch="Fill">
                                 <VisualBrush.Visual>
-                                    <Border CornerRadius="0 , 23 , 0 , 0"  Width="100" Height="90" Background="White"></Border>
+                                    <Border CornerRadius="0 , 23 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </ListViewItem.OpacityMask>
@@ -119,7 +119,7 @@
                         <ListViewItem.OpacityMask>
                             <VisualBrush Stretch="Fill">
                                 <VisualBrush.Visual>
-                                    <Border CornerRadius="0 , 23 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
+                                    <Border CornerRadius="0 , 23 , 0 , 0"  Width="100" Height="90" Background="White"></Border>
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </ListViewItem.OpacityMask>

@@ -14,8 +14,25 @@
         <pcinfoclasses:FilesSizeClass/>
     </UserControl.DataContext>
     <UserControl.Resources>
-        
         <FontFamily x:Key="Poppins" >/fonts/#Poppins-Regular</FontFamily>
+        <ControlTemplate x:Key="CuttingBorder" TargetType="{x:Type ProgressBar}">
+            <Grid x:Name="TemplateRoot" Background="{x:Null}">
+                <Grid>
+                    <Border Height="1" x:Name="MaskBorder" Background="{TemplateBinding Background}" CornerRadius="8" />
+                    <Grid Width="AUTO" x:Name="MainGrid">
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=MaskBorder}" />
+                        </Grid.OpacityMask>
+                        <Rectangle x:Name="PART_Track" Fill="#333151"/>
+                        <Border x:Name="PART_Indicator" HorizontalAlignment="Left">
+                            <Grid x:Name="Foreground" Background="Transparent">
+                                <Border x:Name="PART_GlowRect" Background="#47B5FF" CornerRadius="8"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ControlTemplate>
         <Style x:Key="RepeatButtonTransparent" TargetType="{x:Type RepeatButton}">
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -145,7 +162,7 @@
                 </Grid>
             </fw:AcrylicPanel>
         </Border>
-        <ListView Grid.Column="1" Grid.Row="2" Margin="0 ,20 ,0 ,0" x:Name="FolderListView" ItemsSource="{Binding Folders}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="30" FontFamily="/fonts/#Poppins-ExtraBold" Background="{x:Null}">
+        <ListView Grid.Column="1" Grid.Row="2" Margin="0 ,20 ,0 ,15" x:Name="FolderListView" ItemsSource="{Binding Folders}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="30" FontFamily="/fonts/#Poppins-ExtraBold" Background="{x:Null}">
             <ListView.Resources>
                 <Style TargetType="ScrollBar" BasedOn="{StaticResource GlassScrollBar}"></Style>
             </ListView.Resources>
@@ -186,6 +203,7 @@
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="10"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock FontSize="20" FontFamily="{StaticResource MaterialDesignFont}" FontWeight="Regular">
@@ -208,7 +226,7 @@
                                 </ListView.ItemContainerStyle>
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Header="File Name" DisplayMemberBinding="{Binding Name}"  Util:GridViewSort.PropertyName="Name" Width="200">
+                                        <GridViewColumn Header="File Name" DisplayMemberBinding="{Binding Name}"  Util:GridViewSort.PropertyName="Name" Width="300">
                                             <GridViewColumn.HeaderContainerStyle>
                                                 <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
                                                     <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -218,7 +236,7 @@
                                                 </Style>
                                             </GridViewColumn.HeaderContainerStyle>
                                         </GridViewColumn>
-                                        <GridViewColumn Header="File Size" DisplayMemberBinding="{Binding Size}" Util:GridViewSort.PropertyName="SizeInBytes">
+                                        <GridViewColumn Header="File Size" DisplayMemberBinding="{Binding Size}" Util:GridViewSort.PropertyName="SizeInBytes" Width="300">
                                             <GridViewColumn.HeaderContainerStyle>
                                                 <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
                                                     <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -228,7 +246,7 @@
                                                 </Style>
                                             </GridViewColumn.HeaderContainerStyle>
                                         </GridViewColumn>
-                                        <GridViewColumn Header="File Type" DisplayMemberBinding="{Binding FileType}" Util:GridViewSort.PropertyName="FileType">
+                                        <GridViewColumn Header="File Type" DisplayMemberBinding="{Binding FileType}" Util:GridViewSort.PropertyName="FileType" Width="300">
                                             <GridViewColumn.HeaderContainerStyle>
                                                 <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton }" TargetType="{x:Type GridViewColumnHeader}" >
                                                     <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -251,13 +269,13 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid Background="White" Height="1" VerticalAlignment="Top" Grid.ColumnSpan="2"></Grid>
-            <ProgressBar Name="ReadingStatusProg" Value="{Binding CurrentProggrass}" Maximum="{Binding NumberOfFiles}" Height="30" IsEnabled="False" Margin="542,2,5,2" Grid.ColumnSpan="2"/>
-            <TextBlock Name="ReadingStatus" Foreground="black" FontSize="22" Visibility="{Binding ReadingStatusVisibility}" Grid.Column="1" Margin="146,0,-146,0" FontFamily="Poppins" VerticalAlignment="Center">
-                <Run Text="Number of files:"></Run>
+            <ProgressBar Name="ReadingStatusProg" Template="{StaticResource CuttingBorder}" Value="{Binding CurrentProggrass}" Maximum="{Binding NumberOfFiles}" Height="13" IsEnabled="False" Margin="540,-20,30,2" Grid.ColumnSpan="2"/>
+            <TextBlock Name="ReadingStatus" FontSize="15" Foreground="white" Visibility="{Binding ReadingStatusVisibility}" FontFamily="Poppins" Grid.Column="1" Margin="0 ,20 , 30, 0" HorizontalAlignment="Right">
                 <Run Text="{Binding NumberOfFiles}"></Run>
+                <Run Text="Files"></Run>
             </TextBlock>
-            <TextBlock x:Name="FreeSpaceTextBlock" Text="{Binding FreeSpace}" FontSize="25" Foreground="White" FontFamily="Poppins" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="34,0,513,0"></TextBlock>
+            <TextBlock x:Name="FreeSpaceTextBlock" Text="{Binding FreeSpace}" FontSize="20"  Foreground="White" FontFamily="Poppins" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="50,0,513,20">
+            </TextBlock>
         </Grid>
     </Grid>
 </UserControl>

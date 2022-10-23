@@ -114,7 +114,7 @@
             <RowDefinition Height="5"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="5"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Border CornerRadius="21" Width="1017" Height="82" Grid.Column="1" BorderBrush="#70707049" BorderThickness="1" Margin="15,21,0,0">
             <fw:AcrylicPanel TintColor="#FFFFFF" TintOpacity="0.038" Width="1014.55" Height="82" NoiseOpacity="0">
@@ -162,7 +162,7 @@
                 </Grid>
             </fw:AcrylicPanel>
         </Border>
-        <ListView Grid.Column="1" Grid.Row="2" Margin="0 ,20 ,0 ,15" x:Name="FolderListView" ItemsSource="{Binding Folders}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="30" FontFamily="/fonts/#Poppins-ExtraBold" Background="{x:Null}">
+        <ListView Grid.Column="1" Grid.Row="2" Margin="0 ,20 ,0 ,10" x:Name="FolderListView" ItemsSource="{Binding Folders}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="30" FontFamily="/fonts/#Poppins-ExtraBold" Background="{x:Null}">
             <ListView.Resources>
                 <Style TargetType="ScrollBar" BasedOn="{StaticResource GlassScrollBar}"></Style>
             </ListView.Resources>
@@ -217,7 +217,8 @@
                             <ListView Name="FilesListView" ItemsSource="{Binding FolderFiles}" SelectionChanged="FilesListView_SelectionChanged" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
                                   MaxHeight="300"  FontSize="20" FontFamily="/fonts/#Poppins-ExtraBold" Util:GridViewSort.AutoSort="True">
                                 <ListView.Resources>
-                                    <Style TargetType="ScrollBar" BasedOn="{StaticResource GlassScrollBar}"></Style>
+                                    <Style TargetType="ScrollBar" BasedOn="{StaticResource GlassScrollBar}">
+                                    </Style>
                                 </ListView.Resources>
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignGridViewItem}">
@@ -270,7 +271,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <ProgressBar Name="ReadingStatusProg" Template="{StaticResource CuttingBorder}" Value="{Binding CurrentProggrass}" Maximum="{Binding NumberOfFiles}" Height="13" IsEnabled="False" Margin="540,-20,30,2" Grid.ColumnSpan="2"/>
-            <TextBlock Name="ReadingStatus" FontSize="15" Foreground="white" Visibility="{Binding ReadingStatusVisibility}" FontFamily="Poppins" Grid.Column="1" Margin="0 ,20 , 30, 0" HorizontalAlignment="Right">
+            <TextBlock Name="ReadingStatus" FontSize="15" Foreground="white" Visibility="{Binding ReadingStatusVisibility}" FontFamily="Poppins" Grid.Column="1" Margin="0 ,25 , 30, 0" HorizontalAlignment="Right">
                 <Run Text="{Binding NumberOfFiles}"></Run>
                 <Run Text="Files"></Run>
             </TextBlock>

@@ -3,9 +3,16 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
+using Application = System.Windows.Application;
+using Button = System.Windows.Controls.Button;
 using Forms = System.Windows.Forms;
+using ListView = System.Windows.Controls.ListView;
+using ListViewItem = System.Windows.Controls.ListViewItem;
+
 namespace PCGraph
 {
     /// <summary>

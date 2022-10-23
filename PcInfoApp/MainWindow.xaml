@@ -36,101 +36,114 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid fw:PointerTracker.Enabled="True">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="102"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="AUTO"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.ColumnSpan="2" Height="48" Width="100" HorizontalAlignment="Left" Margin="1090,0,0,0">
+    <Window.OpacityMask>
+        <VisualBrush Stretch="Fill">
+            <VisualBrush.Visual>
+                <Border CornerRadius="11"  Width="1202" Height="822.86" Background="White">
+                    <Expander Background="Transparent">
+                    </Expander>
+                </Border>
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </Window.OpacityMask>
+    <Border BorderBrush="#7070703D" BorderThickness="1" CornerRadius="11">
+        <Grid fw:PointerTracker.Enabled="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="102"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource NoGlow}" Name="Close" Grid.Column="1" Width="62" Height="48" Click="Close_Click" Background="Transparent" BorderBrush="{x:Null}" VerticalAlignment="Center">
-                <Image Source="/imgs/CloseIcon.png" Width="16"></Image>
-            </Button>
-            <Button Style="{StaticResource NoGlow}" Name="Minimize"  Click="Minimize_Click" Background="Transparent" BorderBrush="{x:Null}" VerticalAlignment="Center" Width="50" Height="48">
-                <Image Source="/imgs/MinimizeIcon.png" Width="17"></Image>
-            </Button>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.ColumnSpan="2" Height="48" Width="100" HorizontalAlignment="Left" Margin="1090,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource NoGlow}" Name="Close" Grid.Column="1" Width="62" Height="48" Click="Close_Click" Background="Transparent" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                    <Image Source="/imgs/CloseIcon.png" Width="16"></Image>
+                </Button>
+                <Button Style="{StaticResource NoGlow}" Name="Minimize"  Click="Minimize_Click" Background="Transparent" BorderBrush="{x:Null}" VerticalAlignment="Center" Width="50" Height="48">
+                    <Image Source="/imgs/MinimizeIcon.png" Width="17"></Image>
+                </Button>
+            </Grid>
+            <Border BorderBrush="#70707049" BorderThickness="0 , 1 , 1 , 0" Grid.Row="1" Height="450" CornerRadius="0 , 23 , 23 , 0">
+                <fw:AcrylicPanel NoiseOpacity="0" TintColor="#FFFFFF" TintOpacity="0.045"  Height="450">
+                    <fw:AcrylicPanel.OpacityMask>
+                        <VisualBrush Stretch="Fill">
+                            <VisualBrush.Visual>
+                                <Border CornerRadius="0 , 23 , 23 , 0"  Width="102" Height="450" Background="White"></Border>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </fw:AcrylicPanel.OpacityMask>
+                    <ListView Name="pagesListView" VerticalAlignment="Center" Grid.Row="1" SelectedIndex="0" Background="Transparent">
+                        <ListViewItem Width="100" Height="90">
+                            <ListViewItem.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border CornerRadius="0 , 0 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </ListViewItem.OpacityMask>
+                            <Button  FontSize="14" Click="Pcspecsbtn_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="PC Monitoring" >
+                                <Image Source="/imgs/computerIcon.png" />
+                            </Button>
+                        </ListViewItem>
+                        <ListViewItem Width="100" Height="90">
+                            <ListViewItem.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border CornerRadius="0 , 23 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </ListViewItem.OpacityMask>
+                            <Button Click="FileSizeBT_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="60" ToolTip="Space Analyzer">
+                                <Image Source="/imgs/FolderIcon.png" />
+                            </Button>
+                        </ListViewItem>
+                        <ListViewItem Width="100" Height="90">
+                            <ListViewItem.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border CornerRadius="0 , 23 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </ListViewItem.OpacityMask>
+                            <Button Name="NetworkBt" HorizontalAlignment="Center" FontSize="13" Click="NetworkBt_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="Network Monitoring">
+                                <Image Source="/Imgs/NetworkIcon.png"></Image>
+                            </Button>
+                        </ListViewItem>
+                        <ListViewItem Width="100" Height="90">
+                            <ListViewItem.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border CornerRadius="0 , 23 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </ListViewItem.OpacityMask>
+                            <Button Name="SystemSpecsBT" Click="SystemSpecsBT_Click" HorizontalAlignment="Center" FontSize="13" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="80" ToolTip="System Specs">
+                                <Image Source="/Imgs/SystemInfoIcon.png"></Image>
+                            </Button>
+                        </ListViewItem>
+                        <ListViewItem Width="100" Height="90">
+                            <ListViewItem.OpacityMask>
+                                <VisualBrush Stretch="Fill">
+                                    <VisualBrush.Visual>
+                                        <Border CornerRadius="0 , 23 , 0 , 0"  Width="100" Height="90" Background="White"></Border>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </ListViewItem.OpacityMask>
+                            <Button Name="OverLayBT" Click="OverLayBT_Click" HorizontalAlignment="Center" FontSize="13" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="Overlay for stats">
+                                <Image Source="/Imgs/OverlayIcon.png"></Image>
+                            </Button>
+                        </ListViewItem>
+                    </ListView>
+                </fw:AcrylicPanel>
+            </Border>
+            <Grid Name="ViewGrid" Grid.Row="1" Grid.Column="1">
+            </Grid>
         </Grid>
-        <Border BorderBrush="#70707049" BorderThickness="0 , 1 , 1 , 0" Grid.Row="1" Height="450" CornerRadius="0 , 23 , 23 , 0">
-            <fw:AcrylicPanel NoiseOpacity="0" TintColor="#FFFFFF" TintOpacity="0.045"  Height="450">
-                <fw:AcrylicPanel.OpacityMask>
-                    <VisualBrush Stretch="Fill">
-                        <VisualBrush.Visual>
-                            <Border CornerRadius="0 , 23 , 23 , 0"  Width="102" Height="450" Background="White"></Border>
-                        </VisualBrush.Visual>
-                    </VisualBrush>
-                </fw:AcrylicPanel.OpacityMask>
-                <ListView Name="pagesListView" VerticalAlignment="Center" Grid.Row="1" SelectedIndex="0" Background="Transparent">
-                    <ListViewItem Width="100" Height="90">
-                        <ListViewItem.OpacityMask>
-                            <VisualBrush Stretch="Fill">
-                                <VisualBrush.Visual>
-                                    <Border CornerRadius="0 , 0 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </ListViewItem.OpacityMask>
-                        <Button  FontSize="14" Click="Pcspecsbtn_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="PC Monitoring" >
-                            <Image Source="/imgs/computerIcon.png" />
-                        </Button>
-                    </ListViewItem>
-                    <ListViewItem Width="100" Height="90">
-                        <ListViewItem.OpacityMask>
-                            <VisualBrush Stretch="Fill">
-                                <VisualBrush.Visual>
-                                    <Border CornerRadius="0 , 23 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </ListViewItem.OpacityMask>
-                        <Button Click="FileSizeBT_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="60" ToolTip="Space Analyzer">
-                            <Image Source="/imgs/FolderIcon.png" />
-                        </Button>
-                    </ListViewItem>
-                    <ListViewItem Width="100" Height="90">
-                        <ListViewItem.OpacityMask>
-                            <VisualBrush Stretch="Fill">
-                                <VisualBrush.Visual>
-                                    <Border CornerRadius="0 , 23 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </ListViewItem.OpacityMask>
-                        <Button Name="NetworkBt" HorizontalAlignment="Center" FontSize="13" Click="NetworkBt_Click" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="Network Monitoring">
-                            <Image Source="/Imgs/NetworkIcon.png"></Image>
-                        </Button>
-                    </ListViewItem>
-                    <ListViewItem Width="100" Height="90">
-                        <ListViewItem.OpacityMask>
-                            <VisualBrush Stretch="Fill">
-                                <VisualBrush.Visual>
-                                    <Border CornerRadius="0 , 23 , 23 , 0"  Width="100" Height="90" Background="White"></Border>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </ListViewItem.OpacityMask>
-                        <Button Name="SystemSpecsBT" Click="SystemSpecsBT_Click" HorizontalAlignment="Center" FontSize="13" Background="{x:Null}" BorderBrush="{x:Null}" Width="100" Height="80" ToolTip="System Specs">
-                            <Image Source="/Imgs/SystemInfoIcon.png"></Image>
-                        </Button>
-                    </ListViewItem>
-                    <ListViewItem Width="100" Height="90">
-                        <ListViewItem.OpacityMask>
-                            <VisualBrush Stretch="Fill">
-                                <VisualBrush.Visual>
-                                    <Border CornerRadius="0 , 23 , 0 , 0"  Width="100" Height="90" Background="White"></Border>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </ListViewItem.OpacityMask>
-                        <Button Name="OverLayBT" Click="OverLayBT_Click" HorizontalAlignment="Center" FontSize="13" Background="{x:Null}" BorderBrush="{x:Null}" Width="90" Height="80" ToolTip="Overlay for stats">
-                            <Image Source="/Imgs/OverlayIcon.png"></Image>
-                        </Button>
-                    </ListViewItem>
-                </ListView>
-            </fw:AcrylicPanel>
-        </Border>
-        <Grid Name="ViewGrid" Grid.Row="1" Grid.Column="1">
-        </Grid>
-    </Grid>
+    </Border>
+   
 </Window>

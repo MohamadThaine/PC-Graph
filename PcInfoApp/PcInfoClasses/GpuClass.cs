@@ -14,7 +14,7 @@ namespace PCGraph.PcInfoClasses
         public double GpuLoad { get; set; }
         public int MaxGpuLoad { get; set; }
         public double GpuMaxClock { get; set; }
-        public double GpuMemoryMaxSize { get; set; }
+        public int GpuMemoryMaxSize { get; set; }
         public string VersionDate { get; set; }
         public double GpuFansControl { get; set; }
         public double CurrentClockRate { get; set; }
@@ -59,7 +59,8 @@ namespace PCGraph.PcInfoClasses
             pc.Open();
             pc.Hardware[0].Update();
             this.GpuName = pc.Hardware[0].Name;
-            this.GpuMemoryMaxSize = Convert.ToDouble(pc.Hardware[0].Sensors[26].Value / 1024);
+            double VramSize = Convert.ToDouble(pc.Hardware[0].Sensors[26].Value / 1024);
+            this.GpuMemoryMaxSize = (int)Math.Round(VramSize);
             this.GpuMaxClock = Convert.ToDouble(pc.Hardware[0].Sensors[1].Max);
             VersionDate = GetDriverVersionDate().ToString("dd/MM/yyyy");
         }

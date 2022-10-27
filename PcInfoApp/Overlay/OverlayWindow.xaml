@@ -18,7 +18,7 @@
         Background="Transparent"
         IsEnabled="False"
         Loaded="Window_Loaded"
-        Title="OverlayWindow" Height="30" Width="570">
+        Title="OverlayWindow" Height="30" Width="590">
     <Window.DataContext>
         <local:PcInfo/>
     </Window.DataContext>
@@ -29,7 +29,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="10"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="130"/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition/>
@@ -45,7 +45,7 @@
                     <Run Text="%"></Run>
                 </TextBlock>
                 <Grid Width="1" Grid.Column="1" Background="White" HorizontalAlignment="Right"></Grid>
-                <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12.5" FontFamily="Poppins" FontWeight="SemiBold" Foreground="White">
+                <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12.5" FontFamily="Poppins" FontWeight="SemiBold" Foreground="White" Width="120">
                     <Run Text="Cpu Temp:"></Run>
                     <Run Text="{Binding CpuInfo.CpuTemp}"></Run>
                     <Run Text="°C"></Run>

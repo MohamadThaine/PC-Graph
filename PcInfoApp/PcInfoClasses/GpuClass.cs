@@ -59,7 +59,12 @@ namespace PCGraph.PcInfoClasses
             pc.Open();
             pc.Hardware[0].Update();
             this.GpuName = pc.Hardware[0].Name;
-            double VramSize = Convert.ToDouble(pc.Hardware[0].Sensors[26].Value / 1024);
+            double VramSize = 0;
+            foreach (var Sensor in pc.Hardware[0].Sensors)
+            {
+                if(Sensor.Name == "GPU Memory Total")
+                    VramSize = Convert.ToDouble(Sensor.Value / 1024);
+            }
             this.GpuMemoryMaxSize = (int)Math.Round(VramSize);
             this.GpuMaxClock = Convert.ToDouble(pc.Hardware[0].Sensors[1].Max);
             VersionDate = GetDriverVersionDate().ToString("dd/MM/yyyy");
